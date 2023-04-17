@@ -149,18 +149,6 @@ function PromptToast(props: {
 
   return (
     <div className={chatStyle["prompt-toast"]} key="prompt-toast">
-      {props.showToast && (
-        <div
-          className={chatStyle["prompt-toast-inner"] + " clickable"}
-          role="button"
-          onClick={() => props.setShowModal(true)}
-        >
-          <BrainIcon />
-          <span className={chatStyle["prompt-toast-content"]}>
-            {Locale.Context.Toast(context.length)}
-          </span>
-        </div>
-      )}
       {props.showModal && (
         <div className="modal-mask">
           <Modal
