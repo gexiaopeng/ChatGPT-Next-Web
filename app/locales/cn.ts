@@ -149,7 +149,7 @@ const cn = {
   },
   Store: {
     DefaultTopic: "新的聊天",
-    BotHello: "您好，你有什么需要帮助的吗？",
+    BotHello: "您好，有什么需要帮助的吗？",
     Error: "出错了，稍后重试吧",
     Prompt: {
       History: (content: string) =>
