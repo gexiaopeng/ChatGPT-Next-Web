@@ -230,7 +230,7 @@
 .chat-body {
   flex: 1;
   overflow: auto;
-  padding: 20px;
+  padding: 10px 10px 40px 10px;
   padding-bottom: 40px;
   position: relative;
 }
@@ -274,11 +274,16 @@
 }
 
 .chat-message-avatar {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-right: 6px;
 }
 
 .chat-message-test {
   display: flex;
+}
+.chat-message-user-test {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .chat-message-status {
@@ -297,12 +302,13 @@
   border: var(--border-in-light);
   box-shadow: var(--card-shadow);
   border-radius: 10px;
+  margin-left: 6px;
 }
 
 .chat-message-item {
   box-sizing: border-box;
   max-width: 100%;
-  margin-top: 10px;
+  margin-top: 30px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.05);
   padding: 10px;

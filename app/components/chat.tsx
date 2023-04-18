@@ -713,7 +713,7 @@ export function Chat(props: {
               }
             >
               <div className={styles["chat-message-container"]}>
-                <div className={styles["chat-message-test"]}>
+                <div className={ isUser ?  styles["chat-message-user-test"] : styles["chat-message-test"]}>
                   <div className={styles["chat-message-avatar"]}>
                     <Avatar role={message.role} />
                   </div>
