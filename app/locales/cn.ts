@@ -1,4 +1,5 @@
 import { SubmitKey } from "../store/app";
+import {isMobileScreen} from "../utils";
 
 const cn = {
   WIP: "该功能仍在开发中……",
@@ -22,11 +23,24 @@ const cn = {
     Rename: "重命名对话",
     Typing: "正在输入…",
     Input: (submitKey: string) => {
-      var inputHints = `${submitKey} 发送`;
-      if (submitKey === String(SubmitKey.Enter)) {
-        inputHints += "，Shift + Enter 换行";
+      var inputHints = "";
+      if (!isMobileScreen()) {
+        inputHints = `${submitKey} 发送`;
+        if (submitKey === String(SubmitKey.Enter)) {
+          inputHints += "，Shift + Enter 换行";
+        }else{
+          inputHints += "，Enter 换行";
+        }
+        inputHints+= "，/ 触发补全";
+      }else{
+        if (submitKey === String(SubmitKey.Enter)) {
+          inputHints = "Enter 发送，";
+        }else{
+          inputHints = "Enter 换行，";
+        }
+        inputHints+="/ 触发补全";
       }
-      return inputHints + "，/ 触发补全";
+      return inputHints;
     },
     Send: "发送",
   },
