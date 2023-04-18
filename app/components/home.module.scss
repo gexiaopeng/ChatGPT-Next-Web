@@ -307,9 +307,8 @@
 }
 
 .chat-message-item {
-  /*
+
   box-sizing: border-box;
-   */
   max-width: 100%;
   margin-top: 30px;
   border-radius: 10px;
@@ -317,10 +316,7 @@
   padding: 10px;
   font-size: 14px;
   user-select: text;
-  /*
   word-break: break-word;
-
-   */
   border: var(--border-in-light);
   position: relative;
 }
