@@ -140,7 +140,7 @@ const DEFAULT_CONFIG: ChatConfig = {
   avatar: "1f468-200d-1f4bc", //1f603
   fontSize: 14,
   theme: Theme.Auto as Theme,
-  tightBorder: true, //无边框
+  tightBorder: false, //无边框
   sendPreviewBubble: false, //发送预览气泡
   sidebarWidth: 300,
 
