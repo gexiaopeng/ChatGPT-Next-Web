@@ -100,6 +100,13 @@
   line-height: 1.5;
   word-wrap: break-word;
 }
+.markdown-body-test{
+
+}
+.markdown-body-test p{
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .light {
   @include light;

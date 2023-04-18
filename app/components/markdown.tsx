@@ -72,7 +72,7 @@ export function Markdown(
 
   return (
     <div
-      className="markdown-body2"
+      className="markdown-body-test"
       style={{ fontSize: `${props.fontSize ?? 14}px` }}
       ref={mdRef}
       onContextMenu={props.onContextMenu}
