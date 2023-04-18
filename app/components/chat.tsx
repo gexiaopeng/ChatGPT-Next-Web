@@ -713,47 +713,48 @@ export function Chat(props: {
               }
             >
               <div className={styles["chat-message-container"]}>
-                <div className={styles["chat-message-avatar"]}>
-                  <Avatar role={message.role} />
-                </div>
-                {(message.preview || message.streaming) && (
-                  <div className={styles["chat-message-status"]}>
-                    {Locale.Chat.Typing}
+                <div className={styles["chat-message-test"]}>
+                  <div className={styles["chat-message-avatar"]}>
+                    <Avatar role={message.role} />
                   </div>
-                )}
-                <div className={styles["chat-message-item"]}>
-                  {!isUser &&
-                    !(message.preview || message.content.length === 0) && (
-                      <div className={styles["chat-message-top-actions"]}>
-                        {message.streaming ? (
+                  {(message.preview || message.streaming) && (
+                    <div className={styles["chat-message-status"]}>
+                      {Locale.Chat.Typing}
+                    </div>
+                  )}
+                  <div className={styles["chat-message-item"]}>
+                    {!isUser &&
+                      !(message.preview || message.content.length === 0) && (
+                        <div className={styles["chat-message-top-actions"]}>
+                          {message.streaming ? (
+                            <div
+                              className={styles["chat-message-top-action"]}
+                              onClick={() => onUserStop(message.id ?? i)}
+                            >
+                              {Locale.Chat.Actions.Stop}
+                            </div>
+                          ) : (
+                            <>
+                              <div
+                                className={styles["chat-message-top-action"]}
+                                onClick={() => onDelete(message.id ?? i)}
+                              >
+                                {Locale.Chat.Actions.Delete}
+                              </div>
+                              <div
+                                className={styles["chat-message-top-action"]}
+                                onClick={() => onResend(message.id ?? i)}
+                              >
+                                {Locale.Chat.Actions.Retry}
+                              </div>
+                            </>
+                          )}
+
                           <div
                             className={styles["chat-message-top-action"]}
-                            onClick={() => onUserStop(message.id ?? i)}
+                            onClick={() => copyToClipboard(message.content)}
                           >
-                            {Locale.Chat.Actions.Stop}
-                          </div>
-                        ) : (
-                          <>
-                            <div
-                              className={styles["chat-message-top-action"]}
-                              onClick={() => onDelete(message.id ?? i)}
-                            >
-                              {Locale.Chat.Actions.Delete}
-                            </div>
-                            <div
-                              className={styles["chat-message-top-action"]}
-                              onClick={() => onResend(message.id ?? i)}
-                            >
-                              {Locale.Chat.Actions.Retry}
-                            </div>
-                          </>
-                        )}
-
-                        <div
-                          className={styles["chat-message-top-action"]}
-                          onClick={() => copyToClipboard(message.content)}
-                        >
-                          {Locale.Chat.Actions.Copy}
+                            {Locale.Chat.Actions.Copy}
                         </div>
                       </div>
                     )}
@@ -771,6 +772,7 @@ export function Chat(props: {
                     fontSize={fontSize}
                     parentRef={scrollRef}
                   />
+                  </div>
                 </div>
                 {!isUser && !message.preview && (
                   <div className={styles["chat-message-actions"]}>
