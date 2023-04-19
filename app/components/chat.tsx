@@ -357,7 +357,7 @@ export function ChatActions(props: {
   // stop all responses
   const couldStop = ControllerPool.hasPending();
   const stopAll = () => ControllerPool.stopAll();
-  const [openSettings, setOpenSettings] = useState(false);
+
 
   return (
     <div className={chatStyle["chat-input-actions"]}>
@@ -408,7 +408,6 @@ export function ChatActions(props: {
     </div>
   );
 }
-
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;

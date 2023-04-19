@@ -129,7 +129,8 @@ const useHasHydrated = () => {
 
   return hasHydrated;
 };
-
+// setting
+const [openSettings, setOpenSettings] = useState(false);
 function _Home() {
   const [createNewSession, currentIndex, removeSession] = useChatStore(
     (state) => [
@@ -143,7 +144,7 @@ function _Home() {
   const [showSideBar, setShowSideBar] = useState(true);
 
   // setting
-  const [openSettings, setOpenSettings] = useState(false);
+  //const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
 
   // drag side bar
