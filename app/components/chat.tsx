@@ -344,7 +344,7 @@ export function ChatActions(props: {
   setShowSettings?: () => void;
 }) {
   const chatStore = useChatStore();
-
+  const setOpenSettings=props.setShowSettings;
   // switch themes
   const theme = chatStore.config.theme;
   function nextTheme() {
@@ -365,7 +365,7 @@ export function ChatActions(props: {
       <div
           className={`${chatStyle["chat-input-action"]} clickable`}
           onClick={() => {
-            props.setShowSettings(true);
+            setOpenSettings(true);
           }}
       >
         <SettingsIcon />
