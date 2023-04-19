@@ -341,7 +341,7 @@ export function ChatActions(props: {
   showPromptModal: () => void;
   scrollToBottom: () => void;
   hitBottom: boolean;
-  setShowSettings?: () => void;
+  showSettings: () => void;
 }) {
   const chatStore = useChatStore();
   //const setOpenSettings=props.setShowSettings;
@@ -364,9 +364,7 @@ export function ChatActions(props: {
     <div className={chatStyle["chat-input-actions"]}>
       <div
           className={`${chatStyle["chat-input-action"]} clickable`}
-          onClick={() => {
-            props?.setShowSettings;
-          }}
+          onClick={props?.showSettings}
       >
         <SettingsIcon />
       </div>
@@ -410,14 +408,12 @@ export function ChatActions(props: {
     </div>
   );
 }
-
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
   setShowSettings?: () => void;
 }) {
   type RenderMessage = Message & { preview?: boolean };
-  const setOpenSettings  = props.setShowSettings;
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
     state.currentSession(),
@@ -659,7 +655,7 @@ export function Chat(props: {
               icon={<ReturnIcon />}
               bordered
               title={Locale.Chat.Actions.ChatList}
-              onClick={setOpenSettings}
+              onClick={props?.setShowSettings}
             />
           </div>
           <div className={styles["window-action-button"]}>
@@ -806,7 +802,7 @@ export function Chat(props: {
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
-          setShowSettings={() => setOpenSettings}
+          showSettings={() =>props.setShowSettings}
         />
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
