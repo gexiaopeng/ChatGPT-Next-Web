@@ -20,6 +20,7 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
+
 import {
   Message,
   SubmitKey,
@@ -51,7 +52,7 @@ import styles from "./home.module.scss";
 import chatStyle from "./chat.module.scss";
 
 import { Input, Modal, showModal } from "./ui-lib";
-import SettingsIcon from "../icons/settings.svg";
+
 const Markdown = dynamic(
   async () => memo((await import("./markdown")).Markdown),
   {
@@ -339,10 +340,9 @@ export function ChatActions(props: {
   showPromptModal: () => void;
   scrollToBottom: () => void;
   hitBottom: boolean;
-  setOpenSettings?: () => void;
 }) {
   const chatStore = useChatStore();
-  const setOpenSettings=props.setOpenSettings;
+
   // switch themes
   const theme = chatStore.config.theme;
   function nextTheme() {
@@ -357,16 +357,8 @@ export function ChatActions(props: {
   const couldStop = ControllerPool.hasPending();
   const stopAll = () => ControllerPool.stopAll();
 
-
   return (
     <div className={chatStyle["chat-input-actions"]}>
-      <div className={`${chatStyle["chat-input-action"]} clickable`}
-           onClick={() => {
-             setOpenSettings(true);
-           }}
-        >
-        <SettingsIcon />
-      </div>
       {couldStop && (
         <div
           className={`${chatStyle["chat-input-action"]} clickable`}
@@ -407,13 +399,14 @@ export function ChatActions(props: {
     </div>
   );
 }
+
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
-  setOpenSettings?: () => void;
+  setShowSettings?: () => void;
 }) {
-  const setOpenSettings=props.setOpenSettings;
   type RenderMessage = Message & { preview?: boolean };
+  const setOpenSettings  = props;
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
     state.currentSession(),
@@ -802,7 +795,6 @@ export function Chat(props: {
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
-          setOpenSettings={setOpenSettings}
         />
         <div className={styles["chat-input-panel-inner"]}>
           <textarea

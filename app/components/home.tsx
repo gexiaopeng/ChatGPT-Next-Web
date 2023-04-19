@@ -24,7 +24,6 @@ import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
-import { useSettings } from "../customHooks";
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
@@ -142,8 +141,7 @@ function _Home() {
   const [showSideBar, setShowSideBar] = useState(true);
 
   // setting
-  //const [openSettings, setOpenSettings] = useState(false);
-  const { openSettings, setOpenSettings } = useSettings();
+  const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
 
   // drag side bar
@@ -242,7 +240,7 @@ function _Home() {
             key="chat"
             showSideBar={() => setShowSideBar(true)}
             sideBarShowing={showSideBar}
-            setOpenSettings={setOpenSettings}
+            setShowSettings={setOpenSettings}
           />
         )}
       </div>
