@@ -366,7 +366,10 @@ export function ChatActions(props: {
           className={`${chatStyle["chat-input-action"]} clickable`}
       >
        <SettingsIcon
-           onClick={props?.showSettings}
+           onClick={() => {
+             console.log("--SettingsIcon onClick---",props);
+             props?.showSettings;
+           }}
         />
       </div>
       {couldStop && (
@@ -657,8 +660,8 @@ export function Chat(props: {
               bordered
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
-                console.log("--ReturnIcon onClick---");
                 props?.setShowSettings;
+                console.log("--ReturnIcon onClick---",props);
               }}
             />
           </div>
