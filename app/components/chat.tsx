@@ -365,9 +365,8 @@ export function ChatActions(props: {
       <div
           className={`${chatStyle["chat-input-action"]} clickable`}
       >
-       <IconButton
-            icon={<SettingsIcon />}
-            onClick={props?.showSettings}
+       <SettingsIcon
+           onClick={props?.showSettings}
         />
       </div>
       {couldStop && (
