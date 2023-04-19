@@ -240,7 +240,7 @@ function _Home() {
             key="chat"
             showSideBar={() => setShowSideBar(true)}
             sideBarShowing={showSideBar}
-            setShowSettings={() =>setOpenSettings(false)}
+            setShowSettings={() =>setOpenSettings(true)}
           />
         )}
       </div>
