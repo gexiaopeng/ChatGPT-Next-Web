@@ -242,6 +242,7 @@ function _Home() {
             key="chat"
             showSideBar={() => setShowSideBar(true)}
             sideBarShowing={showSideBar}
+            setOpenSettings={setOpenSettings}
           />
         )}
       </div>
