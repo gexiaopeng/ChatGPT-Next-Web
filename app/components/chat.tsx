@@ -362,7 +362,9 @@ export function ChatActions(props: {
   return (
     <div className={chatStyle["chat-input-actions"]}>
       <div className={`${chatStyle["chat-input-action"]} clickable`}
-           onClick={setOpenSettings(true)}
+           onClick={() => {
+             setOpenSettings(true);
+           }}
         >
         <SettingsIcon />
       </div>
