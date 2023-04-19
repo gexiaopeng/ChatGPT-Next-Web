@@ -340,6 +340,7 @@ export function ChatActions(props: {
   showPromptModal: () => void;
   scrollToBottom: () => void;
   hitBottom: boolean;
+  setShowSettings?: () => void;
 }) {
   const chatStore = useChatStore();
 
@@ -406,7 +407,7 @@ export function Chat(props: {
   setShowSettings?: () => void;
 }) {
   type RenderMessage = Message & { preview?: boolean };
-  const setOpenSettings  = props;
+  const setOpenSettings  = props.setShowSettings;
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
     state.currentSession(),
@@ -795,6 +796,7 @@ export function Chat(props: {
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
+          setShowSettings={() => setOpenSettings}
         />
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
