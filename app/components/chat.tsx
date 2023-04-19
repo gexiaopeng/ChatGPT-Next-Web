@@ -368,7 +368,7 @@ export function ChatActions(props: {
        <SettingsIcon
            onClick={() => {
              console.log("--SettingsIcon onClick---",props);
-             props?.showSettings;
+             props?.showSettings();
            }}
         />
       </div>
@@ -415,7 +415,7 @@ export function ChatActions(props: {
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
-  setShowSettings?: () => void;
+  setShowSettings: () => void;
 }) {
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
@@ -660,8 +660,8 @@ export function Chat(props: {
               bordered
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
-                props?.setShowSettings;
-                console.log("--ReturnIcon onClick---",props);
+                //console.log("--ReturnIcon onClick--1-",props);
+                props?.setShowSettings();
               }}
             />
           </div>
