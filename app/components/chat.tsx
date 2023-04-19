@@ -367,7 +367,6 @@ export function ChatActions(props: {
       >
        <SettingsIcon
            onClick={() => {
-             console.log("--SettingsIcon onClick---",props);
              props?.showSettings();
            }}
         />
