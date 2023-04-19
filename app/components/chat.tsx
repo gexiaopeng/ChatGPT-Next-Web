@@ -52,6 +52,7 @@ import styles from "./home.module.scss";
 import chatStyle from "./chat.module.scss";
 
 import { Input, Modal, showModal } from "./ui-lib";
+import SettingsIcon from "../icons/settings.svg";
 
 const Markdown = dynamic(
   async () => memo((await import("./markdown")).Markdown),
@@ -359,7 +360,16 @@ export function ChatActions(props: {
   const stopAll = () => ControllerPool.stopAll();
 
   return (
+
     <div className={chatStyle["chat-input-actions"]}>
+      <div
+          className={`${chatStyle["chat-input-action"]} clickable`}
+          onClick={() => {
+            props.setShowSettings(true);
+          }}
+      >
+        <SettingsIcon />
+      </div>
       {couldStop && (
         <div
           className={`${chatStyle["chat-input-action"]} clickable`}
