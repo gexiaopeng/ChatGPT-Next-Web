@@ -659,7 +659,7 @@ export function Chat(props: {
               icon={<ReturnIcon />}
               bordered
               title={Locale.Chat.Actions.ChatList}
-              onClick={props?.setShowSettings}
+              onClick={setOpenSettings}
             />
           </div>
           <div className={styles["window-action-button"]}>
