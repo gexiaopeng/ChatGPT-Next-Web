@@ -665,7 +665,7 @@ export function Chat(props: {
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
                 console.log("--ReturnIcon onClick--1-",myporps,myprops);
-                props?.setShowSettings();
+                myprops?.setShowSettings();
               }}
             />
           </div>
@@ -808,7 +808,18 @@ export function Chat(props: {
 
       <div className={styles["chat-input-panel"]}>
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
-
+        <div className={chatStyle["chat-input-actions"]}>
+        <div
+            className={`${chatStyle["chat-input-action"]} clickable`}
+        >
+          <SettingsIcon
+              onClick={() => {
+                console.log("---myporps---",myporps,myprops);
+                props?.setShowSettings;
+              }}
+          />
+        </div>
+        </div>
         <ChatActions
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
