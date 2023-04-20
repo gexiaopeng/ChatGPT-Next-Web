@@ -665,7 +665,7 @@ export function Chat(props: {
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
                 console.log("--ReturnIcon onClick--1-",myporps,myprops);
-                myprops?.setShowSettings();
+                myprops?.setShowSettings;
               }}
             />
           </div>
