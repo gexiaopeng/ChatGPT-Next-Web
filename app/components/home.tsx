@@ -138,7 +138,7 @@ function _Home() {
   );
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
-  const [showSideBar, setShowSideBar] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(false);
 
   // setting
   const [openSettings, setOpenSettings] = useState(false);
@@ -241,7 +241,6 @@ function _Home() {
           <Chat
             key="chat"
             showSideBar={() => setShowSideBar(true)}
-            hiddenSideBar={() => setShowSideBar(false)}
             sideBarShowing={showSideBar}
             setShowSettings={() =>setOpenSettings(true)}
           />
