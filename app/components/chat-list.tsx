@@ -65,11 +65,9 @@ export function ChatList() {
       state.moveSession,
     ]);
   const chatStore = useChatStore();
-  const renameSession = () => {
+  const renameSession = (i) => {
     const newTopic = prompt(Locale.Chat.Rename, sessions.topic);
-    if (newTopic && newTopic !== sessions.topic) {
-      chatStore.updateCurrentSession((session) => (session.topic = newTopic!));
-    }
+    console.log("--renameSession--"+i,newTopic);
   };
 
   const onDragEnd: OnDragEndResponder = (result) => {
@@ -108,7 +106,7 @@ export function ChatList() {
                 selected={i === selectedIndex}
                 onClick={() => selectSession(i)}
                 onDelete={() => chatStore.deleteSession(i)}
-                renameSession={() => renameSession()}
+                renameSession={() => renameSession(i)}
               />
             ))}
             {provided.placeholder}
