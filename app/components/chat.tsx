@@ -413,12 +413,14 @@ export function ChatActions(props: {
   );
 }
 let myporps={};
+let myprops={};
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
 }) {
   myporps={props};
+  myprops=props;
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
@@ -662,8 +664,8 @@ export function Chat(props: {
               bordered
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
-                //console.log("--ReturnIcon onClick--1-",props);
-                myporps?.setShowSettings();
+                console.log("--ReturnIcon onClick--1-",myporps,myprops);
+                props?.setShowSettings();
               }}
             />
           </div>
