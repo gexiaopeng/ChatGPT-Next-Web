@@ -371,6 +371,17 @@ export function ChatActions(props: {
            }}
         />
       </div>
+      <div className={styles["window-action-button"] + " " + styles.mobile}>
+        <IconButton
+            icon={<ReturnIcon />}
+            bordered
+            title={Locale.Chat.Actions.ChatList}
+            onClick={() => {
+              //console.log("--ReturnIcon onClick--1-",props);
+              props?.showSettings();
+            }}
+        />
+      </div>
       {couldStop && (
         <div
           className={`${chatStyle["chat-input-action"]} clickable`}
@@ -662,6 +673,15 @@ export function Chat(props: {
                 //console.log("--ReturnIcon onClick--1-",props);
                 props?.setShowSettings();
               }}
+            />
+          </div>
+          <div
+              className={`${chatStyle["chat-input-action"]} clickable`}
+          >
+            <SettingsIcon
+                onClick={() => {
+                  props?.setShowSettings();
+                }}
             />
           </div>
           <div className={styles["window-action-button"]}>
