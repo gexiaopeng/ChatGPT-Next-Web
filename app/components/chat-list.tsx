@@ -68,10 +68,9 @@ export function ChatList() {
   const renameSession = (i:number) => {
     const session = sessions[i];
     const newTopic = prompt(Locale.Chat.Rename, session.topic);
-    if (newTopic && newTopic !== session.topic) {
-      chatStore.updateSession(session,i);
-    }
-    console.log("--renameSession--"+i,newTopic,session);
+    session.topic=newTopic;
+    sessions[i]=session;
+    console.log("---renameSession--index:"+i,session);
   };
 
   const onDragEnd: OnDragEndResponder = (result) => {
