@@ -367,7 +367,6 @@ export function ChatActions(props: {
       >
        <SettingsIcon
            onClick={() => {
-             console.log("---myporps---",myporps,myprops,props.showSettings());
              props?.showSettings();
            }}
         />
@@ -412,15 +411,11 @@ export function ChatActions(props: {
     </div>
   );
 }
-let myporps={};
-let myprops={};
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
 }) {
-  myporps={props};
-  myprops=props;
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
@@ -663,10 +658,7 @@ export function Chat(props: {
               icon={<ReturnIcon />}
               bordered
               title={Locale.Chat.Actions.ChatList}
-              onClick={() => {
-                console.log("--ReturnIcon onClick--1-",myporps,myprops);
-                myprops?.setShowSettings;
-              }}
+              onClick={props?.showSideBar}
             />
           </div>
           <div className={styles["window-action-button"]}>
@@ -808,24 +800,14 @@ export function Chat(props: {
 
       <div className={styles["chat-input-panel"]}>
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
-        <div className={chatStyle["chat-input-actions"]}>
-        <div
-            className={`${chatStyle["chat-input-action"]} clickable`}
-        >
-          <SettingsIcon
-              onClick={() => {
-                console.log("---myporps---",myporps,myprops);
-                props?.setShowSettings();
-              }}
-          />
-        </div>
-        </div>
         <ChatActions
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
-          showSettings={() =>props.setShowSettings}
+          showSettings={props.setShowSettings}
         />
+
+
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
             ref={inputRef}
