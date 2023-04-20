@@ -232,8 +232,10 @@ function _Home() {
           <Settings
             closeSettings={() => {
               setOpenSettings(false);
-              setShowSideBar(true);
-            }}
+              if(!isMobileScreen()){
+                setShowSideBar(true);
+              }
+           }}
           />
         ) : (
           <Chat
