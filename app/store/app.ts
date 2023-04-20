@@ -581,7 +581,7 @@ export const useChatStore = create<ChatStore>()(
       },
       updateSession(updater,index:number) {
         const sessions = get().sessions;
-        updater(sessions[index]);
+        updater(sessions[index],index);
         set(() => ({ sessions }));
       },
       clearAllData() {
