@@ -80,7 +80,7 @@
 }
 
 .mobile {
-  display: none;
+  display: none !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -107,7 +107,7 @@
   }
 
   .mobile {
-    display: block;
+    display: block !important;
   }
 }
 

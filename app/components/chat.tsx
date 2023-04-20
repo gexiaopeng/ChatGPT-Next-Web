@@ -367,7 +367,7 @@ export function ChatActions(props: {
       >
        <SettingsIcon
            onClick={() => {
-             console.log("---myporps---",myporps,myprops,props?.showSettings);
+             console.log("---myporps---",myporps,myprops,props.showSettings());
              props?.showSettings();
            }}
         />
@@ -665,7 +665,7 @@ export function Chat(props: {
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
                 console.log("--ReturnIcon onClick--1-",myporps,myprops);
-                props?.setShowSettings();
+                myprops?.setShowSettings();
               }}
             />
           </div>
