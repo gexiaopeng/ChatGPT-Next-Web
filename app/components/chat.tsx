@@ -418,7 +418,7 @@ export function Chat(props: {
   sideBarShowing?: boolean;
   setShowSettings: () => void;
 }) {
-  myporps=props;
+  myporps={props};
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
