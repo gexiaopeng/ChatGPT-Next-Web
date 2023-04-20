@@ -363,23 +363,12 @@ export function ChatActions(props: {
 
     <div className={chatStyle["chat-input-actions"]}>
       <div
-          className={`${chatStyle["chat-input-action"]} clickable`}
+          className={`${chatStyle["chat-input-action"]} clickable`+ " " + styles.mobile}
       >
        <SettingsIcon
            onClick={() => {
              props?.showSettings();
            }}
-        />
-      </div>
-      <div className={styles["window-action-button"] + " " + styles.mobile}>
-        <IconButton
-            icon={<ReturnIcon />}
-            bordered
-            title={Locale.Chat.Actions.ChatList}
-            onClick={() => {
-              //console.log("--ReturnIcon onClick--1-",props);
-              props?.showSettings();
-            }}
         />
       </div>
       {couldStop && (
@@ -422,11 +411,13 @@ export function ChatActions(props: {
     </div>
   );
 }
+let myporps={};
 export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
 }) {
+  myporps=props;
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [
@@ -671,17 +662,8 @@ export function Chat(props: {
               title={Locale.Chat.Actions.ChatList}
               onClick={() => {
                 //console.log("--ReturnIcon onClick--1-",props);
-                props?.setShowSettings();
+                myporps?.setShowSettings();
               }}
-            />
-          </div>
-          <div
-              className={`${chatStyle["chat-input-action"]} clickable`}
-          >
-            <SettingsIcon
-                onClick={() => {
-                  props?.setShowSettings();
-                }}
             />
           </div>
           <div className={styles["window-action-button"]}>
