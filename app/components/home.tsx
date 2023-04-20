@@ -138,7 +138,7 @@ function _Home() {
   );
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
-  const [showSideBar, setShowSideBar] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(true);
 
   // setting
   const [openSettings, setOpenSettings] = useState(false);

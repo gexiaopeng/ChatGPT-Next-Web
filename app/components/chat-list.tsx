@@ -22,6 +22,7 @@ export function ChatItem(props: {
   selected: boolean;
   id: number;
   index: number;
+  renameSession?: () => void;
 }) {
   return (
     <Draggable draggableId={`${props.id}`} index={props.index}>
@@ -42,7 +43,7 @@ export function ChatItem(props: {
             </div>
             <div className={styles["chat-item-date"]}>{props.time}</div>
           </div>
-          <div className={styles["chat-item-rename"]} onClick={props.onDelete}>
+          <div className={styles["chat-item-rename"]} onClick={props.renameSession}>
             <RenameTitleIcon />
           </div>
           <div className={styles["chat-item-delete"]} onClick={props.onDelete}>
@@ -64,6 +65,12 @@ export function ChatList() {
       state.moveSession,
     ]);
   const chatStore = useChatStore();
+  const renameSession = () => {
+    const newTopic = prompt(Locale.Chat.Rename, sessions.topic);
+    if (newTopic && newTopic !== sessions.topic) {
+      chatStore.updateCurrentSession((session) => (session.topic = newTopic!));
+    }
+  };
 
   const onDragEnd: OnDragEndResponder = (result) => {
     const { destination, source } = result;
@@ -101,6 +108,7 @@ export function ChatList() {
                 selected={i === selectedIndex}
                 onClick={() => selectSession(i)}
                 onDelete={() => chatStore.deleteSession(i)}
+                renameSession={() => renameSession()}
               />
             ))}
             {provided.placeholder}
