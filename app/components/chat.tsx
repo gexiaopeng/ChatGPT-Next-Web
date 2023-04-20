@@ -413,9 +413,13 @@ export function ChatActions(props: {
 }
 export function Chat(props: {
   showSideBar?: () => void;
+  hiddenSideBar: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
 }) {
+  if(isMobileScreen()){
+    props?.hiddenSideBar();
+  }
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
   const [session, sessionIndex] = useChatStore((state) => [

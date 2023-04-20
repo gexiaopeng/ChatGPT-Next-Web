@@ -241,6 +241,7 @@ function _Home() {
           <Chat
             key="chat"
             showSideBar={() => setShowSideBar(true)}
+            hiddenSideBar={() => setShowSideBar(false)}
             sideBarShowing={showSideBar}
             setShowSettings={() =>setOpenSettings(true)}
           />
