@@ -1,5 +1,5 @@
 import DeleteIcon from "../icons/delete.svg";
-import RenameIcon from "../icons/rename.svg";
+import RenameTitleIcon from "../icons/rename-title.svg";
 import styles from "./home.module.scss";
 import {
   DragDropContext,
@@ -43,7 +43,7 @@ export function ChatItem(props: {
             <div className={styles["chat-item-date"]}>{props.time}</div>
           </div>
           <div className={styles["chat-item-rename"]} onClick={props.onDelete}>
-            <RenameIcon />
+            <RenameTitleIcon />
           </div>
           <div className={styles["chat-item-delete"]} onClick={props.onDelete}>
             <DeleteIcon />
