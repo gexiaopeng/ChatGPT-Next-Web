@@ -148,11 +148,20 @@ function _Home() {
   const { onDragMouseDown } = useDragSideBar();
 
   useSwitchTheme();
+  const hiddenSidebarBody=()=>{
+    console.log("--hiddenSidebarBody--");
+    setOpenSettings(false);
+    setShowSideBar(false);
+  };
+  const hiddenSidebar=()=>{
+    console.log("--hiddenSidebar--");
+    setOpenSettings(false);
+    setShowSideBar(false);
+  };
 
   if (loading) {
     return <Loading />;
   }
-
   return (
     <div
       className={`${
@@ -163,6 +172,9 @@ function _Home() {
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
+        onClick={() => {
+          hiddenSidebar();
+        }}
       >
         <div className={styles["sidebar-header"]}>
           <div className={styles["sidebar-title"]}>ChatGPT Next</div>
@@ -177,8 +189,7 @@ function _Home() {
         <div
           className={styles["sidebar-body"]}
           onClick={() => {
-            setOpenSettings(false);
-            setShowSideBar(false);
+            hiddenSidebarBody();
           }}
         >
           <ChatList />
