@@ -583,7 +583,7 @@ export const useChatStore = create<ChatStore>()(
       updateSession(updater :(session:ChatSession)=>void,index:number) {
         const sessions = get().sessions;
         updater(sessions[index]);
-        set(() => ({ sessions }));
+        //set(() => ({ sessions }));
       },
       clearAllData() {
         if (confirm(Locale.Store.ConfirmClearAll)) {
