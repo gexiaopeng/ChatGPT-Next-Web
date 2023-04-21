@@ -214,7 +214,7 @@ interface ChatStore {
   summarizeSession: () => void;
   updateStat: (message: Message) => void;
   updateCurrentSession: (updater: (session: ChatSession) => void) => void;
-  updateSession: (updater: (session: ChatSession) => void) => void;
+  updateSession: (updater: (session: ChatSession) => void,index:number) => void;
   updateMessage: (
     sessionIndex: number,
     messageIndex: number,
@@ -580,9 +580,8 @@ export const useChatStore = create<ChatStore>()(
         updater(sessions[index]);
         set(() => ({ sessions }));
       },
-      updateSession(updater) {
+      updateSession(updater :(session:ChatSession)=>void,index:number) {
         const sessions = get().sessions;
-        const index = get().currentSessionIndex;
         updater(sessions[index]);
         set(() => ({ sessions }));
       },
