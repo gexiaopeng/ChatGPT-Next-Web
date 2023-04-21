@@ -243,6 +243,7 @@ export const useChatStore = create<ChatStore>()(
     (set, get) => ({
       sessions: [createEmptySession()],
       currentSessionIndex: 0,
+      isRenameTitle:false,
       config: {
         ...DEFAULT_CONFIG,
       },
@@ -269,7 +270,7 @@ export const useChatStore = create<ChatStore>()(
       },
 
       selectSession(index: number) {
-        console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+1);
+        console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index);
         if(get().currentSessionIndex==index || get().isRenameTitle){
           get().renameTitle(false);
           return;
