@@ -150,7 +150,7 @@ function _Home() {
 
   useSwitchTheme();
   const hiddenSidebar=()=>{
-    console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete);
+    console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,new Date().getTime());
     setOpenSettings(false);
     if(isRenameDelete){
       chatStore.renameDelete(false);

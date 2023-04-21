@@ -70,7 +70,7 @@ export function ChatList() {
     chatStore.renameTitle(true);
     const session = sessions[i];
     const newTopic = prompt(Locale.Chat.Rename, session.topic);
-    console.log("---renameSession--index:"+i+",newTopic:"+newTopic,isRenameTitle,chatStore.isRenameTitle);
+    console.log("---renameSession--index:"+i+",newTopic:"+newTopic,isRenameTitle,chatStore.isRenameTitle,new Date().getTime());
     if (newTopic && newTopic !== session.topic) {
 
        chatStore.updateSession((session) => (session.topic = newTopic!),i);

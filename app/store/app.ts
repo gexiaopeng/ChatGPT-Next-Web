@@ -273,10 +273,10 @@ export const useChatStore = create<ChatStore>()(
       },
 
       selectSession(index: number) {
-        console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index+","+get().isRenameTitle);
         if(get().isRenameTitle){
           get().renameDelete(true);
         }
+        console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index+","+get().isRenameTitle,get().isRenameDelete,new Date().getTime());
         if(get().currentSessionIndex==index || get().isRenameTitle){
           get().renameTitle(false);
           return;
