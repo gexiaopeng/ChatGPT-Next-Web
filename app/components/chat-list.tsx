@@ -56,20 +56,21 @@ export function ChatItem(props: {
 }
 
 export function ChatList() {
-  const [sessions, selectedIndex, selectSession, removeSession, moveSession] =
+  const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle] =
     useChatStore((state) => [
       state.sessions,
       state.currentSessionIndex,
       state.selectSession,
       state.removeSession,
       state.moveSession,
+      state.isRenameTitle,
     ]);
   const chatStore = useChatStore();
   const renameSession = (i:number) => {
     chatStore.renameTitle(true);
     const session = sessions[i];
     const newTopic = prompt(Locale.Chat.Rename, session.topic);
-    console.log("---renameSession--index:"+i+"newTopic:"+newTopic);
+    console.log("---renameSession--index:"+i+",newTopic:"+newTopic,isRenameTitle,chatStore.isRenameTitle,chatStore.get().isRenameTitle);
     if (newTopic && newTopic !== session.topic) {
 
        chatStore.updateSession((session) => (session.topic = newTopic!),i);
