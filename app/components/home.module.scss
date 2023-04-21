@@ -109,6 +109,7 @@
   .mobile {
     display: block !important;
   }
+
 }
 
 .sidebar-header {
@@ -490,6 +491,14 @@
 
   .chat-input-send {
     bottom: 30px;
+  }
+  .chat-item > .chat-item-rename {
+    opacity: 0.5;
+    right: 35px;
+  }
+  .chat-item > .chat-item-delete {
+    opacity: 0.5;
+    right: 10px;
   }
 }
 
