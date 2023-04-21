@@ -228,6 +228,8 @@ interface ChatStore {
   resetConfig: () => void;
   updateConfig: (updater: (config: ChatConfig) => void) => void;
   clearAllData: () => void;
+  isRenameTitle:boolean;
+  renameTitle:(isRename:boolean)=>void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -268,6 +270,10 @@ export const useChatStore = create<ChatStore>()(
 
       selectSession(index: number) {
         console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+1);
+        if(get().currentSessionIndex==index || get().isRenameTitle){
+          get().renameTitle(false);
+          return;
+        }
         set({
           currentSessionIndex: index,
         });
@@ -582,9 +588,14 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({ sessions }));
       },
       updateSession(updater :(session:ChatSession)=>void,index:number) {
+        console.log("---rename--begin");
         const sessions = get().sessions;
         updater(sessions[index]);
+        console.log("---rename--end");
         //set(() => ({ sessions }));
+      },
+      renameTitle(isRename:boolean){
+        set(()=>({isRenameTitle:isRename}));
       },
       clearAllData() {
         if (confirm(Locale.Store.ConfirmClearAll)) {
