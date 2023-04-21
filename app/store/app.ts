@@ -267,6 +267,7 @@ export const useChatStore = create<ChatStore>()(
       },
 
       selectSession(index: number) {
+        console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+1);
         set({
           currentSessionIndex: index,
         });
