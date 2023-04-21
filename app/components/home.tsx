@@ -150,13 +150,16 @@ function _Home() {
 
   useSwitchTheme();
   const hiddenSidebar=()=>{
-    console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.isRenameTitle,new Date().getTime());
-    setOpenSettings(false);
-    if(isRenameDelete || chatStore.isRenameTitle){
-      chatStore.renameDelete(false);
-    }else{
-      setShowSideBar(false);
-    }
+
+    setTimeout(()=>{
+      console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.isRenameTitle,new Date().getTime());
+      setOpenSettings(false);
+      if(isRenameDelete || chatStore.isRenameTitle){
+        chatStore.renameDelete(false);
+      }else{
+        setShowSideBar(false);
+      }
+    },100);
   };
 
   if (loading) {
