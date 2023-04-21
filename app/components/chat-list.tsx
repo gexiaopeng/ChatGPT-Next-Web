@@ -68,6 +68,7 @@ export function ChatList() {
   const chatStore = useChatStore();
   const renameSession = (i:number) => {
     chatStore.renameTitle(true);
+    console.log("---renameSession--",new Date().getTime());
     const session = sessions[i];
     const newTopic = prompt(Locale.Chat.Rename, session.topic);
     console.log("---renameSession--index:"+i+",newTopic:"+newTopic,isRenameTitle,chatStore.isRenameTitle,new Date().getTime());

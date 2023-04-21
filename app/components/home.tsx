@@ -150,16 +150,15 @@ function _Home() {
 
   useSwitchTheme();
   const hiddenSidebar=()=>{
-
-    setTimeout(()=>{
-      console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.isRenameTitle,new Date().getTime());
+   setTimeout(()=>{
+      console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.getRenameDelete(),new Date().getTime());
       setOpenSettings(false);
-      if(isRenameDelete || chatStore.isRenameTitle){
+      if(chatStore.getRenameDelete()){
         chatStore.renameDelete(false);
       }else{
         setShowSideBar(false);
       }
-    },100);
+    },10);
   };
 
   if (loading) {

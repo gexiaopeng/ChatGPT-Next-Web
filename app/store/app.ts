@@ -232,6 +232,7 @@ interface ChatStore {
   renameTitle:(isRename:boolean)=>void;
   isRenameDelete:boolean;
   renameDelete:(isReDel:boolean)=>void;
+  getRenameDelete:() =>boolean;
 }
 
 function countMessages(msgs: Message[]) {
@@ -608,7 +609,9 @@ export const useChatStore = create<ChatStore>()(
       renameDelete(isReDel:boolean){
         set(()=>({isRenameDelete:isReDel}));
       },
-
+      getRenameDelete(){
+        return get().isRenameDelete;
+      },
       clearAllData() {
         if (confirm(Locale.Store.ConfirmClearAll)) {
           localStorage.clear();
