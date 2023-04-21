@@ -201,12 +201,6 @@ function _Home() {
 
         <div className={styles["sidebar-tail"]}>
           <div className={styles["sidebar-actions"]}>
-            <div className={styles["sidebar-action"] + " " + styles.mobile}>
-              <IconButton
-                icon={<CloseIcon />}
-                onClick={chatStore.deleteSession}
-              />
-            </div>
             <div className={styles["sidebar-action"]}>
               <IconButton
                 icon={<SettingsIcon />}
