@@ -230,6 +230,8 @@ interface ChatStore {
   clearAllData: () => void;
   isRenameTitle:boolean;
   renameTitle:(isRename:boolean)=>void;
+  isRenameDelete:boolean;
+  renameDelete:(isReDel:boolean)=>void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -244,6 +246,7 @@ export const useChatStore = create<ChatStore>()(
       sessions: [createEmptySession()],
       currentSessionIndex: 0,
       isRenameTitle:false,
+      isRenameDelete:false,
       config: {
         ...DEFAULT_CONFIG,
       },
@@ -273,6 +276,7 @@ export const useChatStore = create<ChatStore>()(
         console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index);
         if(get().currentSessionIndex==index || get().isRenameTitle){
           get().renameTitle(false);
+          get().renameDelete(true);
           return;
         }
         set({
@@ -341,6 +345,7 @@ export const useChatStore = create<ChatStore>()(
         const deletedSession = get().currentSession();
         const index = i ?? get().currentSessionIndex;
         const isLastSession = get().sessions.length === 1;
+        get().renameDelete(true);
         if (!isMobileScreen() || confirm(Locale.Home.DeleteChat)) {
           get().removeSession(index);
 
@@ -598,6 +603,10 @@ export const useChatStore = create<ChatStore>()(
       renameTitle(isRename:boolean){
         set(()=>({isRenameTitle:isRename}));
       },
+      renameDelete(isReDel:boolean){
+        set(()=>({isRenameDelete:isReDel}));
+      },
+
       clearAllData() {
         if (confirm(Locale.Store.ConfirmClearAll)) {
           localStorage.clear();

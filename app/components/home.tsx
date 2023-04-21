@@ -129,11 +129,12 @@ const useHasHydrated = () => {
   return hasHydrated;
 };
 function _Home() {
-  const [createNewSession, currentIndex, removeSession] = useChatStore(
+  const [createNewSession, currentIndex, removeSession,isRenameDelete] = useChatStore(
     (state) => [
       state.newSession,
       state.currentSessionIndex,
       state.removeSession,
+      state.isRenameDelete,
     ],
   );
   const chatStore = useChatStore();
@@ -148,15 +149,14 @@ function _Home() {
   const { onDragMouseDown } = useDragSideBar();
 
   useSwitchTheme();
-  const hiddenSidebarBody=()=>{
-    console.log("--hiddenSidebarBody--");
-    setOpenSettings(false);
-    setShowSideBar(false);
-  };
   const hiddenSidebar=()=>{
     console.log("--hiddenSidebar--");
     setOpenSettings(false);
-    setShowSideBar(false);
+    if(isRenameDelete){
+      chatStore.renameDelete(false);
+    }else{
+      setShowSideBar(false);
+    }
   };
 
   if (loading) {
@@ -172,11 +172,13 @@ function _Home() {
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
-        onClick={() => {
-          hiddenSidebar();
-        }}
+
       >
-        <div className={styles["sidebar-header"]}>
+        <div className={styles["sidebar-header"]}
+             onClick={() => {
+               hiddenSidebar();
+             }}
+        >
           <div className={styles["sidebar-title"]}>ChatGPT Next</div>
           <div className={styles["sidebar-sub-title"]}>
             Build your own AI assistant.
@@ -189,7 +191,7 @@ function _Home() {
         <div
           className={styles["sidebar-body"]}
           onClick={() => {
-            hiddenSidebarBody();
+            hiddenSidebar();
           }}
         >
           <ChatList />
