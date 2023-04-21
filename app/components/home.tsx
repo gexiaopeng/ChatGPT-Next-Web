@@ -243,6 +243,7 @@ function _Home() {
             showSideBar={() => setShowSideBar(true)}
             sideBarShowing={showSideBar}
             setShowSettings={() =>setOpenSettings(true)}
+            createNewSession={()=>createNewSession()}
           />
         )}
       </div>

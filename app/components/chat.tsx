@@ -342,6 +342,7 @@ export function ChatActions(props: {
   scrollToBottom: () => void;
   hitBottom: boolean;
   showSettings: () => void;
+  createNewSession:()=>void;
 }) {
   const chatStore = useChatStore();
   //const setOpenSettings=props.setShowSettings;
@@ -408,6 +409,15 @@ export function ChatActions(props: {
           <DarkIcon />
         ) : null}
       </div>
+      <div
+          className={`${chatStyle["chat-input-action"]} clickable`+ " " + styles.mobile}
+      >
+        <AddIcon
+            onClick={() => {
+              props?.createNewSession();
+            }}
+        />
+      </div>
     </div>
   );
 }
@@ -415,6 +425,7 @@ export function Chat(props: {
   showSideBar?: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
+  createNewSession:()=>void;
 }) {
   type RenderMessage = Message & { preview?: boolean };
   const chatStore = useChatStore();
@@ -805,6 +816,7 @@ export function Chat(props: {
           scrollToBottom={scrollToBottom}
           hitBottom={hitBottom}
           showSettings={props.setShowSettings}
+          createNewSession={props.createNewSession}
         />
 
 
