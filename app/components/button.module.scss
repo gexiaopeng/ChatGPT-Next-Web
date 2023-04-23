@@ -21,6 +21,7 @@
 }
 .icon-button:focus {
   outline: none;
+  border: var(--border-in-light);
 }
 .shadow {
   box-shadow: var(--card-shadow);
