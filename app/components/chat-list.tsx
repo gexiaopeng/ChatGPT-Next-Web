@@ -96,11 +96,10 @@ export function ChatList() {
 
     moveSession(source.index, destination.index);
   };
-
+  createNewSession();
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">
-        {createNewSession}
         {(provided) => (
           <div
             className={styles["chat-list"]}
