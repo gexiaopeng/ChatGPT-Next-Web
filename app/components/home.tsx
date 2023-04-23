@@ -177,7 +177,7 @@ function _Home() {
     const element = event.target as HTMLElement;
     console.log("-handleTouchStart-",element);
     element.focus();
-    const header = document.getElementsByClassName("sidebar-header")[0] as HTMLElement;
+    const header = document.getElementById("sidebar-show") as HTMLElement;
     console.log("-header-",header);
     header?.focus();
     startX = event.touches[0].clientX;
@@ -209,7 +209,7 @@ function _Home() {
       }`}
 
     >
-      <div
+      <div id="sidebar-show"
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
         onTouchStart={(e1) => handleTouchStart(e1 as any)}
         onTouchMove={(e2) => handleTouchMove(e2 as any)}
