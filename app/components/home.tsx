@@ -171,8 +171,7 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-
-      onload={() => {
+     onLoad={() => {
         createNewSession();
       }}
     >
@@ -185,7 +184,8 @@ function _Home() {
                hiddenSidebar();
              }}
         >
-          <div className={styles["sidebar-title"]}>ChatGPT Next</div>
+          <div className={styles["sidebar-title"]}
+          >ChatGPT Next</div>
           <div className={styles["sidebar-sub-title"]}>
             Build your own AI assistant.
           </div>
