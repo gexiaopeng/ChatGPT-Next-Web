@@ -170,6 +170,9 @@ function _Home() {
       setShowSideBar(false);
     }
   }
+  useEffect(() => {
+    initPage();
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -206,9 +209,6 @@ function _Home() {
           className={styles["sidebar-body"]}
           onClick={() => {
             hiddenSidebar();
-          }}
-          onLoad={() => {
-            initPage();
           }}
         >
           <ChatList />
