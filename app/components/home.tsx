@@ -166,7 +166,7 @@ function _Home() {
     console.log("=initPage="+isInit);
     if(!isInit){
       isInit=true;
-      setShowSideBar();
+      setShowSideBar(false);
       createNewSession();
     }
   }
