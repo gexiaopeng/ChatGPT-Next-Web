@@ -16,7 +16,7 @@ import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import CloseIcon from "../icons/close.svg";
 
-import { useChatStore } from "../store";
+import {createMessage, useChatStore} from "../store";
 import { getCSSVar, isMobileScreen } from "../utils";
 import Locale from "../locales";
 import { Chat } from "./chat";
@@ -128,6 +128,8 @@ const useHasHydrated = () => {
 
   return hasHydrated;
 };
+let isInit=false;
+
 function _Home() {
   const [createNewSession, currentIndex, removeSession,isRenameDelete] = useChatStore(
     (state) => [
@@ -160,6 +162,12 @@ function _Home() {
       }
     },10);
   };
+  function initPage(){
+    if(!isInit){
+      createNewSession();
+      isInit=true;
+    }
+  }
 
   if (loading) {
     return <Loading />;
@@ -171,7 +179,9 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-
+      onLoad={() => {
+        initPage();
+      }}
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
@@ -202,9 +212,6 @@ function _Home() {
         </div>
 
         <div className={styles["sidebar-tail"]}
-             onLoad={() => {
-               createNewSession();
-             }}
         >
           <div className={styles["sidebar-actions"]}>
             <div className={styles["sidebar-action"]}>
