@@ -56,9 +56,7 @@ export function ChatItem(props: {
 }
 
 export function ChatList() {
-  const chatStore = useChatStore();
-  chatStore.newSession();
-  const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle] =
+  const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle,createNewSession] =
     useChatStore((state) => [
       state.sessions,
       state.currentSessionIndex,
@@ -66,7 +64,9 @@ export function ChatList() {
       state.removeSession,
       state.moveSession,
       state.isRenameTitle,
+      state.newSession,
     ]);
+  const chatStore = useChatStore();
   const renameSession = (i:number) => {
     chatStore.renameTitle(true);
     console.log("---renameSession--",new Date().getTime());
@@ -106,6 +106,7 @@ export function ChatList() {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
+            {createNewSession}
             {sessions.map((item, i) => (
               <ChatItem
                 title={item.topic}
