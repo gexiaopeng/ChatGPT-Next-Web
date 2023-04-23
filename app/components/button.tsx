@@ -19,7 +19,7 @@ export function IconButton(props: {
         styles["icon-button"] +
         ` ${props.bordered && styles.border} ${props.shadow && styles.shadow} ${
           props.className ?? ""
-        } clickable`
+        } `
       }
       onClick={props.onClick}
       title={props.title}

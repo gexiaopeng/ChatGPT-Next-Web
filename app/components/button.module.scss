@@ -19,7 +19,9 @@
     opacity: 0.5;
   }
 }
-
+.icon-button:focus {
+  outline: none;
+}
 .shadow {
   box-shadow: var(--card-shadow);
 }
