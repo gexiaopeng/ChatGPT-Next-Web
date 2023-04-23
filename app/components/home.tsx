@@ -177,6 +177,9 @@ function _Home() {
     const element = event.target as HTMLElement;
     console.log("-handleTouchStart-",element);
     element.focus();
+    const header = document.getElementsByClassName("sidebar-header")[0] as HTMLElement;
+    console.log("-header-",header);
+    header?.focus();
     startX = event.touches[0].clientX;
   }
 
