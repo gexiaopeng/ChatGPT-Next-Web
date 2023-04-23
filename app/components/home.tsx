@@ -119,6 +119,7 @@ function useDragSideBar() {
   };
 }
 
+
 const useHasHydrated = () => {
   const [hasHydrated, setHasHydrated] = useState<boolean>(false);
 
@@ -170,6 +171,22 @@ function _Home() {
       setShowSideBar(false);
     }
   }
+  const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
+  let startX: number;
+  function handleTouchStart(event: TouchEvent) {
+    startX = event.touches[0].clientX;
+  }
+
+  function handleTouchMove(event: TouchEvent) {
+    const currentX = event.touches[0].clientX;
+    const distance = currentX - startX;
+    if (distance < -MIN_SWIPE_DISTANCE) {
+      // left swipe detected
+      // do something here
+      setShowSideBar(false);
+    }
+  }
+
   useEffect(() => {
     initPage();
   }, []);
@@ -188,7 +205,8 @@ function _Home() {
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
-
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
       >
         <div className={styles["sidebar-header"]}
              onClick={() => {
