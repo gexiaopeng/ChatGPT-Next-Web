@@ -164,7 +164,6 @@ function _Home() {
   if (loading) {
     return <Loading />;
   }
-  createNewSession();
   return (
     <div
       className={`${

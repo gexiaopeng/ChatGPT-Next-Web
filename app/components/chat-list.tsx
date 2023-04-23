@@ -105,7 +105,7 @@ export function ChatList() {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-
+            {createNewSession()}
             {sessions.map((item, i) => (
               <ChatItem
                 title={item.topic}
