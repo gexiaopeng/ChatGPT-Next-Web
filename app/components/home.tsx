@@ -171,6 +171,7 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
+      onload={createNewSession}
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
