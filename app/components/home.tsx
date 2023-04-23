@@ -171,9 +171,7 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-     onLoad={() => {
-        createNewSession();
-      }}
+
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
@@ -203,7 +201,11 @@ function _Home() {
           <ChatList />
         </div>
 
-        <div className={styles["sidebar-tail"]}>
+        <div className={styles["sidebar-tail"]}
+             onLoad={() => {
+               createNewSession();
+             }}
+        >
           <div className={styles["sidebar-actions"]}>
             <div className={styles["sidebar-action"]}>
               <IconButton
