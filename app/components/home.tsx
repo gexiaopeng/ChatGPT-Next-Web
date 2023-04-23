@@ -205,8 +205,12 @@ function _Home() {
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
+        onTouchStart={(e)=>{
+          handleTouchStart(e);
+        }}
+        onTouchMove={(e)=>{
+          handleTouchMove(e);
+        }}
       >
         <div className={styles["sidebar-header"]}
              onClick={() => {
