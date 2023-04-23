@@ -207,14 +207,15 @@ function _Home() {
           onClick={() => {
             hiddenSidebar();
           }}
+          onLoad={() => {
+            initPage();
+          }}
         >
           <ChatList />
         </div>
 
         <div className={styles["sidebar-tail"]}
-             onLoad={() => {
-               initPage();
-             }}
+
         >
           <div className={styles["sidebar-actions"]}>
             <div className={styles["sidebar-action"]}>
