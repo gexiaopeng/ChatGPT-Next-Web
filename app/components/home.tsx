@@ -181,9 +181,7 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-      onLoad={() => {
-        initPage();
-      }}
+
     >
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
@@ -214,6 +212,9 @@ function _Home() {
         </div>
 
         <div className={styles["sidebar-tail"]}
+             onLoad={() => {
+               initPage();
+             }}
         >
           <div className={styles["sidebar-actions"]}>
             <div className={styles["sidebar-action"]}>
