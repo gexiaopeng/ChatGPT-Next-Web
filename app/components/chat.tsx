@@ -669,9 +669,9 @@ export function Chat(props: {
               icon={<ReturnIcon />}
               bordered
               title={Locale.Chat.Actions.ChatList}
-              onClick={(e)=>{
+              onClick={(e:MouseEvent)=>{
                 console.log("-onClick-",e);
-                e.target.blur();
+                e?.target.blur();
                 props?.showSideBar();
               }}
             />
