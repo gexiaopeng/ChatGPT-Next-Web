@@ -96,7 +96,6 @@ export function ChatList() {
 
     moveSession(source.index, destination.index);
   };
-  createNewSession();
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">
