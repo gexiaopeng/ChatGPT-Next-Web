@@ -100,13 +100,14 @@ export function ChatList() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">
+        {createNewSession}
         {(provided) => (
           <div
             className={styles["chat-list"]}
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {createNewSession}
+
             {sessions.map((item, i) => (
               <ChatItem
                 title={item.topic}
