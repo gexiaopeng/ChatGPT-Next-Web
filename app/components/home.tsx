@@ -163,9 +163,11 @@ function _Home() {
     },10);
   };
   function initPage(){
+    console.log("=initPage="+isInit);
     if(!isInit){
-      createNewSession();
       isInit=true;
+      setShowSideBar();
+      createNewSession();
     }
   }
 
