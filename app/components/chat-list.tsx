@@ -56,6 +56,8 @@ export function ChatItem(props: {
 }
 
 export function ChatList() {
+  const chatStore = useChatStore();
+  chatStore.newSession();
   const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle] =
     useChatStore((state) => [
       state.sessions,
@@ -65,7 +67,6 @@ export function ChatList() {
       state.moveSession,
       state.isRenameTitle,
     ]);
-  const chatStore = useChatStore();
   const renameSession = (i:number) => {
     chatStore.renameTitle(true);
     console.log("---renameSession--",new Date().getTime());
