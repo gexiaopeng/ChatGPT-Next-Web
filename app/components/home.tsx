@@ -174,6 +174,8 @@ function _Home() {
   const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
   let startX: number;
   function handleTouchStart(event: TouchEvent) {
+    const element = event.target as HTMLElement;
+    element.focus();
     startX = event.touches[0].clientX;
   }
 
@@ -183,7 +185,7 @@ function _Home() {
     if (distance < -MIN_SWIPE_DISTANCE) {
       // left swipe detected
       // do something here
-      setShowSideBar(false);
+      hiddenSidebar();
     }
   }
 
