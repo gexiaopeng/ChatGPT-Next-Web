@@ -344,7 +344,7 @@ export const useChatStore = create<ChatStore>()(
         sessions.forEach(function(item,i) {
          if(item.messages.length==0){
            nid=i;
-           break;
+           return;
          }
         });
         console.log("--nid--"+nid);
