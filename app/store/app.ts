@@ -278,7 +278,7 @@ export const useChatStore = create<ChatStore>()(
           get().renameDelete(true);
         }
         console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index+","+get().isRenameTitle,get().isRenameDelete,new Date().getTime());
-        if(get().currentSessionIndex==index || get().isRenameTitle){
+        if(get().currentSessionIndex==index || get().isRenameTitle || get().isRenameDelete){
           get().renameTitle(false);
           return;
         }
@@ -338,6 +338,13 @@ export const useChatStore = create<ChatStore>()(
       },
 
       newSession() {
+        const sessions = get().sessions;
+        sessions.forEach(function(item,i) {
+         if(item.messages.length==0){
+           get().selectSession(i);
+           return;
+         }
+        });
         set((state) => ({
           currentSessionIndex: 0,
           sessions: [createEmptySession()].concat(state.sessions),
