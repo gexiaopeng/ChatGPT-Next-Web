@@ -669,7 +669,11 @@ export function Chat(props: {
               icon={<ReturnIcon />}
               bordered
               title={Locale.Chat.Actions.ChatList}
-              onClick={props?.showSideBar}
+              onClick={(e)=>{
+                console.log("-onClick-",e);
+                e.target.blur();
+                props?.showSideBar();
+              }}
             />
           </div>
           <div className={styles["window-action-button"]}>

@@ -175,6 +175,7 @@ function _Home() {
   let startX: number;
   function handleTouchStart(event: TouchEvent) {
     const element = event.target as HTMLElement;
+    console.log("-handleTouchStart-",element);
     element.focus();
     startX = event.touches[0].clientX;
   }
