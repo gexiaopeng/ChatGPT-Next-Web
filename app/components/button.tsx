@@ -13,6 +13,10 @@ export function IconButton(props: {
   title?: string;
   disabled?: boolean;
 }) {
+    function handleClick() {
+        props?.onClick();
+        document.activeElement.blur();
+    }
   return (
     <button
       className={
@@ -21,7 +25,7 @@ export function IconButton(props: {
           props.className ?? ""
         } `
       }
-      onClick={props.onClick}
+      onClick={handleClick}
       title={props.title}
       disabled={props.disabled}
       role="button"
