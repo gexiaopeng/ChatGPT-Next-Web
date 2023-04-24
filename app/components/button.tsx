@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import styles from "./button.module.scss";
-
+import { useRef } from "react";
 export function IconButton(props: {
   onClick?: () => void;
   icon: JSX.Element;
@@ -13,19 +13,17 @@ export function IconButton(props: {
   title?: string;
   disabled?: boolean;
 }) {
-    function handleClick() {
-        console.log("--handleClick--");
-        if (props.onClick) {
+    const buttonRef = useRef<HTMLTextAreaElement>(null);
+    const handleClick = () => {
+        console.log("--handleClick--",buttonRef);
+        if(props.onClick){
             props.onClick();
         }
-        if(document){
-            if( document.activeElement) {
-                document.activeElement.blur();
-            }
-        }
-    }
+        buttonRef.current.blur();
+    };
   return (
     <button
+        ref={buttonRef}
       className={
         styles["icon-button"] +
         ` ${props.bordered && styles.border} ${props.shadow && styles.shadow} ${
