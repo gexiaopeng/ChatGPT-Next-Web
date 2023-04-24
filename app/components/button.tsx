@@ -21,10 +21,7 @@ export function IconButton(props: {
           props.className ?? ""
         } `
       }
-      onClick={(this)=>{
-          console.log("onClick this",this);
-          props.onClick();
-      }}
+      onClick={props.onClick}
       title={props.title}
       disabled={props.disabled}
       role="button"
