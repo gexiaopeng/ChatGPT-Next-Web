@@ -13,7 +13,7 @@ export function IconButton(props: {
   title?: string;
   disabled?: boolean;
 }) {
-    const buttonRef =  useRef(null);
+    const buttonRef =  useRef<HTMLButtonElement>(null);
     const handleClick = () => {
         console.log("--handleClick--",buttonRef);
         if(props.onClick){
