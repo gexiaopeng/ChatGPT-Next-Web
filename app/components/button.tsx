@@ -19,7 +19,9 @@ export function IconButton(props: {
         if(props.onClick){
             props.onClick();
         }
-        buttonRef.current.blur();
+        if(buttonRef.current){
+            buttonRef.current.blur();
+        }
     };
   return (
     <button
