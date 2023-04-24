@@ -15,7 +15,9 @@ export function IconButton(props: {
 }) {
     function handleClick() {
         console.log("--handleClick--");
-        props?.onClick();
+        if (props.onClick) {
+            props.onClick();
+        }
         document.activeElement.blur();
     }
   return (
