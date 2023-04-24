@@ -13,12 +13,13 @@ export function IconButton(props: {
   title?: string;
   disabled?: boolean;
 }) {
-    const buttonRef = useRef<HTMLTextAreaElement>(null);
+    const buttonRef =  useRef(null);
     const handleClick = () => {
         console.log("--handleClick--",buttonRef);
         if(props.onClick){
             props.onClick();
         }
+
         if(buttonRef){
             if(buttonRef.current) {
                 buttonRef.current.blur();
