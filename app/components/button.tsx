@@ -18,7 +18,9 @@ export function IconButton(props: {
         if (props.onClick) {
             props.onClick();
         }
-        document.activeElement.blur();
+        if(document.activeElement){
+           document.activeElement.blur();
+        }
     }
   return (
     <button
