@@ -18,8 +18,10 @@ export function IconButton(props: {
         if (props.onClick) {
             props.onClick();
         }
-        if(document.activeElement){
-           document.activeElement.blur();
+        if(document){
+            if( document.activeElement) {
+                document.activeElement.blur();
+            }
         }
     }
   return (
