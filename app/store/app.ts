@@ -469,6 +469,7 @@ export const useChatStore = create<ChatStore>()(
                 botMessage.id ?? messageIndex,
               );
             } else {
+              console.log("content:["+content+"]");
               botMessage.content = content;
               set(() => ({}));
             }
