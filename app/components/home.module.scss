@@ -148,6 +148,16 @@
   right: 8px;
   background-color: var(--white);
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-action-button-close-inner {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .chat-item {
   padding: 10px 14px;
