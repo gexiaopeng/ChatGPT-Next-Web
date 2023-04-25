@@ -456,9 +456,11 @@ export const useChatStore = create<ChatStore>()(
             // stream response
             if (done) {
               botMessage.streaming = false;
-
+              content = content.trim().replace(/^\r?\n/, "");
               if(role==101) {
-               content = content.trim().replace(/\"$/, "");
+                content = content.trim().replace(/^Translation:/, "");
+                content = content.trim().replace(/^\"/, "");
+                content = content.trim().replace(/\"$/, "");
               }
               botMessage.content = content;
               get().onNewMessage(botMessage);
