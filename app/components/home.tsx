@@ -168,11 +168,11 @@ function _Home() {
   };
   function initPage(){
     const queryParameters = new URLSearchParams(window.location.search);
-    const role = queryParameters.get("r") || 1;
+    const role = queryParameters.get("r") || "1";
     console.log("=initPage,initPage:"+isInit+",role:"+role);
     if(!isInit){
       isInit=true;
-      chatStore.setRole(role);
+      chatStore.setRole(Number(role));
       createNewSession();
       setShowSideBar(false);
     }
