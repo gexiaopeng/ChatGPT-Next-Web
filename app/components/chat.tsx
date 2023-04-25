@@ -462,6 +462,7 @@ export function Chat(props: {
   const onPromptSelect = (prompt: Prompt) => {
     setUserInput(prompt.content);
     setPromptHints([]);
+    console.log("--onPromptSelect---");
     inputRef.current?.focus();
   };
 
@@ -512,7 +513,9 @@ export function Chat(props: {
     setBeforeInput(userInput);
     setUserInput("");
     setPromptHints([]);
-    if (!isMobileScreen()) inputRef.current?.focus();
+    if (!isMobileScreen()) {
+      inputRef.current?.focus();
+    }
     setAutoScroll(true);
   };
 
@@ -583,6 +586,7 @@ export function Chat(props: {
     const content = session.messages[userIndex].content;
     deleteMessage(userIndex);
     chatStore.onUserInput(content).then(() => setIsLoading(false));
+    console.log("---onResend----");
     inputRef.current?.focus();
   };
 
@@ -644,6 +648,7 @@ export function Chat(props: {
 
   // Auto focus
   useEffect(() => {
+    console.log("--useEffect=="+isMobileScreen());
     if (props.sideBarShowing && isMobileScreen()) return;
     if(!isMobileScreen()){
       inputRef.current?.focus();
