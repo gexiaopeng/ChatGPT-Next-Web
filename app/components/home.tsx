@@ -255,6 +255,15 @@ function _Home() {
 
         >
           <div className={styles["sidebar-actions"]}>
+
+            <div className={styles["sidebar-action"]}>
+              <IconButton
+                  icon={<CloseIcon />}
+                  text="清空聊天"
+                  onClick={chatStore.deleteSession}
+              />
+            </div>
+
             <div className={styles["sidebar-action"]}>
               <IconButton
                 icon={<SettingsIcon />}
