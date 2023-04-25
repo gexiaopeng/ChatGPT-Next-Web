@@ -416,6 +416,10 @@ export const useChatStore = create<ChatStore>()(
       },
 
       async onUserInput(content) {
+        let role=get().role;
+        if(role==101){
+          content="翻译以下文本:\r\n\""+content+"\"";
+        }
         const userMessage: Message = createMessage({
           role: "user",
           content,
@@ -429,7 +433,7 @@ export const useChatStore = create<ChatStore>()(
 
         // get recent messages
         const recentMessages = get().getMessagesWithMemory();
-        const sendMessages = recentMessages.concat(userMessage);
+        let sendMessages = (role==101? userMessage: recentMessages.concat(userMessage));
         const sessionIndex = get().currentSessionIndex;
         const messageIndex = get().currentSession().messages.length + 1;
 

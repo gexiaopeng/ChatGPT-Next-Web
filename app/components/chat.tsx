@@ -436,7 +436,8 @@ export function Chat(props: {
     state.currentSessionIndex,
   ]);
   const fontSize = useChatStore((state) => state.config.fontSize);
-
+  const role= useChatStore((state) => state.role);
+  console.log("---chat role:"+role);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
   const [beforeInput, setBeforeInput] = useState("");
@@ -604,6 +605,9 @@ export function Chat(props: {
     session.messages.at(0)?.content !== BOT_HELLO.content
   ) {
     const copiedHello = Object.assign({}, BOT_HELLO);
+    if(role==101){
+      copiedHello.content="翻译（中英自动识别）";
+    }
     if (!accessStore.isAuthorized()) {
       copiedHello.content = Locale.Error.Unauthorized;
     }

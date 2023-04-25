@@ -220,7 +220,7 @@ function _Home() {
         onTouchStart={(e1) => handleTouchStart(e1 as any)}
         onTouchMove={(e2) => handleTouchMove(e2 as any)}
       >
-        <div className={styles["sidebar-action-button-close"] + " " + styles.mobile}>
+        <div className={styles["sidebar-action-button-close"] + " " + styles.mobile}  onClick={hiddenSidebar}>
           <div className={styles["sidebar-action-button-close-inner"]}>
             <ClosegIcon
                 onClick={hiddenSidebar}
