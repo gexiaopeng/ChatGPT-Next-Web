@@ -164,7 +164,7 @@ function _Home() {
     },10);
   };
   function initPage(){
-    console.log("=initPage="+isInit);
+    console.log("=initPage,initPage:"+isInit);
     if(!isInit){
       isInit=true;
       createNewSession();
