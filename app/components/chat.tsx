@@ -645,7 +645,9 @@ export function Chat(props: {
   // Auto focus
   useEffect(() => {
     if (props.sideBarShowing && isMobileScreen()) return;
-    inputRef.current?.focus();
+    if(!isMobileScreen()){
+      inputRef.current?.focus();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
