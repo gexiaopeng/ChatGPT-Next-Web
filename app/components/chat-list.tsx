@@ -56,7 +56,7 @@ export function ChatItem(props: {
 }
 
 export function ChatList() {
-  const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle,createNewSession] =
+  const [sessions, selectedIndex, selectSession, removeSession, moveSession,isRenameTitle,role] =
     useChatStore((state) => [
       state.sessions,
       state.currentSessionIndex,
@@ -64,7 +64,7 @@ export function ChatList() {
       state.removeSession,
       state.moveSession,
       state.isRenameTitle,
-      state.newSession,
+      state.role,
     ]);
   const chatStore = useChatStore();
   const renameSession = (i:number) => {
@@ -96,6 +96,7 @@ export function ChatList() {
 
     moveSession(source.index, destination.index);
   };
+  console.log("--chat-list--role:"+role);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">

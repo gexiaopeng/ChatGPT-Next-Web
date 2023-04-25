@@ -3,7 +3,6 @@
 import MenugIcon from "../icons/menug.svg";
 
 require("../polyfill");
-import React from 'react';
 import { useState, useEffect, useRef } from "react";
 
 import { IconButton } from "./button";
@@ -173,6 +172,7 @@ function _Home() {
     console.log("=initPage,initPage:"+isInit+",role:"+role);
     if(!isInit){
       isInit=true;
+      chatStore.setRole(role);
       createNewSession();
       setShowSideBar(false);
     }

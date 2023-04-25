@@ -233,6 +233,8 @@ interface ChatStore {
   isRenameDelete:boolean;
   renameDelete:(isReDel:boolean)=>void;
   getRenameDelete:() =>boolean;
+  role:number;
+  setRole:(role:number)=>void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -248,10 +250,15 @@ export const useChatStore = create<ChatStore>()(
       currentSessionIndex: 0,
       isRenameTitle:false,
       isRenameDelete:false,
+      role:1,
       config: {
         ...DEFAULT_CONFIG,
       },
-
+      setRole(role:number){
+        set(() => ({
+          role:role,
+        }));
+      },
       clearSessions() {
         set(() => ({
           sessions: [createEmptySession()],
