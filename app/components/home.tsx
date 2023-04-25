@@ -132,7 +132,7 @@ const useHasHydrated = () => {
 
   return hasHydrated;
 };
-const queryParameters = new URLSearchParams(window.location.search);
+
 let isInit=false;
 
 function _Home() {
@@ -168,6 +168,7 @@ function _Home() {
     },10);
   };
   function initPage(){
+    const queryParameters = new URLSearchParams(window.location.search);
     const role = queryParameters.get("r") || 1;
     console.log("=initPage,initPage:"+isInit+",role:"+role);
     if(!isInit){
