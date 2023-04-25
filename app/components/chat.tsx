@@ -514,6 +514,7 @@ export function Chat(props: {
     setUserInput("");
     setPromptHints([]);
     if (!isMobileScreen()) {
+      console.log("---onUserSubmit-");
       inputRef.current?.focus();
     }
     setAutoScroll(true);
@@ -651,6 +652,7 @@ export function Chat(props: {
     console.log("--useEffect=="+isMobileScreen());
     if (props.sideBarShowing && isMobileScreen()) return;
     if(!isMobileScreen()){
+      console.log("--useEffect=focus="+isMobileScreen());
       inputRef.current?.focus();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
