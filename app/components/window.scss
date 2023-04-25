@@ -36,11 +36,14 @@
   margin-left: 10px;
 }
 .window-action-button-menu {
-  margin-left: 5px;
+  margin-left: 8px;
   height: 50px;
 }
 @media only screen and (max-width: 600px) {
   .window-header {
     padding: 14px 20px 14px 0px;
+  }
+  .window-header-title {
+    margin-left: -16px;
   }
 }
