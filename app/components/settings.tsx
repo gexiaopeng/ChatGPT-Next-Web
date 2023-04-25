@@ -248,7 +248,7 @@ export function Settings(props: { closeSettings: () => void }) {
   return (
     <ErrorBoundary>
       <div className={styles["window-header"]}>
-        <div className={`${styles["window-header-title"]} ${styles["margin-left"]}`}>
+        <div className={`${styles["window-header-title"]} ${styles["margin-left"]} ${styles["header-padding"]}`}>
           <div className={styles["window-header-main-title"]}>
             {Locale.Settings.Title}
           </div>
