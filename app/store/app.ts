@@ -432,7 +432,7 @@ export const useChatStore = create<ChatStore>()(
         const recentMessages = get().getMessagesWithMemory();
         let sendMessages=recentMessages.concat(userMessage) ;
         if(role==101){
-          content="翻译以下文本:\r\n"+content;
+          content="翻译以下文本:\r\n\""+content+"\"";
           const userMg: Message = createMessage({
             role: "user",
             content,
