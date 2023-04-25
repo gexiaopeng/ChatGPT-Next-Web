@@ -671,7 +671,7 @@ export function Chat(props: {
     <div className={styles.chat} key={session.id}>
       <div className={styles["window-header"]}>
          <div className={styles["window-action-button-menu"] + " " + styles.mobile}>
-            <MenuIcon
+            <MenugIcon
                 onClick={props?.showSideBar}
             />
           </div>

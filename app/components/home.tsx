@@ -1,5 +1,7 @@
 "use client";
 
+import MenugIcon from "../icons/menug.svg";
+
 require("../polyfill");
 
 import { useState, useEffect, useRef } from "react";
@@ -10,6 +12,7 @@ import styles from "./home.module.scss";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
+import ClosegIcon from "../icons/menug.svg";
 
 import BotIcon from "../icons/bot.svg";
 import AddIcon from "../icons/add.svg";
@@ -214,6 +217,11 @@ function _Home() {
         onTouchStart={(e1) => handleTouchStart(e1 as any)}
         onTouchMove={(e2) => handleTouchMove(e2 as any)}
       >
+        <div className={styles["sidebar-action-button-close"] + " " + styles.mobile}>
+          <ClosegIcon
+              onClick={hiddenSidebar}
+          />
+        </div>
         <div className={styles["sidebar-header"]}
              onClick={() => {
                hiddenSidebar();
