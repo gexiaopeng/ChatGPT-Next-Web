@@ -418,7 +418,7 @@ export const useChatStore = create<ChatStore>()(
       async onUserInput(content) {
         let role=get().role;
         if(role==101){
-          content="翻译以下文本:\r\n\""+content+"\"";
+          content="翻译以下文本:\r\n"+content;
         }
         const userMessage: Message = createMessage({
           role: "user",

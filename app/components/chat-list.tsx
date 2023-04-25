@@ -96,7 +96,7 @@ export function ChatList() {
 
     moveSession(source.index, destination.index);
   };
-  console.log("--chat-list--role:"+role);
+  //console.log("--chat-list--role:"+role);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">

@@ -437,7 +437,7 @@ export function Chat(props: {
   ]);
   const fontSize = useChatStore((state) => state.config.fontSize);
   const role= useChatStore((state) => state.role);
-  console.log("---chat role:"+role);
+  //console.log("---chat role:"+role);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [userInput, setUserInput] = useState("");
   const [beforeInput, setBeforeInput] = useState("");
