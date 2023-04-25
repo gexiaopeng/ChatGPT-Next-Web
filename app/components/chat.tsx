@@ -654,6 +654,13 @@ export function Chat(props: {
     if(!isMobileScreen()){
       console.log("--useEffect=focus="+isMobileScreen());
       inputRef.current?.focus();
+    }else{
+      const textArea = document.createElement("textarea");
+      textArea.value = " ";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      document.body.removeChild(textArea);
+      console.log("--useEffect=textArea=");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
