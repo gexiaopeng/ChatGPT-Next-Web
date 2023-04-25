@@ -208,6 +208,7 @@ interface ChatStore {
   selectSession: (index: number) => void;
   newSession: () => void;
   deleteSession: (index?: number) => void;
+  deleteAllSession: () => void;
   currentSession: () => ChatSession;
   onNewMessage: (message: Message) => void;
   onUserInput: (content: string) => Promise<void>;
@@ -364,7 +365,11 @@ export const useChatStore = create<ChatStore>()(
           sessions: [createEmptySession()].concat(state.sessions),
         }));
       },
-
+      deleteAllSession() {
+        if ( confirm(Locale.Settings.Actions.ConfirmClearAll.Confirm)) {
+          get().clearSessions();
+        }
+      },
       deleteSession(i?: number) {
         const deletedSession = get().currentSession();
         const index = i ?? get().currentSessionIndex;

@@ -4,7 +4,7 @@ import MenugIcon from "../icons/menug.svg";
 
 require("../polyfill");
 import { useState, useEffect, useRef } from "react";
-
+import ClearIcon from "../icons/clear.svg";
 import { IconButton } from "./button";
 import styles from "./home.module.scss";
 
@@ -258,9 +258,9 @@ function _Home() {
 
             <div className={styles["sidebar-action"]}>
               <IconButton
-                  icon={<CloseIcon />}
+                  icon={<ClearIcon />}
                   text="清空聊天"
-                  onClick={chatStore.deleteSession}
+                  onClick={chatStore.deleteAllSession}
               />
             </div>
 
