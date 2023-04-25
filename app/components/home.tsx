@@ -3,7 +3,7 @@
 import MenugIcon from "../icons/menug.svg";
 
 require("../polyfill");
-
+import React from 'react';
 import { useState, useEffect, useRef } from "react";
 
 import { IconButton } from "./button";
