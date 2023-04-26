@@ -513,7 +513,7 @@ export function Chat(props: {
     if (userInput.length <= 0) return;
     setIsLoading(true);
     chatStore.onUserInput(userInput,()=>{
-      console.log("-onUserInput-onUserSubmit-end");
+      console.log("-onUserInput-onUserSubmit-end-");
     }).then(() => setIsLoading(false));
     setBeforeInput(userInput);
     setUserInput("");
