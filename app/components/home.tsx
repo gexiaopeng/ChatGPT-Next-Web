@@ -26,7 +26,7 @@ import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
-import '../../public/highlight.min';
+import hljs from '../../public/highlight.min';
 import '../../public/atom-one-dark.min.css';
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -171,7 +171,7 @@ function _Home() {
   function initPage(){
     const queryParameters = new URLSearchParams(window.location.search);
     const role = queryParameters.get("r") || "1";
-    console.log("=initPage,initPage:"+isInit+",role:"+role);
+    console.log("=initPage,initPage:"+isInit+",role:"+role+", hljs:", hljs);
     if(!isInit){
       isInit=true;
       chatStore.setRole(Number(role));
