@@ -347,7 +347,7 @@ export const useChatStore = create<ChatStore>()(
 
       newSession() {
         const sessions = get().sessions;
-        console.log("=newSession=",sessions);
+        //console.log("=newSession=",sessions);
         let nid=-1;
         sessions.forEach(function(item,i) {
          if(item.messages.length==0){
@@ -355,7 +355,7 @@ export const useChatStore = create<ChatStore>()(
            return;
          }
         });
-        console.log("--nid--"+nid);
+        //console.log("--nid--"+nid);
         if(nid>-1){
           get().selectSession(nid);
           return;
@@ -455,7 +455,7 @@ export const useChatStore = create<ChatStore>()(
         });
 
         // make request
-        console.log("[User Input] ", sendMessages);
+       // console.log("[User Input] ", sendMessages);
         requestChatStream(sendMessages, {
           onMessage(content, done) {
             // stream response
@@ -602,13 +602,6 @@ export const useChatStore = create<ChatStore>()(
 
         const lastSummarizeIndex = session.messages.length;
 
-        console.log(
-          "[Chat History] ",
-          toBeSummarizedMsgs,
-          historyMsgLength,
-          config.compressMessageLengthThreshold,
-        );
-
         if (historyMsgLength > config.compressMessageLengthThreshold) {
           requestChatStream(
             toBeSummarizedMsgs.concat({
@@ -621,7 +614,7 @@ export const useChatStore = create<ChatStore>()(
               onMessage(message, done) {
                 session.memoryPrompt = message;
                 if (done) {
-                  console.log("[Memory] ", session.memoryPrompt);
+                  //console.log("[Memory] ", session.memoryPrompt);
                   session.lastSummarizeIndex = lastSummarizeIndex;
                 }
               },
@@ -647,10 +640,10 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({ sessions }));
       },
       updateSession(updater :(session:ChatSession)=>void,index:number) {
-        console.log("---rename--begin");
+        //console.log("---rename--begin");
         const sessions = get().sessions;
         updater(sessions[index]);
-        console.log("---rename--end");
+       // console.log("---rename--end");
         //set(() => ({ sessions }));
       },
       renameTitle(isRename:boolean){
