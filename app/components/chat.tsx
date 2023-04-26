@@ -515,7 +515,7 @@ export function Chat(props: {
     setIsLoading(true);
     chatStore.onUserInput(userInput,()=>{
       //hljs.highlightAll();
-      console.log("-onUserInput-onUserSubmit-end-hljs:",hljs);
+      //console.log("-onUserInput-onUserSubmit-end-hljs:",hljs);
     }).then(() => setIsLoading(false));
     setBeforeInput(userInput);
     setUserInput("");
@@ -594,7 +594,7 @@ export function Chat(props: {
     const content = session.messages[userIndex].content;
     deleteMessage(userIndex);
     chatStore.onUserInput(content,()=>{
-     console.log("--onUserInput onResend -end-hljs:",hljs);
+     //console.log("--onUserInput onResend -end-hljs:",hljs);
       //hljs.highlightAll();
     }).then(() => setIsLoading(false));
     console.log("---onResend----");
