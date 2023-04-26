@@ -259,7 +259,7 @@ function _Home() {
             <div className={styles["sidebar-action"]}>
               <IconButton
                   icon={<ClearIcon />}
-                  text="清空聊天"
+                  text="清空"
                   onClick={chatStore.deleteAllSession}
               />
             </div>
