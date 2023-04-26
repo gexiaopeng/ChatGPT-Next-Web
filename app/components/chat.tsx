@@ -512,7 +512,9 @@ export function Chat(props: {
   const onUserSubmit = () => {
     if (userInput.length <= 0) return;
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+    chatStore.onUserInput(userInput,()=>{
+      console.log("-onUserInput-onUserSubmit-end");
+    }).then(() => setIsLoading(false));
     setBeforeInput(userInput);
     setUserInput("");
     setPromptHints([]);
@@ -589,7 +591,9 @@ export function Chat(props: {
     setIsLoading(true);
     const content = session.messages[userIndex].content;
     deleteMessage(userIndex);
-    chatStore.onUserInput(content).then(() => setIsLoading(false));
+    chatStore.onUserInput(content,()=>{
+      console.log("--onUserInput onResend -end-");
+    }).then(() => setIsLoading(false));
     console.log("---onResend----");
     inputRef.current?.focus();
   };

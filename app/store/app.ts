@@ -420,7 +420,7 @@ export const useChatStore = create<ChatStore>()(
         get().summarizeSession();
       },
 
-      async onUserInput(content) {
+      async onUserInput(content,highLight) {
         let role=get().role;
         const userMessage: Message = createMessage({
           role: "user",
@@ -473,6 +473,8 @@ export const useChatStore = create<ChatStore>()(
                 sessionIndex,
                 botMessage.id ?? messageIndex,
               );
+              highLight();
+              console.log("---done:"+done);
             } else {
               //console.log("content:["+content+"]");
               content = content.trim().replace(/^\r?\n/, "");
