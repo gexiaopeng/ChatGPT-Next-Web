@@ -171,7 +171,7 @@ function _Home() {
   function initPage(){
     const queryParameters = new URLSearchParams(window.location.search);
     const role = queryParameters.get("r") || "1";
-    console.log("=initPage,initPage:"+isInit+",role:"+role+", hljs:", hljs);
+    console.log("=initPage,initPage:"+isInit+",role:"+role);
     if(!isInit){
       isInit=true;
       chatStore.setRole(Number(role));
