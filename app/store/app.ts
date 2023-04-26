@@ -473,7 +473,7 @@ export const useChatStore = create<ChatStore>()(
                 sessionIndex,
                 botMessage.id ?? messageIndex,
               );
-              highLight();
+             // highLight();
               console.log("---done:"+done);
             } else {
               //console.log("content:["+content+"]");
