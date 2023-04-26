@@ -45,8 +45,8 @@ export function Markdown(
   const rendered = useRef(true); // disable lazy loading for bad ux
   const [counter, setCounter] = useState(0);
     useEffect(() => {
-        console.log("-- hljs.highlightAll--",hljs);
-        //hljs.highlightAll();
+        console.log("-- hljs.highlightAll--");
+        hljs.highlightAll();
     }, []);
   useEffect(() => {
     // to triggr rerender
