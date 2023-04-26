@@ -7,7 +7,7 @@ import RemarkGfm from "remark-gfm";
 import RehypeHighlight from "rehype-highlight";
 import { useRef, useState, RefObject, useEffect } from "react";
 import { copyToClipboard } from "../utils";
-import hljs from '../../public/highlight.min';
+import hljs from '../../public/highlight';
 import '../../public/atom-one-dark.min.css';
 import LoadingIcon from "../icons/three-dots.svg";
 

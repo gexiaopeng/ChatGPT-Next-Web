@@ -7,7 +7,7 @@ declare module "*.scss" {
   const content: Record<string, string>;
   export default content;
 }
-declare module 'highlight.min.js' {
+declare module 'highlight.js' {
   export function highlightAll(): void;
 }
 declare module "*.svg";
