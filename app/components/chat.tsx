@@ -662,10 +662,10 @@ export function Chat(props: {
 
   // Auto focus
   useEffect(() => {
-    console.log("--useEffect=="+isMobileScreen());
+    //console.log("--useEffect=="+isMobileScreen());
     if (props.sideBarShowing && isMobileScreen()) return;
     if(!isMobileScreen()){
-      console.log("--useEffect=focus="+isMobileScreen());
+      //console.log("--useEffect=focus="+isMobileScreen());
       inputRef.current?.focus();
     }else{
       const textArea = document.createElement("textarea");
@@ -673,7 +673,7 @@ export function Chat(props: {
       document.body.appendChild(textArea);
       textArea.focus();
       document.body.removeChild(textArea);
-      console.log("--useEffect=textArea=");
+      //console.log("--useEffect=textArea=");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

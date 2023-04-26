@@ -157,7 +157,7 @@ function _Home() {
   useSwitchTheme();
   const hiddenSidebar=()=>{
    setTimeout(()=>{
-      console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.getRenameDelete(),new Date().getTime());
+      //console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.getRenameDelete(),new Date().getTime());
       setOpenSettings(false);
       if(chatStore.getRenameDelete()){
         chatStore.renameDelete(false);
@@ -180,12 +180,12 @@ function _Home() {
   const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
   let startX: number;
   function handleTouchStart(event: TouchEvent) {
-    const element = event.target as HTMLElement;
-    console.log("-handleTouchStart-",element);
-    element.focus();
+    //const element = event.target as HTMLElement;
+    //console.log("-handleTouchStart-",element);
+    //element.focus();
     const header = document.getElementById("sidebar-show") as HTMLElement;
-    console.log("-header-",header);
-    header?.focus();
+    //console.log("-header-",header);
+    //header?.focus();
     startX = event.touches[0].clientX;
   }
 

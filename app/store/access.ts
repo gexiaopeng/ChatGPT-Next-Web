@@ -50,11 +50,11 @@ export const useAccessStore = create<AccessControlStore>()(
         })
           .then((res) => res.json())
           .then((res: DangerConfig) => {
-            console.log("[Config] got config from server", res);
+            //console.log("[Config] got config from server", res);
             set(() => ({ ...res }));
           })
           .catch(() => {
-            console.error("[Config] failed to fetch config");
+            //console.error("[Config] failed to fetch config");
           })
           .finally(() => {
             fetchState = 2;
