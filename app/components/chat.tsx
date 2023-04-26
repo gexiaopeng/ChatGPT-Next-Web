@@ -55,7 +55,8 @@ import chatStyle from "./chat.module.scss";
 
 import { Input, Modal, showModal } from "./ui-lib";
 import SettingsIcon from "../icons/settings.svg";
-
+import hljs from 'highlight.js';
+import '../../public/atom-one-dark.min.css';
 const Markdown = dynamic(
   async () => memo((await import("./markdown")).Markdown),
   {
@@ -513,7 +514,8 @@ export function Chat(props: {
     if (userInput.length <= 0) return;
     setIsLoading(true);
     chatStore.onUserInput(userInput,()=>{
-      console.log("-onUserInput-onUserSubmit-end-");
+      hljs.highlightAll();
+      console.log("-onUserInput-onUserSubmit-end-hljs:",hljs);
     }).then(() => setIsLoading(false));
     setBeforeInput(userInput);
     setUserInput("");
@@ -592,7 +594,8 @@ export function Chat(props: {
     const content = session.messages[userIndex].content;
     deleteMessage(userIndex);
     chatStore.onUserInput(content,()=>{
-      console.log("--onUserInput onResend -end-");
+     console.log("--onUserInput onResend -end-hljs:",hljs);
+      hljs.highlightAll();
     }).then(() => setIsLoading(false));
     console.log("---onResend----");
     inputRef.current?.focus();
