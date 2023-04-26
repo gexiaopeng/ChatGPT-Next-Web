@@ -471,6 +471,7 @@ pre {
   box-sizing: border-box;
   overflow-y: auto;
   border-radius: 8px 8px 8px 8px;
+  max-width:var(--message-max-width-pre);
 }
 
 .markdown-body .octicon {

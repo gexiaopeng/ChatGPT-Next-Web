@@ -61,6 +61,7 @@
   --sidebar-width: 300px;
   --window-content-width: calc(100% - var(--sidebar-width));
   --message-max-width: 80%;
+  --message-max-width-pre: 600px;
   --full-height: 100%;
 }
 
@@ -71,6 +72,7 @@
     --sidebar-width: 100vw;
     --window-content-width: var(--window-width);
     --message-max-width: 100%;
+    --message-max-width-pre: 350px;
   }
 
   .no-mobile {
