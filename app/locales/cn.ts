@@ -22,7 +22,7 @@ const cn = {
     },
     Rename: "重命名对话",
     Typing: "正在输入…",
-    Input: (submitKey: string) => {
+    Input: (submitKey: string,role:number) => {
       var inputHints = "";
       if (!isMobileScreen()) {
         inputHints = `${submitKey} 发送`;
@@ -31,14 +31,18 @@ const cn = {
         }else{
           inputHints += "，Enter 换行";
         }
-        inputHints+= "，/ 触发补全";
+        if(role==1){
+          inputHints+= "，/ 触发补全";
+        }
       }else{
         if (submitKey === String(SubmitKey.Enter)) {
-          inputHints = "Enter 发送，";
+          inputHints = "Enter 发送";
         }else{
-          inputHints = "Enter 换行，";
+          inputHints = "Enter 换行";
         }
-        inputHints+="/ 触发补全";
+        if(role==1){
+          inputHints+="，/ 触发补全";
+        }
       }
       return inputHints;
     },
