@@ -469,8 +469,11 @@
   font-size: 12px;
   word-wrap: normal;
   overflow-y: auto;
+  /*
   border-radius: 8px 8px 8px 8px;
   max-width:var(--message-max-width-pre);
+   */
+  max-width: calc(100% - 40px);
 }
 
 .markdown-body .octicon {
