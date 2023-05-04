@@ -425,7 +425,7 @@ export function ChatActions(props: {
   );
 }
 export function Chat(props: {
-  showSideBar?: () => void;
+  showSideBar: () => void;
   sideBarShowing?: boolean;
   setShowSettings: () => void;
   createNewSession:()=>void;
@@ -659,7 +659,21 @@ export function Chat(props: {
       chatStore.updateCurrentSession((session) => (session.topic = newTopic!));
     }
   };
+  const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
+  let startX: number;
+  function handleTouchStart(event: TouchEvent) {
+    inputRef.current?.blur();
+    setAutoScroll(false);
+    startX = event.touches[0].clientX;
+  }
 
+  function handleTouchMove(event: TouchEvent) {
+    const currentX = event.touches[0].clientX;
+    const distance = currentX - startX;
+    if (distance > MIN_SWIPE_DISTANCE) {
+      props?.showSideBar();
+    }
+  }
   // Auto focus
   useEffect(() => {
     //console.log("--useEffect=="+isMobileScreen());
@@ -745,10 +759,8 @@ export function Chat(props: {
         ref={scrollRef}
         onScroll={(e) => onChatBodyScroll(e.currentTarget)}
         onWheel={(e) => setAutoScroll(hitBottom && e.deltaY > 0)}
-        onTouchStart={() => {
-          inputRef.current?.blur();
-          setAutoScroll(false);
-        }}
+        onTouchStart={(e1) => handleTouchStart(e1 as any)}
+        onTouchMove={(e2) => handleTouchMove(e2 as any)}
       >
         {messages.map((message, i) => {
           const isUser = message.role === "user";
