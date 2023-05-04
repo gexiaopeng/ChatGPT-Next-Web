@@ -670,7 +670,9 @@ export function Chat(props: {
   function handleTouchMove(event: TouchEvent) {
     const currentX = event.touches[0].clientX;
     const distance = currentX - startX;
+    console.log(distance,MIN_SWIPE_DISTANCE)
     if (distance > MIN_SWIPE_DISTANCE) {
+      console.log("props:", props);
       props?.showSideBar();
     }
   }
