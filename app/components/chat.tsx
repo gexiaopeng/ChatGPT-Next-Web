@@ -662,17 +662,16 @@ export function Chat(props: {
   const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
   let startX: number;
   function handleTouchStart(event: TouchEvent) {
+    startX = event.touches[0].clientX;
     inputRef.current?.blur();
     setAutoScroll(false);
-    startX = event.touches[0].clientX;
   }
 
   function handleTouchMove(event: TouchEvent) {
     const currentX = event.touches[0].clientX;
     const distance = currentX - startX;
-    console.log(distance,MIN_SWIPE_DISTANCE)
+    console.log("currentX,startX,distance",currentX,startX,distance);
     if (distance > MIN_SWIPE_DISTANCE) {
-      console.log("props:", props);
       props?.showSideBar();
     }
   }
