@@ -822,13 +822,6 @@ export function Chat(props: {
                   />
                   </div>
                 </div>
-                {!isUser && !message.preview && (
-                  <div className={styles["chat-message-actions"]}>
-                    <div className={styles["chat-message-action-date"]}>
-                      {message.date.toLocaleString()}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           );
