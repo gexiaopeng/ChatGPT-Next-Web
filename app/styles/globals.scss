@@ -313,3 +313,13 @@ pre {
     overflow: auto;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .clickable {
+    cursor: pointer;
+
+    &:hover {
+      filter: unset;
+    }
+  }
+}
