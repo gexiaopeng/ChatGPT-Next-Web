@@ -665,7 +665,7 @@ export function Chat(props: {
   function handleTouchStart(event: TouchEvent) {
     //console.log("handleTouchStart",event,event?.touches[0],event?.touches[0]?.clientX);
     startX = event.touches[0].clientX;
-    console.log("startX:",startX);
+    //console.log("startX:",startX);
     inputRef.current?.blur();
     setAutoScroll(false);
   }
@@ -673,7 +673,7 @@ export function Chat(props: {
   function handleTouchMove(event: TouchEvent) {
     const currentX = event.touches[0].clientX;
     const distance = currentX - startX;
-    console.log("currentX,startX,distance",currentX,startX,distance);
+    //console.log("currentX,startX,distance",currentX,startX,distance);
     if (distance > MIN_SWIPE_DISTANCE) {
       props?.showSideBar();
     }
