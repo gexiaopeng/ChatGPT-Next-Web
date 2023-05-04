@@ -664,6 +664,7 @@ export function Chat(props: {
   function handleTouchStart(event: TouchEvent) {
     console.log("handleTouchStart",event,event?.touches[0],event?.touches[0]?.clientX);
     startX = event.touches[0].clientX;
+    console.log("startX:",startX);
     inputRef.current?.blur();
     setAutoScroll(false);
   }
