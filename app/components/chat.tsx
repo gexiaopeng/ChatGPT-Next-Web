@@ -424,6 +424,7 @@ export function ChatActions(props: {
     </div>
   );
 }
+let startX: number;
 export function Chat(props: {
   showSideBar: () => void;
   sideBarShowing?: boolean;
@@ -660,7 +661,7 @@ export function Chat(props: {
     }
   };
   const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
-  let startX: number;
+
   function handleTouchStart(event: TouchEvent) {
     console.log("handleTouchStart",event,event?.touches[0],event?.touches[0]?.clientX);
     startX = event.touches[0].clientX;
