@@ -471,9 +471,10 @@
   overflow-y: auto;
   /*
   border-radius: 8px 8px 8px 8px;
-  max-width:var(--message-max-width-pre);
    */
-  max-width: calc(100% - 40px);
+  max-width:var(--message-max-width-pre);
+
+
 }
 
 .markdown-body .octicon {
