@@ -107,9 +107,7 @@ body {
     background-color: var(--second);
   }
 }
-.markdown-body pre::-webkit-scrollbar {
-  height: 8px;
-}
+
 ::-webkit-scrollbar {
   --bar-width: 5px;
   width: var(--bar-width);
@@ -127,10 +125,6 @@ body {
   background-clip: content-box;
   border: 1px solid transparent;
 }
-pre::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 select {
   border: var(--border-in-light);
   padding: 10px;
@@ -294,6 +288,9 @@ pre {
     &:hover {
       opacity: 1;
     }
+  }
+  ::-webkit-scrollbar {
+    height: 8px;
   }
 }
 
