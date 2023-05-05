@@ -267,6 +267,7 @@ function _Home() {
             <div className={styles["sidebar-action"]}>
               <IconButton
                 icon={<SettingsIcon />}
+                text="设置"
                 onClick={() => {
                   setOpenSettings(true);
                   setShowSideBar(false);
