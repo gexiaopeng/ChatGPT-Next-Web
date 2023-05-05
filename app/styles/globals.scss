@@ -107,7 +107,7 @@ body {
     background-color: var(--second);
   }
 }
-pre::-webkit-scrollbar {
+.markdown-body pre::-webkit-scrollbar {
   height: 8px;
 }
 ::-webkit-scrollbar {
