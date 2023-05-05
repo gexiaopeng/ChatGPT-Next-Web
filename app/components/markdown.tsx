@@ -12,9 +12,12 @@ import LoadingIcon from "../icons/three-dots.svg";
 
 export function PreCode(props: { children: any }) {
   const ref = useRef<HTMLPreElement>(null);
-
+    function handleTouchMove(event: TouchEvent) {
+               event.stopPropagation();
+    }
   return (
-    <pre ref={ref}>
+    <pre ref={ref}
+         onTouchMove={(e2) => handleTouchMove(e2 as any)} >
       <span
         className="copy-code-button"
         onClick={() => {
