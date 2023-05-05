@@ -107,15 +107,15 @@ body {
     background-color: var(--second);
   }
 }
-
+pre::-webkit-scrollbar {
+  height: 8px;
+}
 ::-webkit-scrollbar {
   --bar-width: 5px;
   width: var(--bar-width);
   height: var(--bar-width);
 }
-pre::-webkit-scrollbar {
-  height: 8px;
-}
+
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
