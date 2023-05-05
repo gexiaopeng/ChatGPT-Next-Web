@@ -512,7 +512,7 @@ export function Chat(props: {
 
   // submit user input
   const onUserSubmit = () => {
-    if (userInput.length <= 0) return;
+    if (userInput.trim() === "") return;
     setIsLoading(true);
     chatStore.onUserInput(userInput,()=>{
       //hljs.highlightAll();
@@ -536,7 +536,7 @@ export function Chat(props: {
   // check if should send message
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // if ArrowUp and no userInput
-    if (e.key === "ArrowUp" && userInput.length <= 0) {
+    if (e.key === "ArrowUp" && userInput.trim() === "") {
       setUserInput(beforeInput);
       e.preventDefault();
       return;
