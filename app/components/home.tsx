@@ -135,13 +135,13 @@ const useHasHydrated = () => {
 let isInit=false;
 
 function _Home() {
-  const [createNewSession, currentIndex, removeSession,isRenameDelete,sessionMap] = useChatStore(
+  const [createNewSession, currentIndex, removeSession,isRenameDelete,sessionMapp] = useChatStore(
     (state) => [
       state.newSession,
       state.sessionMap,
       state.removeSession,
       state.isRenameDelete,
-      state.sessionMap,
+      state.sessionMapp,
     ],
   );
   const chatStore = useChatStore();
@@ -170,7 +170,7 @@ function _Home() {
   function initPage(){
     const queryParameters = new URLSearchParams(window.location.search);
     const role = queryParameters.get("r") || "1";
-    console.log("=initPage,initPage:"+isInit+",role:"+role,sessionMap);
+    console.log("=initPage,initPage:"+isInit+",role:"+role,sessionMapp);
     if(!isInit){
       isInit=true;
       chatStore.setRole(Number(role));
