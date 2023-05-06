@@ -198,8 +198,8 @@ function createEmptySession(): ChatSession {
   };
 }
 function createEmptySessionMap(){
-  let mMap=new Map<number,ChatSession[]>();
-  mMap.set(0,[createEmptySession()]);
+  let mMap=new Map<String,ChatSession[]>();
+  mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
   return mMap;
 }
@@ -241,7 +241,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:Map<number,ChatSession[]>;
+  sessionMap:Map<String,ChatSession[]>;
   initSession:(role:number) => void;
 }
 
@@ -267,13 +267,13 @@ export const useChatStore = create<ChatStore>()(
         let mMap=get().sessionMap;
         console.log("-mMap-role:"+role+",["+(typeof mMap)+"]",mMap,mMap.size);
         if(!(mMap instanceof Map)){
-          mMap=new Map<number,ChatSession[]>();
-          mMap.set(role,[createEmptySession()]);
+          mMap=new Map<String,ChatSession[]>();
+          mMap.set(role+"",[createEmptySession()]);
           set(() => ({
             sessionMap:mMap,
           }));
         }
-        let mSessions=mMap.get(role);
+        let mSessions=mMap.get(role+"");
         if(!mSessions){
           mSessions=[createEmptySession()];
         }
