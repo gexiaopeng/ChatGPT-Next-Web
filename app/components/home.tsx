@@ -135,10 +135,9 @@ const useHasHydrated = () => {
 let isInit=false;
 
 function _Home() {
-  const [createNewSession, currentIndex, removeSession,isRenameDelete,sessionMapp] = useChatStore(
+  const [createNewSession, removeSession,isRenameDelete,sessionMapp] = useChatStore(
     (state) => [
       state.newSession,
-      state.sessionMap,
       state.removeSession,
       state.isRenameDelete,
       state.sessionMapp,
