@@ -197,7 +197,11 @@ function createEmptySession(): ChatSession {
     lastSummarizeIndex: 0,
   };
 }
-
+function createEmptySessionMap(){
+  let mMap=new Map<number,ChatSession[]>();
+  mMap.set(0,[createEmptySession()]);
+  return mMap;
+}
 interface ChatStore {
   config: ChatConfig;
   sessions: ChatSession[];
@@ -257,7 +261,7 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
-      sessionMap:null,
+      sessionMap:createEmptySessionMap(),
       setRole(role:number){
         let mMap=get().sessionMap;
         console.log("-mMap-role:"+role,mMap,mMap.size);
