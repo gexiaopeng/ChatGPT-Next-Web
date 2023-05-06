@@ -19,7 +19,7 @@ export type Message = ChatCompletionResponseMessage & {
   id?: number;
 };
 
-export type chatSessionMap =Map<number,ChatSession[]>;
+export type chatSessionMap =Map<string,ChatSession[]>;
 
 export function createMessage(override: Partial<Message>): Message {
   return {
@@ -200,8 +200,8 @@ function createEmptySession(): ChatSession {
   };
 }
 function createEmptySessionMap(){
-  let mMap=new Map<number,ChatSession[]>();
-  mMap.set(0,[createEmptySession()]);
+  let mMap=new Map<string,ChatSession[]>();
+  mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
   return mMap;
 }
