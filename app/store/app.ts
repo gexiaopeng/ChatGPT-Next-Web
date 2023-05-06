@@ -19,7 +19,7 @@ export type Message = ChatCompletionResponseMessage & {
   id?: number;
 };
 
-export type chatSessionMap =Map<string,ChatSession[]>;
+export type ChatSessionMap =Map<string,ChatSession[]>;
 
 export function createMessage(override: Partial<Message>): Message {
   return {
@@ -199,9 +199,9 @@ function createEmptySession(): ChatSession {
     lastSummarizeIndex: 0,
   };
 }
-function createEmptySessionMap():Map<string,string>{
-  let mMap=new Map<string,string>();
-  mMap.set("rote0","[createEmptySession()]");
+function createEmptySessionMap():Map<string,ChatSession[]>{
+  let mMap=new Map<string,ChatSession[]>();
+  mMap.set("role0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
   return mMap;
 }
@@ -243,7 +243,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:Map<string,string>;
+  sessionMap:ChatSessionMap;
   initSession:(role:number) => void;
 }
 
