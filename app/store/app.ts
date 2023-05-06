@@ -265,8 +265,8 @@ export const useChatStore = create<ChatStore>()(
       sessionMap:createEmptySessionMap(),
       setRole(role:number){
         let mMap=get().sessionMap;
-        console.log("-mMap-role:"+role,mMap,mMap.size);
-        if(!mMap){
+        console.log("-mMap-role:"+role+",["+mMap.toString()+"]",mMap,mMap.size);
+        if(mMap.toString()=="{}"){
           mMap=new Map<number,ChatSession[]>();
           mMap.set(role,[createEmptySession()]);
           set(() => ({
