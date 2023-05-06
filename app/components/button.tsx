@@ -15,7 +15,7 @@ export function IconButton(props: {
 }) {
     const buttonRef =  useRef<HTMLButtonElement>(null);
     const handleClick = () => {
-        console.log("-IconButton-handleClick--",buttonRef);
+        //console.log("-IconButton-handleClick--",buttonRef);
         if(props.onClick){
             props.onClick();
         }

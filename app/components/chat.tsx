@@ -522,7 +522,7 @@ export function Chat(props: {
     setUserInput("");
     setPromptHints([]);
     if (!isMobileScreen()) {
-      console.log("---onUserSubmit-");
+      //console.log("---onUserSubmit-");
       inputRef.current?.focus();
     }
     setAutoScroll(true);

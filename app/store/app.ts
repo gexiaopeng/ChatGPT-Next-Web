@@ -260,6 +260,7 @@ export const useChatStore = create<ChatStore>()(
       sessionMap:new Map<number,ChatSession[]>(),
       setRole(role:number){
         const sMap=get().sessionMap;
+        console.log("-sMap-role:"+role,sMap);
         let mSessions=sMap.get(role);
         if(!mSessions){
           mSessions=[createEmptySession()];
@@ -486,7 +487,7 @@ export const useChatStore = create<ChatStore>()(
                 botMessage.id ?? messageIndex,
               );
              // highLight();
-              console.log("---done:"+done);
+              //console.log("---done:"+done);
             } else {
               //console.log("content:["+content+"]");
               content = content.trim().replace(/^\r?\n/, "");
