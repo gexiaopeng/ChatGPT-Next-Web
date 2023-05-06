@@ -269,9 +269,6 @@ export const useChatStore = create<ChatStore>()(
       setRole(role:number){
         let mMap=get().sessionMap;
         console.log("-mMapp-role:"+role+",["+(mMap instanceof Map)+"]",mMap);
-        for(let key in mMap){
-          console.log("key:"+key+",value:"+mMap[key]);
-        }
         let nn={id:"999"};
          nn={...nn,...mMap};
         console.log("nn:",nn["id"],nn);
