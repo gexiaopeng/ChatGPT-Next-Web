@@ -200,6 +200,7 @@ function createEmptySession(): ChatSession {
 function createEmptySessionMap(){
   let mMap=new Map<number,ChatSession[]>();
   mMap.set(0,[createEmptySession()]);
+  console.log("createEmptySessionMap",mMap);
   return mMap;
 }
 interface ChatStore {
