@@ -236,7 +236,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:Map<number,ChatSession[]>;
+  sessionMap:Map<String,ChatSession[]>;
   initSession:(role:number) => void;
 }
 
@@ -260,11 +260,11 @@ export const useChatStore = create<ChatStore>()(
       sessionMap:new Map<number,ChatSession[]>(),
       setRole(role:number){
         let mMap=get().sessionMap;
-        let  sMap=new Map<number,ChatSession[]>(Object.entries<number, ChatSession[]>(mMap));
+        let  sMap=new Map<String,ChatSession[]>(Object.entries(mMap));
         console.log("1-sMap-role:"+role,sMap,sMap.size);
-        sMap.set(role,[createEmptySession()]);
+        sMap.set(role+"",[createEmptySession()]);
         console.log("2-sMap-role:"+role,sMap,sMap.size);
-        let mSessions=sMap.get(role);
+        let mSessions=sMap.get(role+"");
         if(!mSessions){
           mSessions=[createEmptySession()];
         }
