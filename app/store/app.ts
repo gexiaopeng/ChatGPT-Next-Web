@@ -269,6 +269,9 @@ export const useChatStore = create<ChatStore>()(
           sessions:mSessions,
         }));
       },
+      initSession(role:number){
+
+      },
       clearSessions() {
         set(() => ({
           sessions: [createEmptySession()],
