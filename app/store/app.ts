@@ -200,11 +200,7 @@ function createEmptySession(): ChatSession {
   };
 }
 function createEmptySessionMap(){
-  let mMap=new Map<string,ChatSession[]>();
-  mMap.set("role0",[createEmptySession()]);
-  console.log("createEmptySessionMap",mMap,typeof mMap);
-  let o={map:"mappppp"};
-  return o;
+  return {};
 }
 interface ChatStore {
   config: ChatConfig;
@@ -268,10 +264,17 @@ export const useChatStore = create<ChatStore>()(
       sessionMap:createEmptySessionMap(),
       setRole(role:number){
         let mMap=get().sessionMap;
-        console.log("-mMapp-role:"+role+",["+(mMap instanceof Map)+"]",mMap);
-        let nn={id:"999"};
-         nn={...nn,...mMap};
-        console.log("nn:",nn["id"],nn);
+        console.log("-mMapp-role:"+role,mMap);
+        let map=new Map<String,String>();
+        map.set("role"+role,""+role);
+        const jsonString = JSON.stringify(Object.fromEntries(map));
+        console.log("jsonString",jsonString);
+        const obj = JSON.parse(jsonString);
+        console.log("obj",obj);
+        const entries = Object.entries(obj);
+        console.log("entries",entries);
+        const myMap = new Map(entries);
+        console.log("myMap",myMap);
         set(() => ({
           role:role,
         }));
