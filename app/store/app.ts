@@ -270,11 +270,11 @@ export const useChatStore = create<ChatStore>()(
         let mMap=get().sessionMap;
         console.log("-mMapp-role:"+role+",["+(mMap instanceof Map)+"]",mMap);
         for(let key in mMap){
-          console.log("key:"+key);
+          console.log("key:"+key+",value:"+mMap[key]);
         }
         let nn={id:"999"};
-        let id=nn["id"];
-        console.log("id:"+id);
+         nn={...nn,...mMap};
+        console.log("nn:",nn["id"],nn);
         set(() => ({
           role:role,
         }));
