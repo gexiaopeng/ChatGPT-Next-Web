@@ -201,7 +201,7 @@ function createEmptySessionMap(){
   let mMap=new Map<String,ChatSession[]>();
   mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
-  return mMap;
+  return {"0":[createEmptySession()]};
 }
 interface ChatStore {
   config: ChatConfig;
@@ -241,7 +241,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:Map<String,ChatSession[]>;
+  sessionMap:object;
   initSession:(role:number) => void;
 }
 
