@@ -247,7 +247,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:ChatSessionMap;
+  sessionMapp:ChatSessionMap;
   initSession:(role:number) => void;
 }
 
@@ -268,10 +268,10 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
-      sessionMap:createEmptySessionMap(),
+      sessionMapp:createEmptySessionMap(),
       setRole(role:number){
-        let mMap=get().sessionMap;
-        console.log("-mMap-role:"+role+",["+(typeof mMap)+"]",mMap);
+        let mMap=get().sessionMapp;
+        console.log("-mMapp-role:"+role+",["+(typeof mMap)+"]",mMap);
         let mSessions=[createEmptySession()];
         if(!mSessions){
           mSessions=[createEmptySession()];
