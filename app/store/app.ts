@@ -173,6 +173,9 @@ export interface ChatSession {
   lastUpdate: string;
   lastSummarizeIndex: number;
 }
+export interface ChatSessionMap {
+  id:number;
+}
 
 const DEFAULT_TOPIC = Locale.Store.DefaultTopic;
 export const BOT_HELLO: Message = createMessage({
@@ -203,7 +206,8 @@ function createEmptySessionMap(){
   let mMap=new Map<string,ChatSession[]>();
   mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
-  return mMap;
+  let sMap={id:0};
+  return sMap;
 }
 interface ChatStore {
   config: ChatConfig;
@@ -243,7 +247,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:chatSessionMap;
+  sessionMap:ChatSessionMap;
   initSession:(role:number) => void;
 }
 
