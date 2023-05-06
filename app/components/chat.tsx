@@ -614,7 +614,7 @@ export function Chat(props: {
   ) {
     const copiedHello = Object.assign({}, BOT_HELLO);
     if(role==101){
-      copiedHello.content="您好，请输入要翻译的文本（中英自动识别）";
+      copiedHello.content="请输入要翻译的文本（中英自动识别）";
     }
     if (!accessStore.isAuthorized()) {
       copiedHello.content = Locale.Error.Unauthorized;
