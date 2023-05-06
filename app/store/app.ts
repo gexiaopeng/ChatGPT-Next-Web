@@ -19,6 +19,8 @@ export type Message = ChatCompletionResponseMessage & {
   id?: number;
 };
 
+export type chatSessionMap =Map<number,ChatSession[]>;
+
 export function createMessage(override: Partial<Message>): Message {
   return {
     id: Date.now(),
@@ -201,7 +203,7 @@ function createEmptySessionMap(){
   let mMap=new Map<String,ChatSession[]>();
   mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
-  return {"0":"[createEmptySession()]"};
+  return mMap;
 }
 interface ChatStore {
   config: ChatConfig;
@@ -241,7 +243,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMap:object;
+  sessionMap:chatSessionMap;
   initSession:(role:number) => void;
 }
 
