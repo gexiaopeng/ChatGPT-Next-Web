@@ -173,9 +173,6 @@ export interface ChatSession {
   lastUpdate: string;
   lastSummarizeIndex: number;
 }
-export interface ChatSessionMap {
-  id:string;
-}
 
 const DEFAULT_TOPIC = Locale.Store.DefaultTopic;
 export const BOT_HELLO: Message = createMessage({
@@ -202,12 +199,11 @@ function createEmptySession(): ChatSession {
     lastSummarizeIndex: 0,
   };
 }
-function createEmptySessionMap():ChatSessionMap{
-  let mMap=new Map<string,ChatSession[]>();
-  mMap.set("0",[createEmptySession()]);
+function createEmptySessionMap():Map<number,ChatSession[]>{
+  let mMap=new Map<number,ChatSession[]>();
+  mMap.set(0,[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
-  let sMap={id:"0"};
-  return sMap;
+  return mMap;
 }
 interface ChatStore {
   config: ChatConfig;
@@ -247,7 +243,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
-  sessionMapp:ChatSessionMap;
+  sessionMap:Map<number,ChatSession[]>;
   initSession:(role:number) => void;
 }
 
@@ -268,9 +264,9 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
-      sessionMapp:createEmptySessionMap(),
+      sessionMap:createEmptySessionMap(),
       setRole(role:number){
-        let mMap=get().sessionMapp;
+        let mMap=get().sessionMap;
         console.log("-mMapp-role:"+role+",["+(typeof mMap)+"]",mMap);
         let mSessions=[createEmptySession()];
         if(!mSessions){
