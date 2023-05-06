@@ -236,6 +236,8 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   setRole:(role:number)=>void;
+  sessionMap:Map<number,ChatSession[]>;
+  initSession:(role:number) => void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -255,9 +257,16 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
+      sessionMap:new Map<number,ChatSession[]>(),
       setRole(role:number){
+        const sMap=get().sessionMap;
+        let mSessions=sMap.get(role);
+        if(!mSessions){
+          mSessions=[createEmptySession()];
+        }
         set(() => ({
           role:role,
+          sessions:mSessions,
         }));
       },
       clearSessions() {
