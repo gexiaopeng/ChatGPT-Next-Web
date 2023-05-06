@@ -174,7 +174,7 @@ export interface ChatSession {
   lastSummarizeIndex: number;
 }
 export interface ChatSessionMap {
-  id:number;
+  id:string;
 }
 
 const DEFAULT_TOPIC = Locale.Store.DefaultTopic;
@@ -202,11 +202,11 @@ function createEmptySession(): ChatSession {
     lastSummarizeIndex: 0,
   };
 }
-function createEmptySessionMap(){
+function createEmptySessionMap():ChatSessionMap{
   let mMap=new Map<string,ChatSession[]>();
   mMap.set("0",[createEmptySession()]);
   console.log("createEmptySessionMap",mMap,typeof mMap);
-  let sMap={id:0};
+  let sMap={id:"0"};
   return sMap;
 }
 interface ChatStore {
