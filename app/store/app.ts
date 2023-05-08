@@ -138,7 +138,16 @@ export const ModalConfigValidator = {
     return limitNumber(x, 0, 2, 1);
   },
 };
-
+function  getDefaultTemperature(){
+  let temperature=1;
+  let role=getRole();
+  if(role==101){
+    temperature=0.1;
+  }else if(role==201 || role==331 || role==338 ){
+    temperature=1.1;
+  }
+  return temperature;
+}
 const DEFAULT_CONFIG: ChatConfig = {
   historyMessageCount: 20,
   compressMessageLengthThreshold: 1000,
@@ -155,7 +164,7 @@ const DEFAULT_CONFIG: ChatConfig = {
 
   modelConfig: {
     model: "gpt-3.5-turbo",
-    temperature: 1,
+    temperature: getDefaultTemperature(),
     max_tokens: 2000,
     presence_penalty: 0,
   },
