@@ -613,11 +613,18 @@ export function Chat(props: {
     session.messages.at(0)?.content !== BOT_HELLO.content
   ) {
     const copiedHello = Object.assign({}, BOT_HELLO);
-    if(role==101){
-      copiedHello.content="请输入要翻译的文本（中英自动识别）";
-    }
     if (!accessStore.isAuthorized()) {
       copiedHello.content = Locale.Error.Unauthorized;
+    }else{
+      if(role==101){
+        copiedHello.content="请输入要翻译的文本（中英自动识别）";
+      }else if(role==201){
+        copiedHello.content="老公好，宝宝想你了😊";
+      }else if(role==331){
+        copiedHello.content="老婆好，我想你了😊";
+      }else if(role==331){
+        copiedHello.content="老公好，我想你了😊";
+      }
     }
     context.push(copiedHello);
   }

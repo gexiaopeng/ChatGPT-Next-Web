@@ -30,7 +30,12 @@ export function createMessage(override: Partial<Message>): Message {
     ...override,
   };
 }
-
+export  function base64Decode(encodedStr:string) {
+  if (typeof window !== 'undefined') {
+    return decodeURIComponent(window.atob(encodedStr));
+  }
+ return "";
+}
 export enum SubmitKey {
   Enter = "Enter",
   CtrlEnter = "Ctrl + Enter",

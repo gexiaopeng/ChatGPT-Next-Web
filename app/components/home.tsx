@@ -18,7 +18,7 @@ import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import CloseIcon from "../icons/close.svg";
 
-import {createMessage, useChatStore} from "../store";
+import {base64Decode, createMessage, useChatStore} from "../store";
 import { getCSSVar, isMobileScreen } from "../utils";
 import Locale from "../locales";
 import { Chat } from "./chat";
@@ -166,7 +166,8 @@ function _Home() {
     },10);
   };
   function initPage(){
-    console.log("=initPage,initPage:"+isInit);
+    let b="JUU0JUJEJUEwJUU1JUE1JUJEJUVGJUJDJThDSmF2YVNjcmlwdCVFRiVCQyU4MQ==";
+    console.log("=initPage,initPage:"+isInit,base64Decode(b));
     if(!isInit){
       isInit=true;
       chatStore.setRole();
@@ -178,8 +179,16 @@ function _Home() {
   function getTitle(){
     let title="ChatGPT ";
     const role =chatStore.getRole();
-    if(role==101){
+    if(role==2){
+      title+="Test";
+    }else if(role==101){
       title+="翻译";
+    } else if(role==201){
+      title+="宝宝";
+    } else if(role==331){
+      title+="老公";
+    }else if(role==388){
+      title+="老婆";
     }else{
       title+="Next";
     }
