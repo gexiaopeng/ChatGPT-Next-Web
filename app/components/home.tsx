@@ -220,7 +220,7 @@ function _Home() {
   useEffect(() => {
     initPage();
   }, []);
-
+  console.log("---document---",document);
   if (loading) {
     return <Loading />;
   }
