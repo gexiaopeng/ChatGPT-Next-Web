@@ -255,7 +255,7 @@ let storageName = 'chat-next-web-store_';
 
 
 const LOCAL_KEY = "chat-next-web-store";
-function getRole(){
+export function getRole(){
   let role=1;
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import Fuse from "fuse.js";
 import { getLang } from "../locales";
-import {useChatStore} from "./app";
+import {getRole} from "./app";
 export interface Prompt {
   id?: number;
   isUser?: boolean;
@@ -63,7 +63,7 @@ export const SearchService = {
 };
 function  getPromptStoreKey(){
     let key=PROMPT_KEY;
-    console.log("useChatStore",useChatStore);
+    console.log("-getRole-",getRole());
     return key;
 
 }
