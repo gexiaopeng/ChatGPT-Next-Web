@@ -220,7 +220,11 @@ function _Home() {
   useEffect(() => {
     initPage();
   }, []);
-  console.log("---document---",document);
+  if (typeof document !== 'undefined') {
+    console.log("---document---", document);
+  }else{
+    console.log("---document---null");
+  }
   if (loading) {
     return <Loading />;
   }
