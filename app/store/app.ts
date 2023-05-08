@@ -251,9 +251,6 @@ interface ChatStore {
 function countMessages(msgs: Message[]) {
   return msgs.reduce((pre, cur) => pre + cur.content.length, 0);
 }
-let storageName = 'chat-next-web-store_';
-
-
 const LOCAL_KEY = "chat-next-web-store";
 export function getRole(){
   let role=1;

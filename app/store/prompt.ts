@@ -62,8 +62,8 @@ export const SearchService = {
   },
 };
 function  getPromptStoreKey(){
-    let key=PROMPT_KEY;
-    console.log("-getRole-",getRole());
+    let key=PROMPT_KEY+"_"+getRole();
+    console.log("-PromptStoreKey-",key);
     return key;
 
 }
