@@ -171,7 +171,7 @@ function _Home() {
     console.log("=initPage,initPage:"+isInit+",role:"+role);
     if(!isInit){
       isInit=true;
-      chatStore.setRole(Number(role));
+      chatStore.setRole();
       createNewSession();
       setShowSideBar(false);
     }

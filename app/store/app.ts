@@ -240,7 +240,7 @@ interface ChatStore {
   getRenameDelete:() =>boolean;
   role:number;
   getRole:() =>number;
-  setRole:(role:number)=>void;
+  setRole:()=>void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -276,7 +276,7 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
-      setRole(role:number){
+      setRole(){
         let r=getRole();
         console.log("=role:"+r);
         set(() => ({
