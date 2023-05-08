@@ -152,6 +152,7 @@ function _Home() {
 
   // drag side bar
   const { onDragMouseDown } = useDragSideBar();
+  initTitle();
   useSwitchTheme();
   const hiddenSidebar=()=>{
    setTimeout(()=>{
@@ -168,14 +169,15 @@ function _Home() {
      console.log("=initPage,initPage:"+isInit);
     if(!isInit){
       isInit=true;
-      initTitle();
       createNewSession();
       setShowSideBar(false);
     }
   }
   function initTitle(){
-    chatStore.setRole();
-    document.title=getTitle()+" Web";
+    if (typeof document !== 'undefined') {
+      chatStore.setRole();
+      document.title = getTitle() + " Web";
+    }
   }
   function getTitle(){
     let title="ChatGPT ";
@@ -220,11 +222,6 @@ function _Home() {
   useEffect(() => {
     initPage();
   }, []);
-  if (typeof document !== 'undefined') {
-    console.log("---document---", document);
-  }else{
-    console.log("---document---null");
-  }
   if (loading) {
     return <Loading />;
   }
