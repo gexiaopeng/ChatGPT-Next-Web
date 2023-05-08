@@ -63,8 +63,6 @@ export const SearchService = {
 };
 function  getPromptStoreKey(){
     let key=PROMPT_KEY;
-    const chatStore = useChatStore();
-    console.log("chatStore:"+chatStore);
     return key;
 
 }
