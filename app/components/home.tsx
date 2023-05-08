@@ -174,10 +174,13 @@ function _Home() {
     }
   }
   function initTitle(){
-    if (!isTitle && typeof document !== 'undefined') {
-       isTitle=true;
-      chatStore.setRole();
+    if (!isTitle ) {
+       chatStore.setRole();
+      isTitle=true;
+    }
+    if (typeof document !== 'undefined' && document.title.trim()=="") {
       document.title = getTitle() + " Web";
+      console.log("title",document.title);
     }
   }
   function getTitle(){
