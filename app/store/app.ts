@@ -248,10 +248,11 @@ interface ChatStore {
 function countMessages(msgs: Message[]) {
   return msgs.reduce((pre, cur) => pre + cur.content.length, 0);
 }
-
+const urlParams = new URLSearchParams(window.location.search);
+const storageName = 'chat-next-web-store_'+(urlParams.get('r') || '1');
 const LOCAL_KEY = "chat-next-web-store";
 function getLocalKey():String{
-  let key=LOCAL_KEY+useChatStore.getRole();
+  let key=LOCAL_KEY;
   return key;
 }
 export const useChatStore = create<ChatStore>()(
@@ -692,7 +693,7 @@ export const useChatStore = create<ChatStore>()(
       },
     }),
     {
-      name: getLocalKey(),
+      name: storageName,
       version: 1.2,
       migrate(persistedState, version) {
         const state = persistedState as ChatStore;
