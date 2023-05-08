@@ -306,6 +306,7 @@ function _Home() {
               onClick={() => {
                 createNewSession();
                 setShowSideBar(false);
+                setOpenSettings(false);
               }}
               shadow
             />
