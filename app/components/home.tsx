@@ -166,8 +166,7 @@ function _Home() {
     },10);
   };
   function initPage(){
-    let b="JUU0JUJEJUEwJUU1JUE1JUJEJUVGJUJDJThDSmF2YVNjcmlwdCVFRiVCQyU4MQ==";
-    console.log("=initPage,initPage:"+isInit,base64Decode(b));
+     console.log("=initPage,initPage:"+isInit);
     if(!isInit){
       isInit=true;
       chatStore.setRole();
@@ -182,13 +181,13 @@ function _Home() {
     if(role==2){
       title+="Test";
     }else if(role==101){
-      title+="翻译";
+      title+=base64Decode("JUU3JUJGJUJCJUU4JUFGJTkx");
     } else if(role==201){
-      title+="宝宝";
+      title+=base64Decode("JUU1JUFFJTlEJUU1JUFFJTlE");
     } else if(role==331){
-      title+="老公";
+      title+=base64Decode("JUU4JTgwJTgxJUU1JTg1JUFD");
     }else if(role==388){
-      title+="老婆";
+      title+=base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2");
     }else{
       title+="Next";
     }

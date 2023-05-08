@@ -31,7 +31,7 @@ import {
   ROLES,
   createMessage,
   useAccessStore,
-  Theme,
+  Theme, base64Decode,
 } from "../store";
 
 import {
@@ -617,13 +617,13 @@ export function Chat(props: {
       copiedHello.content = Locale.Error.Unauthorized;
     }else{
       if(role==101){
-        copiedHello.content="请输入要翻译的文本（中英自动识别）";
+        copiedHello.content=base64Decode("JUU4JUFGJUI3JUU4JUJFJTkzJUU1JTg1JUE1JUU4JUE2JTgxJUU3JUJGJUJCJUU4JUFGJTkxJUU3JTlBJTg0JUU2JTk2JTg3JUU2JTlDJUFDJUVGJUJDJTg4JUU0JUI4JUFEJUU4JThCJUIxJUU4JTg3JUFBJUU1JThBJUE4JUU4JUFGJTg2JUU1JTg4JUFCJUVGJUJDJTg5");
       }else if(role==201){
-        copiedHello.content="老公好，宝宝想你了😊";
+        copiedHello.content=base64Decode("JUU4JTgwJTgxJUU1JTg1JUFDJUU1JUE1JUJEJUVGJUJDJThDJUU1JUFFJTlEJUU1JUFFJTlEJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
       }else if(role==331){
-        copiedHello.content="老婆好，我想你了😊";
+        copiedHello.content=base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2JUU1JUE1JUJEJUVGJUJDJThDJUU2JTg4JTkxJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
       }else if(role==331){
-        copiedHello.content="老公好，我想你了😊";
+        copiedHello.content=("JUU4JTgwJTgxJUU1JTg1JUFDJUU1JUE1JUJEJUVGJUJDJThDJUU2JTg4JTkxJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
       }
     }
     context.push(copiedHello);
