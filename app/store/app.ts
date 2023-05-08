@@ -249,8 +249,8 @@ function countMessages(msgs: Message[]) {
 }
 
 const LOCAL_KEY = "chat-next-web-store";
-function getLocalKey(){
-  let key=LOCAL_KEY;
+function getLocalKey():String{
+  let key=LOCAL_KEY+useChatStore.get().role;
   return key;
 }
 export const useChatStore = create<ChatStore>()(
