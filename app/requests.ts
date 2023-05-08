@@ -25,8 +25,9 @@ const makeRequestParam = (
   // @yidadaa: wont send max_tokens, because it is nonsense for Muggles
   // @ts-expect-error
   delete modelConfig.max_tokens;
- if(useChatStore.getState().role==101){
-   modelConfig.temperature=0.5;
+  let role=useChatStore.getState().role;
+ if(role==101){
+   //modelConfig.temperature=0.5;
  }
   return {
     messages: sendMessages,

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import Fuse from "fuse.js";
 import { getLang } from "../locales";
-
+import {useChatStore} from "./app";
 export interface Prompt {
   id?: number;
   isUser?: boolean;
@@ -22,6 +22,7 @@ export interface PromptStore {
   getUserPrompts: () => Prompt[];
   updateUserPrompts: (id: number, updater: (prompt: Prompt) => void) => void;
 }
+
 
 export const PROMPT_KEY = "prompt-store";
 
@@ -60,7 +61,13 @@ export const SearchService = {
     return userResults.concat(builtinResults).map((v) => v.item);
   },
 };
+function  getPromptStoreKey(){
+    let key=PROMPT_KEY;
+    const chatStore = useChatStore();
+    console.log("chatStore:"+chatStore);
+    return key;
 
+}
 export const usePromptStore = create<PromptStore>()(
   persist(
     (set, get) => ({
@@ -123,7 +130,7 @@ export const usePromptStore = create<PromptStore>()(
       },
     }),
     {
-      name: PROMPT_KEY,
+      name: getPromptStoreKey(),
       version: 1,
       onRehydrateStorage(state) {
         const PROMPT_URL = "./prompts.json";
