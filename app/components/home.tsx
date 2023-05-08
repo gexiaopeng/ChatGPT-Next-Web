@@ -170,13 +170,20 @@ function _Home() {
     if(!isInit){
       isInit=true;
       chatStore.setRole();
-      const role =chatStore.getRole();
-      if(role==101){
-        document.title="ChatGPT 翻译";
-      }
+      document.title=getTitle()+" Web";
       createNewSession();
       setShowSideBar(false);
     }
+  }
+  function getTitle(){
+    let title="ChatGPT ";
+    const role =chatStore.getRole();
+    if(role==101){
+      title+="翻译";
+    }else{
+      title+="Next";
+    }
+    return title;
   }
   const MIN_SWIPE_DISTANCE = 50; // minimum distance in pixels for a swipe to be registered
   let startX: number;
@@ -234,7 +241,7 @@ function _Home() {
              }}
         >
           <div className={styles["sidebar-title"]}
-          >ChatGPT Next</div>
+          >{getTitle}</div>
           <div className={styles["sidebar-sub-title"]}>
             Build your own AI assistant.
           </div>
