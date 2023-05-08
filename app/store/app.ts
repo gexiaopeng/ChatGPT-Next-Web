@@ -249,7 +249,10 @@ function countMessages(msgs: Message[]) {
 }
 
 const LOCAL_KEY = "chat-next-web-store";
-
+function getLocalKey(){
+  let key=LOCAL_KEY;
+  return key;
+}
 export const useChatStore = create<ChatStore>()(
   persist(
     (set, get) => ({
@@ -685,7 +688,7 @@ export const useChatStore = create<ChatStore>()(
       },
     }),
     {
-      name: LOCAL_KEY,
+      name: getLocalKey(),
       version: 1.2,
       migrate(persistedState, version) {
         const state = persistedState as ChatStore;
