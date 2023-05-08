@@ -179,7 +179,7 @@ function _Home() {
        isTitle=true;
     }
     if (typeof document !== 'undefined' && document.title.trim()=="") {
-      console.log("-title-",document.title);
+      //console.log("-title-",document.title);
       document.title = getTitle() + " Web";
    }
   }
@@ -227,7 +227,6 @@ function _Home() {
     initPage();
   }, []);
   if (loading) {
-    console.log("--loading-"+loading);
     return <Loading />;
   }
   return (
