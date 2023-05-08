@@ -241,7 +241,7 @@ function _Home() {
              }}
         >
           <div className={styles["sidebar-title"]}
-          >{()=>{getTitle()}}</div>
+          >{getTitle()}</div>
           <div className={styles["sidebar-sub-title"]}>
             Build your own AI assistant.
           </div>
