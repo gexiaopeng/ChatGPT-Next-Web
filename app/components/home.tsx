@@ -152,7 +152,7 @@ function _Home() {
 
   // drag side bar
   const { onDragMouseDown } = useDragSideBar();
-
+  initTitle();
   useSwitchTheme();
   const hiddenSidebar=()=>{
    setTimeout(()=>{
@@ -169,11 +169,14 @@ function _Home() {
      console.log("=initPage,initPage:"+isInit);
     if(!isInit){
       isInit=true;
-      chatStore.setRole();
-      document.title=getTitle()+" Web";
       createNewSession();
       setShowSideBar(false);
     }
+  }
+  function initTitle(){
+    console.log("--initTitle---");
+    chatStore.setRole();
+    document.title=getTitle()+" Web";
   }
   function getTitle(){
     let title="ChatGPT ";
