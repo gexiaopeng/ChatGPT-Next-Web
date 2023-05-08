@@ -186,7 +186,7 @@ function _Home() {
       title+=base64Decode("JUU1JUFFJTlEJUU1JUFFJTlE");
     } else if(role==331){
       title+=base64Decode("JUU4JTgwJTgxJUU1JTg1JUFD");
-    }else if(role==388){
+    }else if(role==338){
       title+=base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2");
     }else{
       title+="Next";
