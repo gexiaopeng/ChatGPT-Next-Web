@@ -239,6 +239,7 @@ interface ChatStore {
   renameDelete:(isReDel:boolean)=>void;
   getRenameDelete:() =>boolean;
   role:number;
+  getRole:() =>number;
   setRole:(role:number)=>void;
   sessionMap:object;
   initSession:(role:number) => void;
@@ -250,7 +251,7 @@ function countMessages(msgs: Message[]) {
 
 const LOCAL_KEY = "chat-next-web-store";
 function getLocalKey():String{
-  let key=LOCAL_KEY+useChatStore((state) => state.role);
+  let key=LOCAL_KEY+useChatStore.getRole();
   return key;
 }
 export const useChatStore = create<ChatStore>()(
@@ -281,6 +282,9 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({
           role:role,
         }));
+      },
+      getRole(){
+        return get().role;
       },
       initSession(role:number){
 
