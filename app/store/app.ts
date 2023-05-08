@@ -248,8 +248,15 @@ interface ChatStore {
 function countMessages(msgs: Message[]) {
   return msgs.reduce((pre, cur) => pre + cur.content.length, 0);
 }
-const urlParams = new URLSearchParams(window.location.search);
-const storageName = 'chat-next-web-store_'+(urlParams.get('r') || '1');
+let storageName = 'chat-next-web-store_';
+
+if (typeof window !== 'undefined') {
+  const urlParams = new URLSearchParams(window.location.search);
+  const keyParam = urlParams.get('r') || "1";
+  if (keyParam) {
+    storageName =storageName+ keyParam;
+  }
+}
 const LOCAL_KEY = "chat-next-web-store";
 function getLocalKey():String{
   let key=LOCAL_KEY;
