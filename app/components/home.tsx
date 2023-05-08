@@ -176,12 +176,12 @@ function _Home() {
   function initTitle(){
     if (!isTitle ) {
        chatStore.setRole();
-      isTitle=true;
+       isTitle=true;
     }
     if (typeof document !== 'undefined' && document.title.trim()=="") {
+      console.log("-title-",document.title);
       document.title = getTitle() + " Web";
-      console.log("title",document.title);
-    }
+   }
   }
   function getTitle(){
     let title="ChatGPT ";
@@ -227,6 +227,7 @@ function _Home() {
     initPage();
   }, []);
   if (loading) {
+    console.log("--loading-"+loading);
     return <Loading />;
   }
   return (
