@@ -166,12 +166,14 @@ function _Home() {
     },10);
   };
   function initPage(){
-    const queryParameters = new URLSearchParams(window.location.search);
-    const role = queryParameters.get("r") || "1";
-    console.log("=initPage,initPage:"+isInit+",role:"+role);
+    console.log("=initPage,initPage:"+isInit);
     if(!isInit){
       isInit=true;
       chatStore.setRole();
+      const role =chatStore.getRole();
+      if(role==101){
+        document.title="ChatGPT 翻译";
+      }
       createNewSession();
       setShowSideBar(false);
     }
