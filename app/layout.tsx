@@ -3,11 +3,20 @@ import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getBuildConfig } from "./config/build";
+import {useChatStore} from "./store";
 
 const buildConfig = getBuildConfig();
-
+const chatStore = useChatStore();
+function getTitle(){
+  let title="ChatGPT Next Web";
+  let role=chatStore.getRole();
+  if(role==101){
+    title="ChatGPT 翻译";
+  }
+  return title;
+}
 export const metadata = {
-  title: "ChatGPT Next Web1",
+  title: getTitle(),
   description: "Your personal ChatGPT Chat Bot.",
   appleWebApp: {
     title: "ChatGPT Next Web",
