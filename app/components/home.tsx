@@ -133,7 +133,7 @@ const useHasHydrated = () => {
 };
 
 let isInit=false;
-
+let isTitle=false;
 function _Home() {
   const [createNewSession, removeSession,isRenameDelete] = useChatStore(
     (state) => [
@@ -174,7 +174,8 @@ function _Home() {
     }
   }
   function initTitle(){
-    if (typeof document !== 'undefined') {
+    if (!isTitle && typeof document !== 'undefined') {
+       isTitle=true;
       chatStore.setRole();
       document.title = getTitle() + " Web";
     }
