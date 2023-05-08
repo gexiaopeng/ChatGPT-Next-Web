@@ -241,8 +241,6 @@ interface ChatStore {
   role:number;
   getRole:() =>number;
   setRole:(role:number)=>void;
-  sessionMap:object;
-  initSession:(role:number) => void;
 }
 
 function countMessages(msgs: Message[]) {
@@ -250,16 +248,21 @@ function countMessages(msgs: Message[]) {
 }
 let storageName = 'chat-next-web-store_';
 
-if (typeof window !== 'undefined') {
-  const urlParams = new URLSearchParams(window.location.search);
-  const keyParam = urlParams.get('r') || "1";
-  if (keyParam) {
-    storageName =storageName+ keyParam;
-  }
-}
+
 const LOCAL_KEY = "chat-next-web-store";
+function getRole(){
+  let role=1;
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const keyParam = urlParams.get('r');
+    if (keyParam) {
+      role=Number(keyParam);
+    }
+  }
+  return role;
+}
 function getLocalKey():String{
-  let key=LOCAL_KEY;
+  let key=LOCAL_KEY+"_"+getRole();
   return key;
 }
 export const useChatStore = create<ChatStore>()(
@@ -273,29 +276,15 @@ export const useChatStore = create<ChatStore>()(
       config: {
         ...DEFAULT_CONFIG,
       },
-      sessionMap:createEmptySessionMap(),
       setRole(role:number){
-        let mMap=get().sessionMap;
-        console.log("-mMapp-role:"+role,mMap);
-        let map=new Map<String,String>();
-        map.set("role"+role,""+role);
-        const jsonString = JSON.stringify(Object.fromEntries(map));
-        console.log("jsonString",jsonString);
-        const obj = JSON.parse(jsonString);
-        console.log("obj",obj);
-        const entries = Object.entries(obj);
-        console.log("entries",entries);
-        const myMap = new Map(entries);
-        console.log("myMap",myMap);
+        let r=getRole();
+        console.log("=role:"+r);
         set(() => ({
-          role:role,
+          role:r,
         }));
       },
       getRole(){
         return get().role;
-      },
-      initSession(role:number){
-
       },
       clearSessions() {
         set(() => ({
@@ -700,7 +689,7 @@ export const useChatStore = create<ChatStore>()(
       },
     }),
     {
-      name: storageName,
+      name: getLocalKey(),
       version: 1.2,
       migrate(persistedState, version) {
         const state = persistedState as ChatStore;
