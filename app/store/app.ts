@@ -261,7 +261,7 @@ function getRole(){
   }
   return role;
 }
-function getLocalKey():String{
+function getLocalKey(){
   let key=LOCAL_KEY+"_"+getRole();
   return key;
 }
