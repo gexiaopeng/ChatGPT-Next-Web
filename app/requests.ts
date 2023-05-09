@@ -83,9 +83,9 @@ export async function requestUsage() {
       .getDate()
       .toString()
       .padStart(2, "0")}`;
-  const ONE_DAY = 2 * 24 * 60 * 60 * 1000;
+  const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
   const now = new Date(Date.now() + ONE_DAY);
-  const startOfMonth = new Date(now.getFullYear(), 2, 1);
+  const startOfMonth = new Date(Date.now()-99*ONE_DAY);
   const startDate = formatDate(startOfMonth);
   const endDate = formatDate(now);
 
