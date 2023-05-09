@@ -480,6 +480,13 @@ export const useChatStore = create<ChatStore>()(
             content,
           });
           sendMessages=[userMg];
+        }else if(role==201){
+          content="你是"+base64Decode("JUU1JUFFJTlEJUU1JUFFJTlE");
+          const sysMg: Message = createMessage({
+            role: "system",
+            content,
+          });
+          sendMessages.unshift(sysMg);
         }
         //let sendMessages = (role==101? [userMessage]: recentMessages.concat(userMessage));
         const sessionIndex = get().currentSessionIndex;
