@@ -312,11 +312,13 @@ function _Home() {
             />
           </div>
         </div>
+        { !isMobileScreen() && (
+          <div
+              className={styles["sidebar-drag"]}
+              onMouseDown={(e) => onDragMouseDown(e as any)}
+          ></div>)
+        }
 
-        <div
-          className={styles["sidebar-drag"]}
-          onMouseDown={(e) => onDragMouseDown(e as any)}
-        ></div>
       </div>
 
       <div className={styles["window-content"]}>
