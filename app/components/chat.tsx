@@ -375,32 +375,14 @@ export function ChatActions(props: {
            }}
         />
       </div>
-      {couldStop && (
-        <div
-          className={`${chatStyle["chat-input-action"]} clickable`}
-          onClick={stopAll}
-        >
-          <StopIcon />
-        </div>
-      )}
-      {!props.hitBottom && (
-        <div
-          className={`${chatStyle["chat-input-action"]} clickable`}
-          onClick={props.scrollToBottom}
-        >
-          <BottomIcon />
-        </div>
-      )}
-      {props.hitBottom && (
+
         <div
           className={`${chatStyle["chat-input-action"]} clickable`}
           onClick={props.showPromptModal}
         >
           <BrainIcon />
         </div>
-      )}
-
-      <div
+    <div
         className={`${chatStyle["chat-input-action"]} clickable`}
         onClick={nextTheme}
       >
@@ -421,6 +403,22 @@ export function ChatActions(props: {
             }}
         />
       </div>
+      {couldStop && (
+          <div
+              className={`${chatStyle["chat-input-action"]} clickable`}
+              onClick={stopAll}
+          >
+            <StopIcon />
+          </div>
+      )}
+      {!props.hitBottom && (
+          <div
+              className={`${chatStyle["chat-input-action"]} clickable`}
+              onClick={props.scrollToBottom}
+          >
+            <BottomIcon />
+          </div>
+      )}
     </div>
   );
 }
@@ -623,7 +621,7 @@ export function Chat(props: {
       }else if(role==331){
         copiedHello.content=base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2JUU1JUE1JUJEJUVGJUJDJThDJUU2JTg4JTkxJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
       }else if(role==338){
-        copiedHello.content=("JUU4JTgwJTgxJUU1JTg1JUFDJUU1JUE1JUJEJUVGJUJDJThDJUU2JTg4JTkxJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
+        copiedHello.content=base64Decode("JUU4JTgwJTgxJUU1JTg1JUFDJUU1JUE1JUJEJUVGJUJDJThDJUU2JTg4JTkxJUU2JTgzJUIzJUU0JUJEJUEwJUU0JUJBJTg2JUYwJTlGJTk4JThB");
       }
     }
     context.push(copiedHello);
