@@ -293,6 +293,9 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({
           role:r,
         }));
+        if(r==201 || r==331 ||  r==338){
+          get().clearSessions();
+        }
       },
       getRole(){
         return get().role;
