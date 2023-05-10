@@ -292,8 +292,13 @@ function _Home() {
                 icon={<SettingsIcon />}
                 text="设置"
                 onClick={() => {
-                  setOpenSettings(true);
-                  setShowSideBar(false);
+                  if(!openSettings){
+                    setOpenSettings(true);
+                    setShowSideBar(false);
+                  }else{
+                    setOpenSettings(false);
+                    setShowSideBar(true);
+                  }
                 }}
                 shadow
               />
