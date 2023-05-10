@@ -31,7 +31,7 @@ const cn = {
         }else{
           inputHints += "，Enter 换行";
         }
-        if(role==1){
+        if(role<101){
           inputHints+= "，/ 触发补全";
         }
       }else{
@@ -40,7 +40,7 @@ const cn = {
         }else{
           inputHints = "Enter 换行";
         }
-        if(role==1){
+        if(role<101){
           inputHints+="，/ 触发补全";
         }
       }
