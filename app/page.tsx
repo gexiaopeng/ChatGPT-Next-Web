@@ -5,7 +5,6 @@ import { Home } from "./components/home";
 import { getServerSideConfig } from "./config/server";
 
 const serverConfig = getServerSideConfig();
-console.log("-serverConfig-",serverConfig);
 
 export default async function App() {
   return (
