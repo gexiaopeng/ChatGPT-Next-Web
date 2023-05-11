@@ -156,17 +156,17 @@ const cn = {
       SubTitle: "已开启加密访问",
       Placeholder: "请输入访问密码",
     },
-    Model: "模型 (model)",
+    Model: "模型",
     Temperature: {
-      Title: "随机性 (temperature)",
+      Title: "随机性",
       SubTitle: "值越大，回复越随机，大于 1 的值可能会导致乱码",
     },
     MaxTokens: {
-      Title: "单次回复限制 (max_tokens)",
+      Title: "单次回复限制",
       SubTitle: "单次交互所用的最大 Token 数",
     },
     PresencePenlty: {
-      Title: "话题新鲜度 (penalty)",
+      Title: "话题新鲜度",
       SubTitle: "值越大，越有可能扩展到新话题",
     },
   },
