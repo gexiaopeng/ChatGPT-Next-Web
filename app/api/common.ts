@@ -9,9 +9,6 @@ export async function requestOpenai(req: NextRequest) {
   const token = req.headers.get("token");
   const tokens = token?.split(",") ?? [];
   let len=tokens.length;
-  if(len==0){
-    return null;
-  }
   if(seq>=len){
     seq=0;
   }
