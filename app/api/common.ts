@@ -22,8 +22,7 @@ export async function requestOpenai(req: NextRequest) {
 
   console.log("[Proxy] ", openaiPath);
   console.log("[Base Url]", baseUrl);
-
-  return fetch(`${baseUrl}/${openaiPath}`, {
+  let res=fetch(`${baseUrl}/${openaiPath}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
@@ -31,4 +30,7 @@ export async function requestOpenai(req: NextRequest) {
     method: req.method,
     body: req.body,
   });
+  let key=apiKey.slice(-4);
+  res={...res,...{key}};
+  return res;
 }

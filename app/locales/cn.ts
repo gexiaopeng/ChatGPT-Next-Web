@@ -145,7 +145,7 @@ const cn = {
     Usage: {
       Title: "余额查询",
       SubTitle(used: any, total: any, until: any="", key: any="") {
-        return `总共已使用 $${used}，订阅总额 $${total}，到期 $${until}($${key})`;
+        return `总共已使用 $${used}，订阅总额 $${total}，到期 ${until}(${key})`;
       },
       IsChecking: "正在检查…",
       Check: "重新检查",

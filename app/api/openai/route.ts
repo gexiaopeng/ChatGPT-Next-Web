@@ -4,6 +4,7 @@ import { requestOpenai } from "../common";
 async function makeRequest(req: NextRequest) {
   try {
     const api = await requestOpenai(req);
+    console.error("[api res] ", api);
     const res = new NextResponse(api.body);
     res.headers.set("Content-Type", "application/json");
     res.headers.set("Cache-Control", "no-cache");
