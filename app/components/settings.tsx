@@ -203,6 +203,8 @@ export function Settings(props: { closeSettings: () => void }) {
   const usage = {
     used: updateStore.used,
     subscription: updateStore.subscription,
+    until:updateStore.until,
+    token:updateStore.token,
   };
   const [loadingUsage, setLoadingUsage] = useState(false);
   function checkUsage(force:boolean) {
@@ -488,7 +490,9 @@ export function Settings(props: { closeSettings: () => void }) {
                   ? Locale.Settings.Usage.IsChecking
                   : Locale.Settings.Usage.SubTitle(
                       usage?.used ?? "[?]",
-                      usage?.subscription ?? "[?]",
+                          usage?.subscription ?? "[?]",
+                      usage?.until ?? "[?]",
+                          usage?.token ?? "[?]",
                     )
                 : Locale.Settings.Usage.NoAccess
             }

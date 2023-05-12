@@ -107,6 +107,7 @@ export async function requestUsage() {
 
   const total = (await subs.json()) as {
     hard_limit_usd?: number;
+    access_until?:number;
   };
 
   if (response.error && response.error.type) {
@@ -121,10 +122,15 @@ export async function requestUsage() {
   if (total.hard_limit_usd) {
     total.hard_limit_usd = Math.round(total.hard_limit_usd * 100) / 100;
   }
-
+  let until="";
+  if(total.access_until){
+    until=formatDate(new Date(total.access_until));
+  }
   return {
     used: response.total_usage,
     subscription: total.hard_limit_usd,
+    until:until,
+    token:token,
   };
 }
 
