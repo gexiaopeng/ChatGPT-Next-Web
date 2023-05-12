@@ -205,9 +205,9 @@ export function Settings(props: { closeSettings: () => void }) {
     subscription: updateStore.subscription,
   };
   const [loadingUsage, setLoadingUsage] = useState(false);
-  function checkUsage() {
+  function checkUsage(force:boolean) {
     setLoadingUsage(true);
-    updateStore.updateUsage().finally(() => {
+    updateStore.updateUsage(force).finally(() => {
       setLoadingUsage(false);
     });
   }
@@ -228,7 +228,7 @@ export function Settings(props: { closeSettings: () => void }) {
   useEffect(() => {
     // checks per minutes
     checkUpdate();
-    showUsage && checkUsage();
+    showUsage && checkUsage(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -499,7 +499,7 @@ export function Settings(props: { closeSettings: () => void }) {
               <IconButton
                 icon={<ResetIcon></ResetIcon>}
                 text={Locale.Settings.Usage.Check}
-                onClick={checkUsage}
+                onClick={() => checkUsage(true)}
               />
             )}
           </SettingItem>
