@@ -498,7 +498,6 @@ export function Settings(props: { closeSettings: () => void }) {
             ) : (
               <IconButton
                 icon={<ResetIcon></ResetIcon>}
-                text={Locale.Settings.Usage.Check}
                 onClick={() => checkUsage(true)}
               />
             )}
