@@ -89,7 +89,8 @@ export async function requestUsage() {
   const startDate = formatDate(startOfMonth);
   const endDate = formatDate(now);
   const sub= await requestOpenaiClient("dashboard/billing/subscription")(null, "GET");
-  console.log("--sub--",sub);
+  const token=sub.headers.get("token");
+  console.log("--token--",token);
   const [used, subs] = await Promise.all([
     requestOpenaiClient(
       `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`,
