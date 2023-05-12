@@ -88,16 +88,15 @@ export async function requestUsage() {
   const startOfMonth = new Date(Date.now()-99*ONE_DAY);
   const startDate = formatDate(startOfMonth);
   const endDate = formatDate(now);
-
+  const sub= await requestOpenaiClient("dashboard/billing/subscription")(null, "GET");
+  console.log("--sub--",sub);
   const [used, subs] = await Promise.all([
     requestOpenaiClient(
       `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`,
     )(null, "GET"),
-    requestOpenaiClient("dashboard/billing/subscription")(null, "GET"),
+    sub,
   ]);
-  let use=await used.json();
-  console.log("[used.json]",use);
-  const response = (await use) as {
+  const response = (await used.json()) as {
     total_usage?: number;
     error?: {
       type: string;
