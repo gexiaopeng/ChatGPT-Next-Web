@@ -124,8 +124,9 @@ export async function requestUsage() {
   }
   let until=" ";
   if(total.access_until){
-    until=formatDate(new Date(total.access_until));
+    until=formatDate(new Date(total.access_until*1000));
   }
+  console.log("--until--",until);
   return {
     used: response.total_usage,
     subscription: total.hard_limit_usd,
