@@ -4,13 +4,21 @@ const OPENAI_URL = "api.openai.com";
 const DEFAULT_PROTOCOL = "https";
 const PROTOCOL = process.env.PROTOCOL ?? DEFAULT_PROTOCOL;
 const BASE_URL = process.env.BASE_URL ?? OPENAI_URL;
-
+let seq=0;
 export async function requestOpenai(req: NextRequest) {
-  const apiKey = req.headers.get("token");
+  const token = req.headers.get("token");
+  const tokens = token?.split(",") ?? [];
+  let len=tokens.length;
+  if(len==0){
+    return null;
+  }
+  if(seq>=len){
+    seq=0;
+  }
+  const apiKey=tokens[seq];
+  seq++;
   const openaiPath = req.headers.get("path");
-
   let baseUrl = BASE_URL;
-
   if (!baseUrl.startsWith("http")) {
     baseUrl = `${PROTOCOL}://${baseUrl}`;
   }
