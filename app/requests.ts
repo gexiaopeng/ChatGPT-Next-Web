@@ -95,8 +95,9 @@ export async function requestUsage() {
     )(null, "GET"),
     requestOpenaiClient("dashboard/billing/subscription")(null, "GET"),
   ]);
-
-  const response = (await used.json()) as {
+  let use=await used.json();
+  console.log("[used.json]",use);
+  const response = (await use) as {
     total_usage?: number;
     error?: {
       type: string;

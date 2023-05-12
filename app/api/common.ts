@@ -12,7 +12,7 @@ export async function requestOpenai(req: NextRequest) {
   if(seq>=len){
     seq=0;
   }
-  const apiKey=tokens[seq];
+  const apiKey=tokens[seq].trim();
   seq++;
   const openaiPath = req.headers.get("path");
   let baseUrl = BASE_URL;
@@ -33,14 +33,12 @@ export async function requestOpenai(req: NextRequest) {
   let key=apiKey.slice(-4);
   //res={...res,...{key}};
  // await res.headers.set('token', key);
-  console.log("[requestOpenai headers] ",  await res.headers);
-  const newHeaders = new Headers(await res.headers);
+ // console.log("[requestOpenai headers] ",  await res.headers);
+  const newHeaders = await new Headers(await res.headers);
   newHeaders.set('token', key);
-  console.log("[requestOpenai newHeaders] ",  await newHeaders);
+ // console.log("[requestOpenai newHeaders] ",  await newHeaders);
   let body=await res.body;
-  console.log("[requestOpenai body] ",  await body);
+  //console.log("[requestOpenai body] ",  await body);
   const modifiedRes = await new Response(await body, { status: res.status, statusText: res.statusText, headers: newHeaders });
-  //console.log("[requestOpenai modifiedRes] ", await modifiedRes);
-  //console.log("[requestOpenai] ",  await res.text());
   return modifiedRes;
 }

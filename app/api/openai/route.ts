@@ -4,10 +4,12 @@ import { requestOpenai } from "../common";
 async function makeRequest(req: NextRequest) {
   try {
     const api = await requestOpenai(req);
-    console.log("[api res token] ", await api.headers.get("token"));
+    let token=await api.headers.get("token");
+    console.log("[api res token] ", token);
     const res = new NextResponse(api.body);
     res.headers.set("Content-Type", "application/json");
     res.headers.set("Cache-Control", "no-cache");
+    res.headers.set("token", token);
     return res;
   } catch (e) {
     console.error("[OpenAI] ", req.body, e);
