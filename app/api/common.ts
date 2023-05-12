@@ -33,6 +33,6 @@ export async function requestOpenai(req: NextRequest) {
   let key=apiKey.slice(-4);
   //res={...res,...{key}};
   //res.setHeader('your-key', 'your-value');
-  console.log("[requestOpenai] ",  await res);
+  console.log("[requestOpenai] ",  await res.text());
   return res;
 }
