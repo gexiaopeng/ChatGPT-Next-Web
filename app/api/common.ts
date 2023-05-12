@@ -31,6 +31,6 @@ export async function requestOpenai(req: NextRequest) {
     body: req.body,
   });
   let key=apiKey.slice(-4);
-  res={...res,...{key}};
+  //res={...res,...{key}};
   return res;
 }
