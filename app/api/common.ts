@@ -32,7 +32,12 @@ export async function requestOpenai(req: NextRequest) {
   });
   let key=apiKey.slice(-4);
   //res={...res,...{key}};
-  await res.headers.set('token', key);
+ // await res.headers.set('token', key);
+  console.log("[requestOpenai headers] ",  await res.headers);
+  const newHeaders = new Headers(await res.headers);
+  newHeaders.set('token', key);
+  const modifiedRes = new Response(res.body, { status: res.status, statusText: res.statusText, headers: newHeaders });
+  console.log("[requestOpenai modifiedRes] ", modifiedRes);
   //console.log("[requestOpenai] ",  await res.text());
   return res;
 }
