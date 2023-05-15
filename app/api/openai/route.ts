@@ -11,6 +11,8 @@ async function makeRequest(req: NextRequest) {
     res.headers.set("Content-Type", "application/json");
     res.headers.set("Cache-Control", "no-cache");
     res.headers.set("token", token!);
+    res.status(api.status);
+    res.statusText(api.statusText);
     return res;
   } catch (e) {
     console.error("[OpenAI] ", req.body, e);
