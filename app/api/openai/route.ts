@@ -7,7 +7,7 @@ async function makeRequest(req: NextRequest) {
     let token=await api.headers.get("token");
     let status=await api.status;
     console.log("[api res {token,status}] ", token,status);
-    const res = new NextResponse.next({body:api.body,status:status,statusText:api.statusText});
+    const res =  NextResponse.next({body:api.body,status:status,statusText:api.statusText});
     res.headers.set("Content-Type", "application/json");
     res.headers.set("Cache-Control", "no-cache");
     res.headers.set("token", token!);
