@@ -5,7 +5,8 @@ async function makeRequest(req: NextRequest) {
   try {
     const api = await requestOpenai(req);
     let token=await api.headers.get("token");
-    console.log("[api res token] ", token);
+    let status=await api.status;
+    console.log("[api res {token,status}] ", token,status);
     const res = new NextResponse(api.body);
     res.headers.set("Content-Type", "application/json");
     res.headers.set("Cache-Control", "no-cache");
