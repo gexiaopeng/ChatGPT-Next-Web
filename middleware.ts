@@ -34,7 +34,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.json(
         {
           error: {
-            message: "Please go settings page and fill your access code.",
+            message: "Please set your access code.",
             type: "invalid_request_error",
             param: null,
             code: "need_access_code."
