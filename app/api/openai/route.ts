@@ -12,10 +12,14 @@ async function makeRequest(req: NextRequest) {
   } catch (e) {
     console.error("[OpenAI] ", req.body, e);
     return NextResponse.json(
-      {
-        error: true,
-        msg: JSON.stringify(e),
-      },
+        {
+          error: {
+            message: JSON.stringify(e),
+            type: "Internal server errorr",
+            param: null,
+            code: "internal_error"
+          }
+        },
       {
         status: 500,
       }
