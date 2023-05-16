@@ -4,17 +4,11 @@ import { requestOpenai } from "../common";
 async function makeRequest(req: NextRequest) {
   try {
     const api = await requestOpenai(req);
-    //let token=await api.headers.get("token");
-    //let status=await api.status;
-    const myOptions = { status:api.status, statusText:api.statusText,headers: api.headers};
+
+    //const myOptions = { status:api.status, statusText:api.statusText,headers: api.headers};
     //console.log("[api res {token,status}] ", token,status);
-    const res =  new NextResponse(api.body,myOptions);
-    //res.headers.set("Content-Type", "application/json");
-    //res.headers.set("Cache-Control", "no-cache");
-   // res.headers.set("token", token!);
-   // res.status(status!);
-    //res.statusText=api.statusText;
-    return res;
+    //const res =  new NextResponse(api.body,myOptions);
+    return api;
   } catch (e) {
     console.error("[OpenAI] ", req.body, e);
     return NextResponse.json(
