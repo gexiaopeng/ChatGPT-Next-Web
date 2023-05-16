@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 const OPENAI_URL = "api.openai.com";
 const DEFAULT_PROTOCOL = "https";
+const DEFAULT_PATH="v1/chat/completions";
 const PROTOCOL = process.env.PROTOCOL ?? DEFAULT_PROTOCOL;
 const BASE_URL = process.env.BASE_URL ?? OPENAI_URL;
 let seq=0;
@@ -14,7 +15,7 @@ export async function requestOpenai(req: NextRequest) {
   }
   const apiKey=tokens[seq].trim();
   seq++;
-  const openaiPath = req.headers.get("path");
+  const openaiPath = req.headers.get("path") || DEFAULT_PATH;
   let baseUrl = BASE_URL;
   if (!baseUrl.startsWith("http")) {
     baseUrl = `${PROTOCOL}://${baseUrl}`;
