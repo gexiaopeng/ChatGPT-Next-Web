@@ -32,11 +32,14 @@ export function middleware(req: NextRequest) {
 
   if (serverConfig.needCode && !serverConfig.codes.has(hashedCode) && !token) {
     return NextResponse.json(
-      {
-        error: true,
-        needAccessCode: true,
-        msg: "Please go settings page and fill your access code.",
-      },
+        {
+          error: {
+            message: "Please go settings page and fill your access code.",
+            type: "invalid_request_error",
+            param: null,
+            code: "need_access_code."
+          }
+        },
       {
         status: 401,
       },
@@ -51,10 +54,14 @@ export function middleware(req: NextRequest) {
       req.headers.set("token", apiKey);
     } else {
       return NextResponse.json(
-        {
-          error: true,
-          msg: "Empty Api Key",
-        },
+         {
+            error: {
+              message: "Empty Api Key",
+              type: "invalid_request_error",
+              param: null,
+              code: "empty_api_key"
+            }
+         },
         {
           status: 401,
         },
