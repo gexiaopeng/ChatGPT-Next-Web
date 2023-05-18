@@ -18,8 +18,13 @@ function request(cReq, cRes) {
     try{
       cRes.writeHead(pRes.statusCode, pRes.headers);
       pRes.pipe(cRes);
+      pRes.on('error', function(e) {
+        console.error("-request-pRes.on -error--url:"+murl,e);
+        cRes.end();
+      });
     }catch (e){
       console.error("-request-write-error--url:"+murl,e);
+      cRes.end();
     }
   }).on('error', function(e) {
     console.error("-request-on -error--url:"+murl,e);
@@ -27,6 +32,10 @@ function request(cReq, cRes) {
   });
  try{
     cReq.pipe(pReq);
+    cReq.on('error', function(e) {
+     console.error("-request-cReq.on-error--url:"+murl,e);
+     cRes.end();
+   });
   }catch (e){
     console.error("-request-pipe error-url:"+murl,e);
   }
@@ -41,6 +50,10 @@ function connect(cReq, cSock) {
     try{
       cSock.write('HTTP/1.1 200 Connection Established\r\n\r\n');
       pSock.pipe(cSock);
+      pSock.on('error', function(e) {
+        console.error("-connect-pSock.on-error--url:"+murl,e);
+        cSock.end();
+      });
     }catch (e){
       console.error("-connect-write-error--url:"+murl,e);
     }
@@ -51,6 +64,10 @@ function connect(cReq, cSock) {
   });
   try{
     cSock.pipe(pSock);
+    cSock.on('error', function(e) {
+      console.error("-connect-cSock.on-error--url:"+murl,e);
+      cSock.end();
+    });
   }catch (e){
     console.error("-connect-pipe error--url:"+murl,e);
   }
