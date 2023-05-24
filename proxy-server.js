@@ -1,50 +1,65 @@
 var http = require('http');
+var https = require('https');
 var net = require('net');
 var url = require('url');
-var port = 3888;
+var port = parseInt(process.env.PORT, 10) || 3000
+console.log("--port--"+port);
 function request(cReq, cRes) {
     var murl = cReq.url;
     console.log("-request-url-" + murl);
-    var u = url.parse(murl);
-    var options = {
-        hostname: u.hostname,
-        port: u.port || 80,
-        path: u.path,
-        method: cReq.method,
-        headers: cReq.headers
-    };
+    get(cRes,murl);
 
-    var pReq = http.request(options, function (pRes) {
-        try {
-            cRes.writeHead(pRes.statusCode, pRes.headers);
-            pRes.pipe(cRes);
-            pRes.on('error', function (e) {
-                console.error("-request-pRes.on -error--url:" + murl, e);
-                cRes.end();
-            });
-        } catch (e) {
-            console.error("-request-write-error--url:" + murl, e);
-            cRes.end();
-        }
-    }).on('error', function (e) {
-        console.error("-request-on -error--url:" + murl, e);
-        cRes.end();
-    });
-    try {
-        cReq.pipe(pReq);
-        cReq.on('error', function (e) {
-            console.error("-request-cReq.on-error--url:" + murl, e);
-            cRes.end();
-        });
-    } catch (e) {
-        console.error("-request-pipe error-url:" + murl, e);
-        cRes.end();
+}
+
+function get(cRes,murl){
+
+    if(murl.startsWith("/http")){
+        murl=murl.slice(1);
     }
+    if(murl==null || murl=="undefined" || murl.startsWith("/")){
+        cRes.statusCode = 200 ;
+        cRes.end("hello world,murl:"+murl);
+        return;
+    }
+// 发送 HTTP GET 请求
+    var httpclient=null;
+    if(murl.startsWith("https://")){
+        httpclient=https;
+    }else{
+        httpclient=http;
+    }
+    const req = httpclient.get(murl, (res) => {
+        handleResponse(cRes,res);
+    });
+
+    req.on('error', (e) => {
+        console.error(`请求遇到问题: ${e.message}`);
+    });
+
+    req.end();
+
+}
+
+function handleResponse(cRes,res) {
+    const { statusCode } = res;
+
+    if (statusCode === 301 || statusCode === 302) {
+        const redirectUrl = res.headers['location'];
+        get(cRes,redirectUrl);
+        return;
+    }
+    cRes.writeHead(res.statusCode, res.headers);
+    res.pipe(cRes);
 }
 
 function connect(cReq, cSock) {
     var murl = cReq.url;
     console.log("-connect-url-" + murl);
+    if(murl==null || murl.startsWith("/")){
+        cSock.statusCode = 404 ;
+        cSock.end();
+        return;
+    }
     var u = url.parse('http://' + murl);
 
     var pSock = net.connect(u.port, u.hostname, function () {
