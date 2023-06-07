@@ -26,6 +26,10 @@ import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { REPO_URL } from "../constant";
 import { ErrorBoundary } from "./error";
+
+import { getServerSideConfig } from "../config/server";
+
+
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
@@ -166,7 +170,8 @@ function _Home() {
     },10);
   };
   function initPage(){
-     console.log("=initPage,initPage:"+isInit);
+    const serverConfig = getServerSideConfig();
+     console.log("=initPage,initPage:"+isInit+",serverConfig:",serverConfig);
     if(!isInit){
       isInit=true;
       createNewSession();
