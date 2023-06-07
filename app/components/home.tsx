@@ -7,28 +7,22 @@ import { useState, useEffect, useRef } from "react";
 import ClearIcon from "../icons/clear.svg";
 import { IconButton } from "./button";
 import styles from "./home.module.scss";
-
 import SettingsIcon from "../icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import ClosegIcon from "../icons/closeg.svg";
 
 import BotIcon from "../icons/bot.svg";
 import AddIcon from "../icons/add.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import CloseIcon from "../icons/close.svg";
 
-import {base64Decode, createMessage, useChatStore} from "../store";
+import { base64Decode, createMessage, useChatStore } from "../store";
 import { getCSSVar, isMobileScreen } from "../utils";
 import Locale from "../locales";
 import { Chat } from "./chat";
 
 import dynamic from "next/dynamic";
-import { REPO_URL } from "../constant";
+
 import { ErrorBoundary } from "./error";
-
-import { getServerSideConfig } from "../config/server";
-
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -125,7 +119,6 @@ function useDragSideBar() {
   };
 }
 
-
 const useHasHydrated = () => {
   const [hasHydrated, setHasHydrated] = useState<boolean>(false);
 
@@ -136,15 +129,11 @@ const useHasHydrated = () => {
   return hasHydrated;
 };
 
-let isInit=false;
-let isTitle=false;
+let isInit = false;
+let isTitle = false;
 function _Home() {
-  const [createNewSession, removeSession,isRenameDelete] = useChatStore(
-    (state) => [
-      state.newSession,
-      state.removeSession,
-      state.isRenameDelete,
-    ],
+  const [createNewSession, removeSession, isRenameDelete] = useChatStore(
+    (state) => [state.newSession, state.removeSession, state.isRenameDelete],
   );
   const chatStore = useChatStore();
   const loading = !useHasHydrated();
@@ -158,51 +147,50 @@ function _Home() {
   const { onDragMouseDown } = useDragSideBar();
   initTitle();
   useSwitchTheme();
-  const hiddenSidebar=()=>{
-   setTimeout(()=>{
+  const hiddenSidebar = () => {
+    setTimeout(() => {
       //console.log("--hiddenSidebar--",isRenameDelete,chatStore.isRenameDelete,chatStore.getRenameDelete(),new Date().getTime());
       setOpenSettings(false);
-      if(chatStore.getRenameDelete()){
+      if (chatStore.getRenameDelete()) {
         chatStore.renameDelete(false);
-      }else{
+      } else {
         setShowSideBar(false);
       }
-    },10);
+    }, 10);
   };
-  function initPage(){
-    const serverConfig = getServerSideConfig();
-     console.log("=initPage,initPage:"+isInit+",serverConfig:",serverConfig);
-    if(!isInit){
-      isInit=true;
+  function initPage() {
+    console.log("=initPage,initPage:" + isInit);
+    if (!isInit) {
+      isInit = true;
       createNewSession();
       setShowSideBar(false);
     }
   }
-  function initTitle(){
-    if (!isTitle ) {
-       chatStore.setRole();
-       isTitle=true;
+  function initTitle() {
+    if (!isTitle) {
+      chatStore.setRole();
+      isTitle = true;
     }
-    if (typeof document !== 'undefined' && document.title.trim()=="") {
+    if (typeof document !== "undefined" && document.title.trim() == "") {
       //console.log("-title-",document.title);
       document.title = getTitle() + " Web";
-   }
+    }
   }
-  function getTitle(){
-    let title="ChatGPT ";
-    const role =chatStore.getRole();
-    if(role==2){
-      title+="Test";
-    }else if(role==101){
-      title+=base64Decode("JUU3JUJGJUJCJUU4JUFGJTkx");
-    } else if(role==201){
-      title+=base64Decode("JUU1JUFFJTlEJUU1JUFFJTlE");
-    } else if(role==331){
-      title+=base64Decode("JUU4JTgwJTgxJUU1JTg1JUFD");
-    }else if(role==338){
-      title+=base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2");
-    }else{
-      title+="Test";
+  function getTitle() {
+    let title = "ChatGPT ";
+    const role = chatStore.getRole();
+    if (role == 2) {
+      title += "Test";
+    } else if (role == 101) {
+      title += base64Decode("JUU3JUJGJUJCJUU4JUFGJTkx");
+    } else if (role == 201) {
+      title += base64Decode("JUU1JUFFJTlEJUU1JUFFJTlE");
+    } else if (role == 331) {
+      title += base64Decode("JUU4JTgwJTgxJUU1JTg1JUFD");
+    } else if (role == 338) {
+      title += base64Decode("JUU4JTgwJTgxJUU1JUE5JTg2");
+    } else {
+      title += "Test";
     }
     return title;
   }
@@ -241,27 +229,30 @@ function _Home() {
           ? styles["tight-container"]
           : styles.container
       }`}
-
     >
-      <div id="sidebar-show"
+      <div
+        id="sidebar-show"
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
         onTouchStart={(e1) => handleTouchStart(e1 as any)}
         onTouchMove={(e2) => handleTouchMove(e2 as any)}
       >
-        <div className={styles["sidebar-action-button-close"] + " " + styles.mobile}  onClick={hiddenSidebar}>
+        <div
+          className={
+            styles["sidebar-action-button-close"] + " " + styles.mobile
+          }
+          onClick={hiddenSidebar}
+        >
           <div className={styles["sidebar-action-button-close-inner"]}>
-            <ClosegIcon
-                onClick={hiddenSidebar}
-            />
+            <ClosegIcon onClick={hiddenSidebar} />
           </div>
         </div>
-        <div className={styles["sidebar-header"]}
-             onClick={() => {
-               hiddenSidebar();
-             }}
+        <div
+          className={styles["sidebar-header"]}
+          onClick={() => {
+            hiddenSidebar();
+          }}
         >
-          <div className={styles["sidebar-title"]}
-          >{getTitle()}</div>
+          <div className={styles["sidebar-title"]}>{getTitle()}</div>
           <div className={styles["sidebar-sub-title"]}>
             Build your own AI assistant.
           </div>
@@ -279,16 +270,13 @@ function _Home() {
           <ChatList />
         </div>
 
-        <div className={styles["sidebar-tail"]}
-
-        >
+        <div className={styles["sidebar-tail"]}>
           <div className={styles["sidebar-actions"]}>
-
             <div className={styles["sidebar-action"]}>
               <IconButton
-                  icon={<ClearIcon />}
-                  text="清空"
-                  onClick={chatStore.deleteAllSession}
+                icon={<ClearIcon />}
+                text="清空"
+                onClick={chatStore.deleteAllSession}
               />
             </div>
 
@@ -297,10 +285,10 @@ function _Home() {
                 icon={<SettingsIcon />}
                 text="设置"
                 onClick={() => {
-                  if(!openSettings){
+                  if (!openSettings) {
                     setOpenSettings(true);
                     setShowSideBar(false);
-                  }else{
+                  } else {
                     setOpenSettings(false);
                     setShowSideBar(true);
                   }
@@ -322,13 +310,12 @@ function _Home() {
             />
           </div>
         </div>
-        { !isMobileScreen() && (
+        {!isMobileScreen() && (
           <div
-              className={styles["sidebar-drag"]}
-              onMouseDown={(e) => onDragMouseDown(e as any)}
-          ></div>)
-        }
-
+            className={styles["sidebar-drag"]}
+            onMouseDown={(e) => onDragMouseDown(e as any)}
+          ></div>
+        )}
       </div>
 
       <div className={styles["window-content"]}>
@@ -336,18 +323,18 @@ function _Home() {
           <Settings
             closeSettings={() => {
               setOpenSettings(false);
-              if(!isMobileScreen()){
+              if (!isMobileScreen()) {
                 setShowSideBar(true);
               }
-           }}
+            }}
           />
         ) : (
           <Chat
             key="chat"
             showSideBar={() => setShowSideBar(true)}
             sideBarShowing={showSideBar}
-            setShowSettings={() =>setOpenSettings(true)}
-            createNewSession={()=>createNewSession()}
+            setShowSettings={() => setOpenSettings(true)}
+            createNewSession={() => createNewSession()}
           />
         )}
       </div>
