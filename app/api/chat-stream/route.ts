@@ -2,6 +2,7 @@ import { createParser } from "eventsource-parser";
 import { NextRequest } from "next/server";
 import { requestOpenai } from "../common";
 import { kv } from "@vercel/kv";
+
 async function createStream(req: NextRequest) {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
@@ -49,9 +50,18 @@ async function createStream(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    kv.incr("chatCount");
+    let count;
+    if (process.env.NODE_ENV === "production") {
+      count = await kv.incr("chatCount");
+    } else {
+      count = await kv.get("chatCount");
+      console.log("count:" + count);
+    }
     const stream = await createStream(req);
-    return new Response(stream);
+    const resp = new Response(stream);
+    resp.headers.set("chatCount", count + "");
+    //console.log("resp", resp);
+    return resp;
   } catch (error) {
     console.error("[Chat Stream error]", error);
     return new Response(
@@ -59,9 +69,10 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
 export const runtime = "edge";
 /**
-export const config = {
+ export const config = {
   runtime: "edge", //默认serverless
 };
  */
