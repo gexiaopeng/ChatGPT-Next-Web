@@ -51,12 +51,13 @@ async function createStream(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     let count;
+    const time = new Date().getTime();
     if (process.env.NODE_ENV === "production") {
       count = await kv.incr("chatCount");
     } else {
       count = await kv.get("chatCount");
-      console.log("count:" + count);
     }
+    console.log("count:" + count + "," + (new Date().getTime() - time));
     const stream = await createStream(req);
     const resp = new Response(stream);
     resp.headers.set("chat-count", count + "");
