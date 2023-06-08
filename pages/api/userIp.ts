@@ -6,6 +6,6 @@ export default async function handler(
     response: NextApiResponse,
 ) {
     let userIps = await kv.hgetall("userIps");
-    const chatCount=await kv.get("chatCount");
+    const chatCount=await kv.get("chatCount") || 0;
     return response.status(200).json({chatCount,userIps});
 }
