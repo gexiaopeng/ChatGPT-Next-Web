@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     let count;
     const time = new Date().getTime();
     if (process.env.NODE_ENV === "production") {
-      count = await kv.incr("chatCount");
+      count = kv.incr("chatCount");
     } else {
       count = await kv.get("chatCount");
     }
