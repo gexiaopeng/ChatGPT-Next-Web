@@ -2,6 +2,7 @@ import { createParser } from "eventsource-parser";
 import { NextRequest } from "next/server";
 import { requestOpenai } from "../common";
 import { kv } from "@vercel/kv";
+import { getIP, ipToDecimal, getDateTime } from "../../../global";
 
 async function createStream(req: NextRequest) {
   const encoder = new TextEncoder();
@@ -50,19 +51,12 @@ async function createStream(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    let count;
-    const time = new Date().getTime();
-    if (process.env.NODE_ENV === "production") {
-      count = kv.incr("chatCount");
-    } else {
-      count = await kv.get("chatCount");
-    }
-    console.log("count:" + count + "," + (new Date().getTime() - time));
+    stat(req);
     const stream = await createStream(req);
-    const resp = new Response(stream);
-    resp.headers.set("chat-count", count + "");
+    //const resp = new Response(stream);
+    //resp.headers.set("chat-count", count + "");
     //console.log("resp", resp);
-    return resp;
+    return new Response(stream);
   } catch (error) {
     console.error("[Chat Stream error]", error);
     return new Response(
@@ -70,7 +64,27 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
+async function stat(req: NextRequest) {
+  if (process.env.NODE_ENV === "production") {
+    kv.incr("chatCount");
+  }
+  const ip = getIP(req) + "";
+  let ipStat = await kv.hget("userIps", ip);
+  //console.log("ipStat",ipStat);
+  let userIp = {};
+  let newIpStat;
+  if (!ipStat) {
+    userIp = {};
+    newIpStat = { count: 1, lastTime: getDateTime() };
+  } else {
+    // @ts-ignore
+    newIpStat = { count: ipStat.count + 1, lastTime: getDateTime() };
+  }
+  // @ts-ignore
+  userIp[ip] = newIpStat;
+  // @ts-ignore
+  kv.hset("userIps", userIp);
+}
 export const runtime = "edge";
 /**
  export const config = {

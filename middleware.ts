@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSideConfig } from "./app/config/server";
+import { getIP} from "./global";
 import md5 from "spark-md5";
 
 export const config = {
@@ -8,27 +9,17 @@ export const config = {
 
 const serverConfig = getServerSideConfig();
 
-function getIP(req: NextRequest) {
-  let ip = req.ip ?? req.headers.get("x-real-ip");
-  const forwardedFor = req.headers.get("x-forwarded-for");
-
-  if (!ip && forwardedFor) {
-    ip = forwardedFor.split(",").at(0) ?? "";
-  }
-
-  return ip;
-}
 
 export function middleware(req: NextRequest) {
   const accessCode = req.headers.get("access-code");
   const token = req.headers.get("token");
   const hashedCode = md5.hash(accessCode ?? "").trim();
 
-  console.log("[Auth] allowed hashed codes: ", [...serverConfig.codes]);
-  console.log("[Auth] got access code:", accessCode);
-  console.log("[Auth] hashed access code:", hashedCode);
+ // console.log("[Auth] allowed hashed codes: ", [...serverConfig.codes]);
+  //console.log("[Auth] got access code:", accessCode);
+ // console.log("[Auth] hashed access code:", hashedCode);
   console.log("[User IP] ", getIP(req));
-  console.log("[Time] ", new Date().toLocaleString());
+ // console.log("[Time] ", new Date().toLocaleString());
 
   if (serverConfig.needCode && !serverConfig.codes.has(hashedCode) && !token) {
     return NextResponse.json(
