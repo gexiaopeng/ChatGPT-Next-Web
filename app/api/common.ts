@@ -30,7 +30,6 @@ export async function requestOpenai(req: NextRequest) {
     },
     method: req.method,
     body: req.body,
-    duplex: "half",
   });
   let key = apiKey.slice(-4);
   //res={...res,...{key}};

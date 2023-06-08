@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import fs from "fs/promises";
-
 const RAW_FILE_URL = "https://raw.githubusercontent.com/";
 const MIRRORF_FILE_URL = "https://raw.fgit.ml/";
 
@@ -48,5 +47,7 @@ async function main() {
       console.log("[Fetch] saved to " + FILE);
     });
 }
-
-main();
+const windir=process?.env?.windir;
+if(windir==null || windir!=="C:\\WINDOWS") {
+   main();
+}

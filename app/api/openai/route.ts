@@ -12,17 +12,17 @@ async function makeRequest(req: NextRequest) {
   } catch (e) {
     console.error("[OpenAI] ", req.body, e);
     return NextResponse.json(
-        {
-          error: {
-            message: JSON.stringify(e),
-            type: "Internal server errorr",
-            param: null,
-            code: "internal_error"
-          }
+      {
+        error: {
+          message: JSON.stringify(e),
+          type: "Internal server errorr",
+          param: null,
+          code: "internal_error",
         },
+      },
       {
         status: 500,
-      }
+      },
     );
   }
 }
@@ -34,7 +34,9 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   return makeRequest(req);
 }
-
+export const runtime = "edge";
+/**
 export const config = {
   runtime: "edge",
 };
+ */

@@ -58,7 +58,9 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
+export const runtime = "edge";
+/**
 export const config = {
   runtime: "edge", //默认serverless
 };
+ */
