@@ -65,9 +65,7 @@ export async function POST(req: NextRequest) {
   }
 }
 async function stat(req: NextRequest) {
-  if (process.env.NODE_ENV === "production") {
-    kv.incr("chatCount");
-  }
+  kv.incr("chatCount");
   const ip = getIP(req) + "";
   let ipStat = await kv.hget("userIps", ip);
   //console.log("ipStat",ipStat);
