@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
     }
     const stream = await createStream(req);
     const resp = new Response(stream);
-    resp.headers.set("chatCount", count + "");
+    resp.headers.set("chat-count", count + "");
     //console.log("resp", resp);
     return resp;
   } catch (error) {
