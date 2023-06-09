@@ -12,20 +12,21 @@ export default async function handler(req: NextRequest) {
         baseUrl = `${PROTOCOL}://${baseUrl}`;
     }
     let ourl=baseUrl+"/"+url;
-    let newHeaders =  new Headers( req.headers);
-    newHeaders.delete('host');
+   // let newHeaders =  new Headers( req.headers);
+   // newHeaders.delete('host');
 
-    newHeaders =  new Headers();
+    let  newHeaders =  new Headers();
     newHeaders.set('authorization',req.headers.get("authorization")+"");
+    newHeaders.set('content-type',req.headers.get("content-type")+"");
     //let ind=ourl.indexOf("?=");
     //if(ind>0){
     //ourl=ourl.substring(0,ind);
     //}
     console.log("-ourl-[" + ourl + "]");
-    let heads="";
-    for (const [key, value] of newHeaders.entries()) {
-        heads+=key+":"+value+"\n";
-    }
+    //let heads="";
+    //for (const [key, value] of newHeaders.entries()) {
+        //heads+=key+":"+value+"\n";
+   // }
     //console.log("-heads-[" + heads + "]");
     //headers: newHeaders,
     try {

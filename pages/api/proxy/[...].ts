@@ -6,8 +6,11 @@ export default async function handler(req: NextRequest) {
     //console.log("-query-",query);
     //console.log("-res-",res);
     const url = `${req.nextUrl.pathname}${req.nextUrl.search}`.replaceAll("/api/proxy/", "");
-    const newHeaders =  new Headers( req.headers);
-    newHeaders.delete('host');
+    //let newHeaders =  new Headers( req.headers);
+    //newHeaders.delete('host');
+    let newHeaders =  new Headers();
+    newHeaders.set('authorization',req.headers.get("authorization")+"");
+    newHeaders.set('content-type',req.headers.get("content-type")+"");
     console.log("-url-[" + url + "]");
     if(!url.startsWith("http")){
         return NextResponse.json(
