@@ -15,11 +15,11 @@ export default async function handler(req: NextRequest) {
     let newHeaders =  new Headers( req.headers);
     newHeaders.delete('host');
 
-    //newHeaders =  new Headers();
-    //newHeaders.set('authorization',req.headers.get("authorization")+"");
+    newHeaders =  new Headers();
+    newHeaders.set('authorization',req.headers.get("authorization")+"");
     //let ind=ourl.indexOf("?=");
     //if(ind>0){
-        //ourl=ourl.substring(0,ind);
+    //ourl=ourl.substring(0,ind);
     //}
     console.log("-ourl-[" + ourl + "]");
     let heads="";
