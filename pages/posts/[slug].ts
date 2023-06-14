@@ -1,5 +1,5 @@
 import posts from '../../data/posts.json';
-export default function mPost(post) {
+export default function mPost(post:any) {
      console.log("post", post);
     //return post;
      return "你好"+JSON.stringify(post);
