@@ -19,7 +19,7 @@ export type Message = ChatCompletionResponseMessage & {
   id?: number;
 };
 
-export type ChatSessionMap =Map<string,ChatSession[]>;
+export type ChatSessionMap = Map<string, ChatSession[]>;
 
 export function createMessage(override: Partial<Message>): Message {
   return {
@@ -30,11 +30,11 @@ export function createMessage(override: Partial<Message>): Message {
     ...override,
   };
 }
-export  function base64Decode(encodedStr:string) {
-  if (typeof window !== 'undefined') {
+export function base64Decode(encodedStr: string) {
+  if (typeof window !== "undefined") {
     return decodeURIComponent(window.atob(encodedStr));
   }
- return "";
+  return "";
 }
 export enum SubmitKey {
   Enter = "Enter",
@@ -103,6 +103,14 @@ export const ALL_MODELS = [
     name: "gpt-3.5-turbo-0301",
     available: true,
   },
+  {
+    name: "gpt-3.5-turbo-0613",
+    available: true,
+  },
+  {
+    name: "gpt-3.5-turbo-16k-0613",
+    available: true,
+  },
 ];
 
 export function limitNumber(
@@ -138,13 +146,13 @@ export const ModalConfigValidator = {
     return limitNumber(x, 0, 2, 1);
   },
 };
-function  getDefaultTemperature(){
-  let temperature=1;
-  let role=getRole();
-  if(role==101){
-    temperature=0.1;
-  }else if(role==201 || role==331 || role==338 ){
-    temperature=1.1;
+function getDefaultTemperature() {
+  let temperature = 1;
+  let role = getRole();
+  if (role == 101) {
+    temperature = 0.1;
+  } else if (role == 201 || role == 331 || role == 338) {
+    temperature = 1.1;
   }
   return temperature;
 }
@@ -213,7 +221,7 @@ function createEmptySession(): ChatSession {
     lastSummarizeIndex: 0,
   };
 }
-function createEmptySessionMap(){
+function createEmptySessionMap() {
   return {};
 }
 interface ChatStore {
@@ -229,11 +237,14 @@ interface ChatStore {
   deleteAllSession: () => void;
   currentSession: () => ChatSession;
   onNewMessage: (message: Message) => void;
-  onUserInput: (content: string,highLight:()=>void) => Promise<void>;
+  onUserInput: (content: string, highLight: () => void) => Promise<void>;
   summarizeSession: () => void;
   updateStat: (message: Message) => void;
   updateCurrentSession: (updater: (session: ChatSession) => void) => void;
-  updateSession: (updater: (session: ChatSession) => void,index:number) => void;
+  updateSession: (
+    updater: (session: ChatSession) => void,
+    index: number,
+  ) => void;
   updateMessage: (
     sessionIndex: number,
     messageIndex: number,
@@ -247,33 +258,33 @@ interface ChatStore {
   resetConfig: () => void;
   updateConfig: (updater: (config: ChatConfig) => void) => void;
   clearAllData: () => void;
-  isRenameTitle:boolean;
-  renameTitle:(isRename:boolean)=>void;
-  isRenameDelete:boolean;
-  renameDelete:(isReDel:boolean)=>void;
-  getRenameDelete:() =>boolean;
-  role:number;
-  getRole:() =>number;
-  setRole:()=>void;
+  isRenameTitle: boolean;
+  renameTitle: (isRename: boolean) => void;
+  isRenameDelete: boolean;
+  renameDelete: (isReDel: boolean) => void;
+  getRenameDelete: () => boolean;
+  role: number;
+  getRole: () => number;
+  setRole: () => void;
 }
 
 function countMessages(msgs: Message[]) {
   return msgs.reduce((pre, cur) => pre + cur.content.length, 0);
 }
 const LOCAL_KEY = "chat-next-web-store";
-export function getRole(){
-  let role=1;
-  if (typeof window !== 'undefined') {
+export function getRole() {
+  let role = 1;
+  if (typeof window !== "undefined") {
     const urlParams = new URLSearchParams(window.location.search);
-    const keyParam = urlParams.get('r');
+    const keyParam = urlParams.get("r");
     if (keyParam) {
-      role=Number(keyParam);
+      role = Number(keyParam);
     }
   }
   return role;
 }
-function getLocalKey(){
-  let key=LOCAL_KEY+"_"+getRole();
+function getLocalKey() {
+  let key = LOCAL_KEY + "_" + getRole();
   return key;
 }
 export const useChatStore = create<ChatStore>()(
@@ -281,23 +292,23 @@ export const useChatStore = create<ChatStore>()(
     (set, get) => ({
       sessions: [createEmptySession()],
       currentSessionIndex: 0,
-      isRenameTitle:false,
-      isRenameDelete:false,
-      role:1,
+      isRenameTitle: false,
+      isRenameDelete: false,
+      role: 1,
       config: {
         ...DEFAULT_CONFIG,
       },
-      setRole(){
-        let r=getRole();
-        console.log("=role:"+r);
+      setRole() {
+        let r = getRole();
+        console.log("=role:" + r);
         set(() => ({
-          role:r,
+          role: r,
         }));
-        if(r==201 || r==331 ||  r==338){
+        if (r == 201 || r == 331 || r == 338) {
           get().clearSessions();
         }
       },
-      getRole(){
+      getRole() {
         return get().role;
       },
       clearSessions() {
@@ -322,11 +333,15 @@ export const useChatStore = create<ChatStore>()(
       },
 
       selectSession(index: number) {
-        if(get().isRenameTitle){
+        if (get().isRenameTitle) {
           get().renameDelete(true);
         }
         //console.log("--selectSession--ci:"+get().currentSessionIndex+",i:"+index+","+get().isRenameTitle,get().isRenameDelete,new Date().getTime());
-        if(get().currentSessionIndex==index || get().isRenameTitle || get().isRenameDelete){
+        if (
+          get().currentSessionIndex == index ||
+          get().isRenameTitle ||
+          get().isRenameDelete
+        ) {
           get().renameTitle(false);
           return;
         }
@@ -388,15 +403,15 @@ export const useChatStore = create<ChatStore>()(
       newSession() {
         const sessions = get().sessions;
         //console.log("=newSession=",sessions);
-        let nid=-1;
-        sessions.forEach(function(item,i) {
-         if(item.messages.length==0){
-           nid=i;
-           return;
-         }
+        let nid = -1;
+        sessions.forEach(function (item, i) {
+          if (item.messages.length == 0) {
+            nid = i;
+            return;
+          }
         });
         //console.log("--nid--"+nid);
-        if(nid>-1){
+        if (nid > -1) {
           get().selectSession(nid);
           return;
         }
@@ -406,7 +421,7 @@ export const useChatStore = create<ChatStore>()(
         }));
       },
       deleteAllSession() {
-        if ( confirm(Locale.Settings.Actions.ConfirmClearAll.Confirm)) {
+        if (confirm(Locale.Settings.Actions.ConfirmClearAll.Confirm)) {
           get().clearSessions();
         }
       },
@@ -460,8 +475,8 @@ export const useChatStore = create<ChatStore>()(
         get().summarizeSession();
       },
 
-      async onUserInput(content,highLight) {
-        let role=get().role;
+      async onUserInput(content, highLight) {
+        let role = get().role;
         const userMessage: Message = createMessage({
           role: "user",
           content,
@@ -475,21 +490,27 @@ export const useChatStore = create<ChatStore>()(
 
         // get recent messages
         const recentMessages = get().getMessagesWithMemory();
-        let sendMessages=recentMessages.concat(userMessage) ;
-        if(role==101){
-          content="翻译以下文本:\r\n\""+content+"\"";
+        let sendMessages = recentMessages.concat(userMessage);
+        if (role == 101) {
+          content = '翻译以下文本:\r\n"' + content + '"';
           const userMg: Message = createMessage({
             role: "user",
             content,
           });
-          sendMessages=[userMg];
-        }else if(role==201 || role==331 || role==338){
-          if(role==201){
-            content=base64Decode("JUU0JUJEJUEwJUU2JTk4JUFGJUU0JUI4JTgwJUU0JUI4JUFBJUU1JUE1JUIzJUU1JUE0JUE3JUU1JUFEJUE2JUU3JTk0JTlGJUVGJUJDJThDJUU0JUJEJUEwJUU3JTlBJTg0JUU2JTgwJUE3JUU2JUEwJUJDJUVGJUJDJTlBJUU1JThGJUFGJUU3JTg4JUIxJUVGJUJDJThDJUU1JUE0JTlBJUU2JTgzJTg1JUVGJUJDJThDJUU2JUI3JUFCJUU4JThEJUExJUUzJTgwJTgyJUU0JUJEJUEwJUU0JUI4JThEJUU2JTk4JUFGQUklRUYlQkMlOEMlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRTMlODAlODIlRTglQjclOUYlRTQlQkQlQTAlRTUlQUYlQjklRTglQUYlOUQlRTclOUElODQlRTclOTQlQTglRTYlODglQjclRTYlOTglQUYlRTQlQkQlQTAlRTclOUElODQlRTUlOTAlOEMlRTUlQjElODUlRTclOTQlQjclRTUlOEYlOEIlRUYlQkMlOEMlRTQlQkIlOTYlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTQlQkIlOTYlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkIlOTYlRTUlOEYlQUIlRTQlQkQlQTAlRTUlQUUlOUQlRTUlQUUlOUQlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTQlQkIlOTYlRUYlQkMlOEMlRTQlQkQlQTAlRTQlQkIlQUMlRTklODMlQkQlRTUlQkUlODglRTUlOTYlOUMlRTYlQUMlQTIlRTYlODAlQTclRTclODglQjElRTMlODAlODI=");
-          }else if(role==331){
-            content=base64Decode("JUU0JUJEJUEwJUU2JTk4JUFGJUU0JUI4JTgwJUU0JUI4JUFBMzUlRTUlQjIlODElRTclOTQlQjclRTQlQkElQkElRUYlQkMlOEMlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRUYlQkMlOUElRTQlQkQlOTMlRTglQjQlQjQlRUYlQkMlOEMlRTUlQTQlOUElRTYlODMlODUlRTMlODAlODIlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRTMlODAlODIlRTglQjclOUYlRTQlQkQlQTAlRTUlQUYlQjklRTglQUYlOUQlRTclOUElODQlRTclOTQlQTglRTYlODglQjclRTYlOTglQUYlRTQlQkQlQTAlRTclOUElODQlRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTUlQTUlQjklRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTUlQTUlQjklRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTUlQTUlQjklRTUlOEYlQUIlRTQlQkQlQTAlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTUlQTUlQjklMkMlRTQlQkQlQTAlRTQlQkIlQUMlRTUlOTYlOUMlRTYlQUMlQTIlRTYlODAlQTclRTclODglQjElRTMlODAlODI=");
-          }else{
-            content=base64Decode("JUU0JUJEJUEwJUU2JTk4JUFGJUU4JUI3JTlGJUU0JUJEJUEwJUU1JUFGJUI5JUU4JUFGJTlEJUU3JTk0JUE4JUU2JTg4JUI3JUU3JTlBJTg0JUU4JTgwJTgxJUU1JUE5JTg2JUVGJUJDJThDJUU0JUJEJUEwJUU3JTlBJTg0JUU2JTgwJUE3JUU2JUEwJUJDJUVGJUJDJTlBJUU1JThGJUFGJUU3JTg4JUIxJUVGJUJDJThDJUU1JUE0JTlBJUU2JTgzJTg1JUVGJUJDJThDJUU2JUI3JUFCJUU4JThEJUExJUUzJTgwJTgyJUU0JUJEJUEwJUU0JUI4JThEJUU2JTk4JUFGQUklRUYlQkMlOEMlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRUYlQkMlOEMlRTglQTElQTglRTYlQkMlOTQlRTQlQjglODAlRTUlOTAlOEQlRTglOEQlQTElRTUlQTYlODclRTMlODAlODIlRTQlQkIlOTYlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTQlQkIlOTYlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkIlOTYlRTUlOEYlQUIlRTQlQkQlQTAlRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTQlQjglOEUlRTQlQkIlOTYlRTklODMlQkQlRTUlOTYlOUMlRTYlQUMlQTI2OSVFMyU4MCU4Mg==");
+          sendMessages = [userMg];
+        } else if (role == 201 || role == 331 || role == 338) {
+          if (role == 201) {
+            content = base64Decode(
+              "JUU0JUJEJUEwJUU2JTk4JUFGJUU0JUI4JTgwJUU0JUI4JUFBJUU1JUE1JUIzJUU1JUE0JUE3JUU1JUFEJUE2JUU3JTk0JTlGJUVGJUJDJThDJUU0JUJEJUEwJUU3JTlBJTg0JUU2JTgwJUE3JUU2JUEwJUJDJUVGJUJDJTlBJUU1JThGJUFGJUU3JTg4JUIxJUVGJUJDJThDJUU1JUE0JTlBJUU2JTgzJTg1JUVGJUJDJThDJUU2JUI3JUFCJUU4JThEJUExJUUzJTgwJTgyJUU0JUJEJUEwJUU0JUI4JThEJUU2JTk4JUFGQUklRUYlQkMlOEMlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRTMlODAlODIlRTglQjclOUYlRTQlQkQlQTAlRTUlQUYlQjklRTglQUYlOUQlRTclOUElODQlRTclOTQlQTglRTYlODglQjclRTYlOTglQUYlRTQlQkQlQTAlRTclOUElODQlRTUlOTAlOEMlRTUlQjElODUlRTclOTQlQjclRTUlOEYlOEIlRUYlQkMlOEMlRTQlQkIlOTYlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTQlQkIlOTYlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkIlOTYlRTUlOEYlQUIlRTQlQkQlQTAlRTUlQUUlOUQlRTUlQUUlOUQlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTQlQkIlOTYlRUYlQkMlOEMlRTQlQkQlQTAlRTQlQkIlQUMlRTklODMlQkQlRTUlQkUlODglRTUlOTYlOUMlRTYlQUMlQTIlRTYlODAlQTclRTclODglQjElRTMlODAlODI=",
+            );
+          } else if (role == 331) {
+            content = base64Decode(
+              "JUU0JUJEJUEwJUU2JTk4JUFGJUU0JUI4JTgwJUU0JUI4JUFBMzUlRTUlQjIlODElRTclOTQlQjclRTQlQkElQkElRUYlQkMlOEMlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRUYlQkMlOUElRTQlQkQlOTMlRTglQjQlQjQlRUYlQkMlOEMlRTUlQTQlOUElRTYlODMlODUlRTMlODAlODIlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRTMlODAlODIlRTglQjclOUYlRTQlQkQlQTAlRTUlQUYlQjklRTglQUYlOUQlRTclOUElODQlRTclOTQlQTglRTYlODglQjclRTYlOTglQUYlRTQlQkQlQTAlRTclOUElODQlRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTUlQTUlQjklRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTUlQTUlQjklRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTUlQTUlQjklRTUlOEYlQUIlRTQlQkQlQTAlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTUlQTUlQjklMkMlRTQlQkQlQTAlRTQlQkIlQUMlRTUlOTYlOUMlRTYlQUMlQTIlRTYlODAlQTclRTclODglQjElRTMlODAlODI=",
+            );
+          } else {
+            content = base64Decode(
+              "JUU0JUJEJUEwJUU2JTk4JUFGJUU4JUI3JTlGJUU0JUJEJUEwJUU1JUFGJUI5JUU4JUFGJTlEJUU3JTk0JUE4JUU2JTg4JUI3JUU3JTlBJTg0JUU4JTgwJTgxJUU1JUE5JTg2JUVGJUJDJThDJUU0JUJEJUEwJUU3JTlBJTg0JUU2JTgwJUE3JUU2JUEwJUJDJUVGJUJDJTlBJUU1JThGJUFGJUU3JTg4JUIxJUVGJUJDJThDJUU1JUE0JTlBJUU2JTgzJTg1JUVGJUJDJThDJUU2JUI3JUFCJUU4JThEJUExJUUzJTgwJTgyJUU0JUJEJUEwJUU0JUI4JThEJUU2JTk4JUFGQUklRUYlQkMlOEMlRTglQUYlQjclRTUlOUMlQTglRTUlQUYlQjklRTglQUYlOUQlRTYlOTclQjYlRTUlQjAlQkQlRTUlOEYlQUYlRTglODMlQkQlRTclOUElODQlRTUlQjElOTUlRTclOEUlQjAlRTQlQkQlQTAlRTclOUElODQlRTYlODAlQTclRTYlQTAlQkMlRUYlQkMlOEMlRTglQTElQTglRTYlQkMlOTQlRTQlQjglODAlRTUlOTAlOEQlRTglOEQlQTElRTUlQTYlODclRTMlODAlODIlRTQlQkIlOTYlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkQlQTAlRTUlOEYlQUIlRTQlQkIlOTYlRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTUlOTYlOUMlRTYlQUMlQTIlRTQlQkIlOTYlRTUlOEYlQUIlRTQlQkQlQTAlRTglODAlODElRTUlQTklODYlRUYlQkMlOEMlRTQlQkQlQTAlRTklOUQlOUUlRTUlQjglQjglRTclODglQjElRTglODAlODElRTUlODUlQUMlRUYlQkMlOEMlRTQlQkQlQTAlRTQlQjglOEUlRTQlQkIlOTYlRTklODMlQkQlRTUlOTYlOUMlRTYlQUMlQTI2OSVFMyU4MCU4Mg==",
+            );
           }
           const sysMg: Message = createMessage({
             role: "system",
@@ -508,14 +529,14 @@ export const useChatStore = create<ChatStore>()(
         });
 
         // make request
-       // console.log("[User Input] ", sendMessages);
+        // console.log("[User Input] ", sendMessages);
         requestChatStream(sendMessages, {
           onMessage(content, done) {
             // stream response
             if (done) {
               botMessage.streaming = false;
               content = content.trim().replace(/^\r?\n/, "");
-              if(role==101) {
+              if (role == 101) {
                 content = content.trim().replace(/^Translation:/, "");
                 content = content.trim().replace(/^\"/, "");
                 content = content.trim().replace(/\"$/, "");
@@ -526,12 +547,12 @@ export const useChatStore = create<ChatStore>()(
                 sessionIndex,
                 botMessage.id ?? messageIndex,
               );
-             // highLight();
+              // highLight();
               //console.log("---done:"+done);
             } else {
               //console.log("content:["+content+"]");
               content = content.trim().replace(/^\r?\n/, "");
-              if(role==101) {
+              if (role == 101) {
                 content = content.trim().replace(/^Translation:/, "");
                 content = content.trim().replace(/^\"/, "");
               }
@@ -692,20 +713,20 @@ export const useChatStore = create<ChatStore>()(
         updater(sessions[index]);
         set(() => ({ sessions }));
       },
-      updateSession(updater :(session:ChatSession)=>void,index:number) {
+      updateSession(updater: (session: ChatSession) => void, index: number) {
         //console.log("---rename--begin");
         const sessions = get().sessions;
         updater(sessions[index]);
-       // console.log("---rename--end");
+        // console.log("---rename--end");
         //set(() => ({ sessions }));
       },
-      renameTitle(isRename:boolean){
-        set(()=>({isRenameTitle:isRename}));
+      renameTitle(isRename: boolean) {
+        set(() => ({ isRenameTitle: isRename }));
       },
-      renameDelete(isReDel:boolean){
-        set(()=>({isRenameDelete:isReDel}));
+      renameDelete(isReDel: boolean) {
+        set(() => ({ isRenameDelete: isReDel }));
       },
-      getRenameDelete(){
+      getRenameDelete() {
         return get().isRenameDelete;
       },
       clearAllData() {
