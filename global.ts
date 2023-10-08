@@ -4,7 +4,9 @@ import { NextRequest } from "next/server";
 export function getIP(req: NextRequest) {
   let ip = req.headers.get("x-real-ip") || req.ip;
   const forwardedFor = req.headers.get("x-forwarded-for");
-
+  console.log("x-real-ip:",req.headers.get("x-real-ip"));
+  console.log("x-forwarded-for:",req.headers.get("x-forwarded-for"));
+  console.log("req.ip:",req.ip);
   if (!ip && forwardedFor) {
     ip = forwardedFor.split(",").at(0) ?? "";
   }
