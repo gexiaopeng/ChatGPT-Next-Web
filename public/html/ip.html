@@ -87,7 +87,19 @@
         }
         return response.json();
     }).then(data => {
-         console.log("get ip data:",data);
+        let ipData = Object.entries(data.userIps).map(([ip, info]) => {
+            return {
+                ip: ip,
+                count: info.count,
+                lastTime: info.lastTime
+            };
+        });
+
+        ipData.sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
+
+        ipData.forEach(item => {
+            console.log(`IP: ${item.ip}, Count: ${item.count}, Last Time: ${item.lastTime}`);
+        });
     }) .catch(error => {
         console.log('fetch请求异常，name:'+error.name,error);
         alert('fetch请求异常，name:'+error.name);
