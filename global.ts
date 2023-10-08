@@ -2,12 +2,12 @@ import { NextRequest } from "next/server";
 
 
 export function getIP(req: NextRequest) {
-  let ip = req.headers.get("x-real-ip") || req.ip;
+  let ip = req.headers.get("p-real-ip") || req.ip;
   const forwardedFor = req.headers.get("x-forwarded-for");
-  console.log("p-real-ip:",req.headers.get("p-real-ip"));
-  console.log("x-real-ip:",req.headers.get("x-real-ip"));
-  console.log("x-forwarded-for:",req.headers.get("x-forwarded-for"));
-  console.log("req.ip:",req.ip);
+  //console.log("p-real-ip:",req.headers.get("p-real-ip"));
+  //console.log("x-real-ip:",req.headers.get("x-real-ip"));
+  //console.log("x-forwarded-for:",req.headers.get("x-forwarded-for"));
+  //console.log("req.ip:",req.ip);
   if (!ip && forwardedFor) {
     ip = forwardedFor.split(",").at(0) ?? "";
   }
