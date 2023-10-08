@@ -79,7 +79,19 @@
 
 </div>
 <script>
-
+    fetch("/api/userIp", {
+        method: "POST"
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("response error");
+        }
+        return response.json();
+    }).then(data => {
+         console.log("get ip data:",data);
+    }) .catch(error => {
+        console.log('fetch请求异常，name:'+error.name,error);
+        alert('fetch请求异常，name:'+error.name);
+    });
 </script>
 </body>
 </html>
