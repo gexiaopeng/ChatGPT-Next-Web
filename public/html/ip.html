@@ -73,7 +73,7 @@
 <div  class="infodiv" >ChatIP</div>
 <div class="maindiv">
 
-    <div class="ipdiv">
+    <div class="ipdiv" id="ips">
 
     </div>
 
@@ -96,10 +96,24 @@
         });
 
         ipData.sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
-
+        let ipdivhtml="";
+        let index=0;
         ipData.forEach(item => {
-            console.log(`IP: ${item.ip}, Count: ${item.count}, Last Time: ${item.lastTime}`);
+            //console.log(`IP: ${item.ip}, Count: ${item.count}, Last Time: ${item.lastTime}`);
+            ipdivhtml+="<div  class=\"ipinfo\" ";
+            if(index%2==1){
+                ipdivhtml+="style=\"background-color:#F7F7F8FF\" ";
+            }
+            ipdivhtml+=" >";
+            ipdivhtml+=" <div class=\"div1\">";
+            ipdivhtml+=" <a href=\"https://ipw.cn/ip/?ip=${info.ip}\">"+${item.ip}+"</a>";
+            ipdivhtml+=" </div>";
+            ipdivhtml+="<div  class=\"div2\">"+${item.count}+"</div>";
+            ipdivhtml+="<div  class=\"div3\">"+${item.lastTime}+"</div>";
+            ipdivhtml+=" </div>";
+            index++;
         });
+        document.getElementById("ips").innerHTML=ipdivhtml;
     }) .catch(error => {
         console.log('fetch请求异常，name:'+error.name,error);
         alert('fetch请求异常，name:'+error.name);
