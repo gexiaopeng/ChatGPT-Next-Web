@@ -8,7 +8,7 @@ export default async function handler(
     const { query } = request;
     let ip = query.ip;
     console.log("==ip:"+ip);
-    let success=0;
+    let success=1;
     if(ip && ip!="undefined"){
         // @ts-ignore
         let ipStat = await kv.hget("userIps", ip);
@@ -18,7 +18,9 @@ export default async function handler(
             // @ts-ignore
             await kv.hdel("userIps", ip);
         }
-       success=1;
+    }else{
+        await kv.del("chatCount");
+        await kv.del("userIps");
     }
     return response.status(200).json({success});
 }
