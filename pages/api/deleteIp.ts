@@ -6,14 +6,16 @@ export default async function handler(
     response: NextApiResponse,
 ) {
     const { query } = request;
-    let ip = query.ip+"";
-    console.log("--ip:"+ip);
+    let ip = query.ip;
+    console.log("==ip:"+ip);
     let success=0;
-    if(ip){
+    if(ip && ip!="undefined"){
+        // @ts-ignore
         let ipStat = await kv.hget("userIps", ip);
         if(ipStat){
             // @ts-ignore
             kv.decrby("chatCount",ipStat.count);
+            // @ts-ignore
             kv.hdel("userIps", ip);
         }
        success=1;

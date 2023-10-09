@@ -126,10 +126,8 @@
         });
     }
     function deleteIp(ip){
-        const data = {ip};
-         fetch("/api/deleteIp", {
-            method: "POST",
-             body:data
+         fetch("/api/deleteIp?ip="+ip, {
+            method: "POST"
         }).then(response => {
             if (!response.ok) {
                 throw new Error("response error");
