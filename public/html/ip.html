@@ -135,7 +135,7 @@
             return;
         }
         isSubmit=true;
-         fetch("/api/deleteIp?ip="+ip, {
+         fetch(url, {
             method: "POST"
         }).then(response => {
              isSubmit=false;
