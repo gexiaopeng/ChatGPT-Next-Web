@@ -51,7 +51,7 @@ async function createStream(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    stat(req);
+    await stat(req);
     const stream = await createStream(req);
     //const resp = new Response(stream);
     //resp.headers.set("chat-count", count + "");
