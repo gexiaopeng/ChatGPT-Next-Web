@@ -16,7 +16,7 @@ export default async function handler(
             // @ts-ignore
             kv.decrby("chatCount",ipStat.count);
             // @ts-ignore
-            kv.hdel("userIps", ip);
+            await kv.hdel("userIps", ip);
         }
        success=1;
     }

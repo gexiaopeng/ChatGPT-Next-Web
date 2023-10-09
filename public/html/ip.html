@@ -125,21 +125,29 @@
             alert('getIps fetch请求异常，name:'+error.name);
         });
     }
+    let isSubmit=false;
     function deleteIp(ip){
+        if(isSubmit){
+            return;
+        }
+        isSubmit=true;
          fetch("/api/deleteIp?ip="+ip, {
             method: "POST"
         }).then(response => {
+             isSubmit=false;
             if (!response.ok) {
                 throw new Error("response error");
             }
             return response.json();
         }).then(data => {
+             isSubmit=false;
           if(data && data.success==1){
               getIps();
           }else{
              console.error("deleteIp error",data) ;
           }
         }) .catch(error => {
+             isSubmit=false;
             console.log('deleteIp fetch请求异常，name:'+error.name,error);
             alert('deleteIp fetch请求异常，name:'+error.name);
         });
