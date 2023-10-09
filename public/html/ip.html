@@ -73,56 +73,80 @@
 <div  class="infodiv" >ChatIP</div>
 <div class="maindiv">
 
-    <div class="ipdiv" id="ips">
+    <div class="ipdiv" id="ips" >
 
     </div>
 
 </div>
 <script>
-    document.getElementById("ips").innerHTML="loading...";
-    fetch("/api/userIp", {
-        method: "POST"
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error("response error");
-        }
-        return response.json();
-    }).then(data => {
-        let ipdivhtml="";
-        if(data && data.userIps) {
-            let ipData = Object.entries(data.userIps).map(([ip, info]) => {
-                return {
-                    ip: ip,
-                    count: info.count,
-                    lastTime: info.lastTime
-                };
-            });
+    function getIps(){
+        document.getElementById("ips").innerHTML="loading...";
+        fetch("/api/userIp", {
+            method: "POST"
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("response error");
+            }
+            return response.json();
+        }).then(data => {
+            let ipdivhtml="";
+            if(data && data.userIps) {
+                let ipData = Object.entries(data.userIps).map(([ip, info]) => {
+                    return {
+                        ip: ip,
+                        count: info.count,
+                        lastTime: info.lastTime
+                    };
+                });
 
-            ipData.sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
+                ipData.sort((a, b) => new Date(b.lastTime) - new Date(a.lastTime));
 
-            let index = 0;
-            ipData.forEach(item => {
-                //console.log(`IP: ${item.ip}, Count: ${item.count}, Last Time: ${item.lastTime}`);
-                ipdivhtml += "<div  class=\"ipinfo\" ";
-                if (index % 2 == 1) {
-                    ipdivhtml += "style=\"background-color:#F7F7F8FF\" ";
-                }
-                ipdivhtml += " >";
-                ipdivhtml += " <div class=\"div1\">";
-                ipdivhtml += " <a href=\"https://ipchaxun.com/" + item.ip + "\">" + item.ip + "</a>";
-                ipdivhtml += " </div>";
-                ipdivhtml += "<div  class=\"div2\">" + item.count + "</div>";
-                ipdivhtml += "<div  class=\"div3\">" + item.lastTime + "</div>";
-                ipdivhtml += " </div>";
-                index++;
-            });
-        }
-        document.getElementById("ips").innerHTML=ipdivhtml;
-    }) .catch(error => {
-        document.getElementById("ips").innerHTML="";
-        console.log('fetch请求异常，name:'+error.name,error);
-        alert('fetch请求异常，name:'+error.name);
-    });
+                let index = 0;
+                ipData.forEach(item => {
+                    //console.log(`IP: ${item.ip}, Count: ${item.count}, Last Time: ${item.lastTime}`);
+                    ipdivhtml += "<div  class=\"ipinfo\" ";
+                    if (index % 2 == 1) {
+                        ipdivhtml += "style=\"background-color:#F7F7F8FF\" ";
+                    }
+                    ipdivhtml += " >";
+                    ipdivhtml += " <div class=\"div1\">";
+                    ipdivhtml += " <a href=\"https://ipchaxun.com/" + item.ip + "\">" + item.ip + "</a>";
+                    ipdivhtml += " </div>";
+                    ipdivhtml += "<div  class=\"div2\">" + item.count + "</div>";
+                    ipdivhtml += "<div  class=\"div3\" onclick=\"deleteIp("+item.ip+")\">" + item.lastTime + "</div>";
+                    ipdivhtml += " </div>";
+                    index++;
+                });
+            }
+            document.getElementById("ips").innerHTML=ipdivhtml;
+        }) .catch(error => {
+            document.getElementById("ips").innerHTML="";
+            console.log('getIps fetch请求异常，name:'+error.name,error);
+            alert('getIps fetch请求异常，name:'+error.name);
+        });
+    }
+    function deleteIp(ip){
+        const data = {ip};
+         fetch("/api/deleteIp", {
+            method: "POST",
+             body:data
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("response error");
+            }
+            return response.json();
+        }).then(data => {
+          if(data && data.success==1){
+              getIps();
+          }else{
+             console.error("deleteIp error",data) ;
+          }
+        }) .catch(error => {
+            console.log('deleteIp fetch请求异常，name:'+error.name,error);
+            alert('deleteIp fetch请求异常，name:'+error.name);
+        });
+    }
+    getIps();
 </script>
 </body>
 </html>

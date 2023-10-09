@@ -68,6 +68,7 @@ async function stat(req: NextRequest) {
   kv.incr("chatCount");
   const ip = getIP(req) + "";
   let ipStat = await kv.hget("userIps", ip);
+
   //console.log("ipStat",ipStat);
   let userIp = {};
   let newIpStat;
