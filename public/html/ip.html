@@ -70,7 +70,7 @@
     </style>
 </head>
 <body>
-<div  class="infodiv" >ChatIP</div>
+<div  class="infodiv" onclick="deleteIp()">ChatIP</div>
 <div class="maindiv">
 
     <div class="ipdiv" id="ips" >
@@ -127,6 +127,10 @@
     }
     let isSubmit=false;
     function deleteIp(ip){
+        let url="/api/deleteIp";
+        if(ip){
+            url+="?ip="+ip;
+        }
         if(isSubmit){
             return;
         }
