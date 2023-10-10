@@ -70,7 +70,7 @@
     </style>
 </head>
 <body>
-<div  class="infodiv" onclick="deleteIp()">ChatIP</div>
+<div  class="infodiv"  ondblclick="deleteIp()">ChatIP</div>
 <div class="maindiv">
 
     <div class="ipdiv" id="ips" >
@@ -113,7 +113,7 @@
                     ipdivhtml += " <a href=\"https://ipchaxun.com/" + item.ip + "\">" + item.ip + "</a>";
                     ipdivhtml += " </div>";
                     ipdivhtml += "<div  class=\"div2\">" + item.count + "</div>";
-                    ipdivhtml += "<div  class=\"div3\" onclick=\"deleteIp('"+item.ip+"')\">" + item.lastTime + "</div>";
+                    ipdivhtml += "<div  class=\"div3\" ondblclick=\"deleteIp('"+item.ip+"')\">" + item.lastTime + "</div>";
                     ipdivhtml += " </div>";
                     index++;
                 });
